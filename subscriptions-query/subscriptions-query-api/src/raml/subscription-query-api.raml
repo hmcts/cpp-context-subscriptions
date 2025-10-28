@@ -1,0 +1,48 @@
+#%RAML 0.8
+title: Subscription Query API
+baseUri: http://localhost:8080/subscriptions-query-api/query/api/rest/subscriptions
+protocols: [ HTTP, HTTPS ]
+
+/subscriptions:
+  get:
+    description: |
+      Gets the Subscriptions for the organisation user belongs to
+      ...
+      (mapping):
+        responseType: application/vnd.subscriptions.query.subscriptions+json
+        name: subscriptions.query.subscriptions
+      (mapping):
+        responseType: application/vnd.subscriptions.query.subscriptions-by-user+json
+        name: subscriptions.query.subscriptions-by-user
+      ...
+    responses:
+        200:
+          description: OK
+          body:
+            application/vnd.subscriptions.query.subscriptions+json:
+              example:  !include json/example/subscriptions.query.subscriptions.json
+              schema:  !include json/schema/subscriptions.query.subscriptions.json
+            application/vnd.subscriptions.query.subscriptions-by-user+json:
+              example:  !include json/example/subscriptions.query.subscriptions.json
+              schema:  !include json/schema/subscriptions.query.subscriptions.json
+
+/subscriptions/byCourtId:
+  get:
+    description: |
+      Gets the Subscriptions for the organisation user belongs to
+      ...
+      (mapping):
+        responseType: application/vnd.subscriptions.query.subscriptions.by-court-id+json
+        name: subscriptions.query.subscriptions.by-court-id
+      ...
+    queryParameters:
+          courtId:
+            type: string
+            required: true
+    responses:
+        200:
+          description: OK
+          body:
+            application/vnd.subscriptions.query.subscriptions.by-court-id+json:
+              example:  !include json/example/subscriptions.query.subscriptions.json
+              schema:  !include json/schema/subscriptions.query.subscriptions.json

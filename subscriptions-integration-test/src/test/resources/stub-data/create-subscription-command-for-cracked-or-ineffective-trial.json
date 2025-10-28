@@ -1,0 +1,24 @@
+{
+  "id": "%ID%",
+  "name": "Derby Only",
+  "nowsOrEdts": [
+    "Custody Warrant on Discharge of Extradition Pending Appeal",
+    "Custody Warrant on Extradition"
+  ],
+  "events": [
+    "CRACKED_OR_INEFFECTIVE_TRAIL"
+  ],
+  "subscribers": [
+    "deby@thirdparty.com"
+  ],
+  "filter": {
+    "filterType": "CASE_REFERENCE",
+    "urn": "%CASE_URN%"
+  },
+  "courts": [
+    {
+      "courtId": "%COURT_ID%",
+      "name": "Derby Court House"
+    }
+  ]
+}

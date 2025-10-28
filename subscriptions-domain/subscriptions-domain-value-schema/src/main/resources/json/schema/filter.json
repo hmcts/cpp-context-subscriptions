@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/filter.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    },
+    "filterType": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/enum-def.json#/definitions/filterType"
+    },
+    "urn": {
+      "type": "string"
+    },
+    "isAdult": {
+      "type": "boolean"
+    },
+    "defendant": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/defendant.json"
+    },
+    "gender": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/enum-def.json#/definitions/gender"
+    },
+    "offence": {
+      "type": "string"
+    }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "filterType",
+        "urn"
+      ]
+    },
+    {
+      "required": [
+        "filterType",
+        "isAdult"
+      ]
+    },
+    {
+      "required": [
+        "filterType",
+        "defendant"
+      ]
+    },
+    {
+      "required": [
+        "filterType",
+        "gender"
+      ]
+    },
+    {
+      "required": [
+        "filterType",
+        "offence"
+      ]
+    }
+  ],
+  "additionalProperties": false
+}

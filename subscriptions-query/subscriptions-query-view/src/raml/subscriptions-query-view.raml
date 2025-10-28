@@ -1,0 +1,27 @@
+#%RAML 0.8
+title: Subscription Query View
+baseUri: http://localhost:8080/subscriptions-query-view/query/view/rest/subscriptions
+protocols: [ HTTP, HTTPS ]
+
+/subscriptions:
+  get:
+    description: |
+      Gets the Subscription
+      ...
+      (mapping):
+        responseType: application/vnd.subscriptions.query.subscriptions+json
+        name: subscriptions.query.subscriptions
+      (mapping):
+        responseType: application/vnd.subscriptions.query.subscriptions-by-user+json
+        name: subscriptions.query.subscriptions-by-user
+      ...
+    responses:
+        200:
+          description: OK
+          body:
+            application/vnd.subscriptions.query.subscriptions+json:
+              example:  !include json/example/subscriptions.query.subscriptions.json
+              schema:  !include json/schema/subscriptions.query.subscriptions.json
+            application/vnd.subscriptions.query.subscriptions-by-user+json:
+              example:  !include json/example/subscriptions.query.subscriptions.json
+              schema:  !include json/schema/subscriptions.query.subscriptions.json

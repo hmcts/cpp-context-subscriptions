@@ -1,0 +1,25 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+    <changeSet id="04" author="Electro"
+               logicalFilePath="liquibase/subscriptions-viewstore-db-changelog.xml">
+        <createTable tableName="filter">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true"
+                             primaryKeyName="pk_filter"/>
+            </column>
+            <column name="filter_type" type="VARCHAR(25)"/>
+            <column name="urn" type="VARCHAR(20)"/>
+            <column name="is_adult" type="boolean"/>
+            <column name="defendant_first_name" type="VARCHAR(100)"/>
+            <column name="defendant_last_name" type="VARCHAR(100)"/>
+            <column name="defendant_date_of_birth" type="datetime"/>
+            <column name="gender" type="VARCHAR(10)"/>
+            <column name="offence" type="VARCHAR(200)"/>
+        </createTable>
+        <addColumn tableName="subscription">
+            <column name="filter_id" type="UUID"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

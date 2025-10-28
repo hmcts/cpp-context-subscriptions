@@ -1,0 +1,256 @@
+{
+  "materialId": "%MATERIAL_ID%",
+  "nowDocumentRequest": {
+    "applications": [
+    ],
+    "bilingualTemplateName": "NPB_DisqualificationFromDriving",
+    "cases": [
+      "8aa05a66-08e8-4f7d-b15e-3a38533f3052"
+    ],
+    "hearingId": "%HEARING_ID%",
+    "masterDefendantId": "%DEFENDANT_ID%",
+    "materialId": "%MATERIAL_ID%",
+    "notVisibleToUserGroups": [
+      "CPS",
+      "Defence",
+      "Judiciary",
+      "NCES",
+      "Probation",
+      "Prosecuting Authorities",
+      "YOTs"
+    ],
+    "nowContent": {
+      "caseApplicationReferences": [
+        "22GD4384921"
+      ],
+      "cases": [
+        {
+          "defendantCaseOffences": [
+            {
+              "alcoholReadingAmount": 500,
+              "alcoholReadingMethodCode": "A",
+              "alcoholReadingMethodDescription": "Blood",
+              "civilOffence": false,
+              "code": "CA03012",
+              "endDate": "2020-05-04",
+              "legislation": "Contrary to section 363(3)(b) and (4) of the    Communications Act 2003.",
+              "modeOfTrial": "Summary",
+              "results": [
+                {
+                  "label": "Discretionary with ordinary disqualification",
+                  "prompts": [
+                    {
+                      "label": "Disqualification period",
+                      "promptIdentifier": "2bf54447-328c-4c1b-a123-341adbd52172",
+                      "promptReference": "disqualificationPeriod",
+                      "value": "1 Years",
+                      "welshLabel": "Cyfnod gwahardd",
+                      "welshValue": "1 Flynedd"
+                    },
+                    {
+                      "label": "Extension period section 35A (immediate custodial sentence)",
+                      "promptIdentifier": "81638260-3cd1-41e7-9725-c8e91e23bda1",
+                      "promptReference": "extensionPeriodSection35AImmediateCustodialSentence",
+                      "value": "cadsdsd",
+                      "welshLabel": "Cyfnod estyniad adran 35A (dedfryd o garchar ar unwaith)",
+                      "welshValue": "cadsdsd"
+                    },
+                    {
+                      "label": "Extension period section 35B (effect of custodial sentence noted)",
+                      "promptIdentifier": "0143f821-7cab-4e53-a00b-2fd1c3dc8204",
+                      "promptReference": "extensionPeriodSection35BEffectOfCustodialSentenceNoted",
+                      "value": "sDasda",
+                      "welshLabel": "Cyfnod estyniad adran 35B (effaith dedfryd o garchar wedi'i nodi)",
+                      "welshValue": "sDasda"
+                    },
+                    {
+                      "label": "Defendant driving licence number",
+                      "promptIdentifier": "a593ae4a-9d69-45b9-9585-c11aeed28404",
+                      "promptReference": "defendantDrivingLicenceNumber",
+                      "value": "MORGA657054SM9BF",
+                      "welshLabel": "Rhif trwydded yrru'r Diffynnydd",
+                      "welshValue": "MORGA657054SM9BF"
+                    },
+                    {
+                      "label": "Date of Interim Disqualification",
+                      "promptIdentifier": "7fd83833-178c-48db-866b-33fc9e69a0d1",
+                      "promptReference": "42534df0-77bf-4bc4-b383-4f0f8e111da3",
+                      "value": "Starting from date (date of interim disqualification):20/03/2021",
+                      "welshLabel": "Dyddiad y gwaharddiad dros dro"
+                    }
+                  ],
+                  "publishedForNows": false,
+                  "resultIdentifier": "ccfc452e-ebe4-4cd7-b8a0-4f90768447b4",
+                  "resultWording": "Disqualified for holding or obtaining a driving licence. Discretionary disqualification. Driving record endorsed. Section 34(2) Road Traffic Offenders Act 1988",
+                  "sequence": 100,
+                  "welshResultWording": "Gwahardd rhag dal neu gael trwydded yrru. Gwahardd yn ôl disgresiwn. Cofnod gyrru wedi'i ardystio. Adran 34(2) Deddf Troseddwyr Traffig Ffyrdd 1988"
+                },
+                {
+                  "label": "Driving record endorsed (no points)",
+                  "publishedForNows": false,
+                  "resultIdentifier": "b0aeb4fc-df63-4e2f-af88-97e3f23e847f",
+                  "sequence": 2800,
+                  "welshLabel": "Cofnod gyrru wedi'i ardystio (dim pwyntiau)"
+                },
+                {
+                  "label": "Disqualification for life for non-endorsable offence",
+                  "publishedForNows": false,
+                  "resultIdentifier": "df0c3533-e4ce-4e10-b63f-8e81bd9c4242",
+                  "resultWording": "Disqualified for holding or obtaining a driving licence for life. Section 146 Powers of Criminal Courts (Sentencing) Act 2000 / Section 163 of the Sentencing Act 2020",
+                  "sequence": 3900
+                }
+              ],
+              "startDate": "2020-01-04",
+              "title": "Possess /    control TV set with intent another use install without a licence",
+              "wording": "Possess /    control TV set with intent another use install without a licence\nContrary to section 363(3)(b) and (4) of the    Communications Act 2003."
+            }
+          ],
+          "prosecutor": "Driver and Vehicle Licensing Agency",
+          "prosecutorOUCode": "G94DV00",
+          "reference": "%CASE_URN%"
+        }
+      ],
+      "civilNow": false,
+      "courtClerkName": "Erica Wilson",
+      "defendant": {
+        "address": {
+          "line1": "56saon",
+          "line2": "56Police House",
+          "line3": "StreetDescription1",
+          "line4": "Locality1",
+          "line5": "Town2",
+          "postCode": "TW14 9XD"
+        },
+        "aliasNames": [
+          "PersonTitle1 PersonGivenName11 PersonGivenName21 PersonFamilyName2"
+        ],
+        "dateOfBirth": "1988-08-16",
+        "firstName": "Lorraine",
+        "isCivil": false,
+        "isYouth": "N",
+        "lastName": "Torra",
+        "name": "Lorraine Torra",
+        "occupation": "Occupation0",
+        "prosecutingAuthorityReference": "TFL",
+        "specialNeeds": "SpecialNeeds0",
+        "title": "MR"
+      },
+      "distinctPrompts": [
+        {
+          "label": "Disqualification period",
+          "promptIdentifier": "2bf54447-328c-4c1b-a123-341adbd52172",
+          "promptReference": "disqualificationPeriod",
+          "value": "1 Years",
+          "welshLabel": "Cyfnod gwahardd",
+          "welshValue": "1 Flynedd"
+        },
+        {
+          "label": "Defendant driving licence number",
+          "promptIdentifier": "a593ae4a-9d69-45b9-9585-c11aeed28404",
+          "promptReference": "defendantDrivingLicenceNumber",
+          "value": "MORGA657054SM9BF",
+          "welshLabel": "Rhif trwydded yrru'r Diffynnydd",
+          "welshValue": "MORGA657054SM9BF"
+        }
+      ],
+      "distinctResults": [
+        {
+          "label": "Discretionary with ordinary disqualification",
+          "prompts": [
+            {
+              "label": "Disqualification period",
+              "promptIdentifier": "2bf54447-328c-4c1b-a123-341adbd52172",
+              "promptReference": "disqualificationPeriod",
+              "value": "1 Years",
+              "welshLabel": "Cyfnod gwahardd",
+              "welshValue": "1 Flynedd"
+            },
+            {
+              "label": "Extension period section 35A (immediate custodial sentence)",
+              "promptIdentifier": "81638260-3cd1-41e7-9725-c8e91e23bda1",
+              "promptReference": "extensionPeriodSection35AImmediateCustodialSentence",
+              "value": "cadsdsd",
+              "welshLabel": "Cyfnod estyniad adran 35A (dedfryd o garchar ar unwaith)",
+              "welshValue": "cadsdsd"
+            },
+            {
+              "label": "Extension period section 35B (effect of custodial sentence noted)",
+              "promptIdentifier": "0143f821-7cab-4e53-a00b-2fd1c3dc8204",
+              "promptReference": "extensionPeriodSection35BEffectOfCustodialSentenceNoted",
+              "value": "sDasda",
+              "welshLabel": "Cyfnod estyniad adran 35B (effaith dedfryd o garchar wedi'i nodi)",
+              "welshValue": "sDasda"
+            },
+            {
+              "label": "Defendant driving licence number",
+              "promptIdentifier": "a593ae4a-9d69-45b9-9585-c11aeed28404",
+              "promptReference": "defendantDrivingLicenceNumber",
+              "value": "MORGA657054SM9BF",
+              "welshLabel": "Rhif trwydded yrru'r Diffynnydd",
+              "welshValue": "MORGA657054SM9BF"
+            },
+            {
+              "label": "Date of Interim Disqualification",
+              "promptIdentifier": "7fd83833-178c-48db-866b-33fc9e69a0d1",
+              "promptReference": "42534df0-77bf-4bc4-b383-4f0f8e111da3",
+              "value": "Starting from date (date of interim disqualification):20/03/2021",
+              "welshLabel": "Dyddiad y gwaharddiad dros dro"
+            }
+          ],
+          "publishedForNows": false,
+          "resultIdentifier": "ccfc452e-ebe4-4cd7-b8a0-4f90768447b4",
+          "resultWording": "Disqualified for holding or obtaining a driving licence. Discretionary disqualification. Driving record endorsed. Section 34(2) Road Traffic Offenders Act 1988",
+          "sequence": 100,
+          "welshResultWording": "Gwahardd rhag dal neu gael trwydded yrru. Gwahardd yn ôl disgresiwn. Cofnod gyrru wedi'i ardystio. Adran 34(2) Deddf Troseddwyr Traffig Ffyrdd 1988"
+        },
+        {
+          "label": "Driving record endorsed (no points)",
+          "publishedForNows": false,
+          "resultIdentifier": "b0aeb4fc-df63-4e2f-af88-97e3f23e847f",
+          "sequence": 2800,
+          "welshLabel": "Cofnod gyrru wedi'i ardystio (dim pwyntiau)"
+        },
+        {
+          "label": "Disqualification for life for non-endorsable offence",
+          "publishedForNows": false,
+          "resultIdentifier": "df0c3533-e4ce-4e10-b63f-8e81bd9c4242",
+          "resultWording": "Disqualified for holding or obtaining a driving licence for life. Section 146 Powers of Criminal Courts (Sentencing) Act 2000 / Section 163 of the Sentencing Act 2020",
+          "sequence": 3900
+        }
+      ],
+      "orderAddressee": {
+        "address": {
+          "emailAddress1": "robert@gmail.com",
+          "line1": "56saon",
+          "line2": "56Police House",
+          "line3": "StreetDescription1",
+          "line4": "Locality1",
+          "line5": "Town2",
+          "postCode": "TW14 9XD"
+        },
+        "name": "Lorraine Torra"
+      },
+      "orderDate": "2021-10-01",
+      "orderName": "Custody Warrant on Extradition",
+      "orderingCourt": {
+        "address": {
+          "line1": "176A Lavender Hill",
+          "line2": "London",
+          "postCode": "SW11 1JU"
+        },
+        "courtCentreName": "Lavender Hill Magistrates' Court",
+        "ljaCode": "2577",
+        "ljaName": "South West London Magistrates' Court",
+        "welshCourtCentre": false
+      },
+      "welshOrderName": "Hysbysiad o Waharddiad Rhag Gyrru"
+    },
+    "nowDistribution": {
+      "secondClassLetter": true
+    },
+    "nowTypeId": "55f4db58-6503-4a5a-b1bb-505bf3d7b3c8",
+    "storageRequired": true,
+    "subscriberName": "Defendant - Notice of Disqualification from Driving",
+    "templateName": "NPE_DisqualificationFromDriving"
+  }
+}

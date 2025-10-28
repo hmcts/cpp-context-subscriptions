@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-created.json",
+  "type": "object",
+  "properties": {
+    "subscription": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription.json"
+    },
+    "organisationId": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    }
+  },
+  "required": [
+    "subscription",
+    "organisationId"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://moj.gov.uk/cpp/subscriptions/json/schemas/handler/subscriptions.command.handler.activate-subscription.json",
+  "type": "object",
+  "properties": {
+    "subscriptionId": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    },
+    "organisationId": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    }
+  },
+  "required": [
+    "subscriptionId",
+    "organisationId"
+  ],
+  "additionalProperties": false
+}

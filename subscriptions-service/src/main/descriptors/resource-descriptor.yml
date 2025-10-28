@@ -1,0 +1,57 @@
+--
+resource_descriptor:
+  spec_version: '1.0.0'
+  version: '${project.version}'
+
+  resources:
+    - name: java:/app/subscriptions-service/DS.eventstore
+      type: xa-datasource
+      setup:
+        - type: liquibase
+          maven:
+            groupId: uk.gov.justice.services
+            artifactId: event-repository-liquibase
+            type: jar
+            version: '${cpp.framework.version}'
+        - type: liquibase
+          maven:
+            groupId: uk.gov.justice.services
+            artifactId: aggregate-snapshot-repository-liquibase
+            type: jar
+            version: '${project.version}'
+
+    - name: java:/DS.subscriptions
+      type: xa-datasource
+      setup:
+        - type: liquibase
+          maven:
+            groupId: uk.gov.justice.services
+            artifactId: event-buffer-liquibase
+            type: jar
+            version: '${cpp.framework.version}'
+        - type: liquibase
+          maven:
+            groupId: uk.gov.moj.cpp.subscriptions
+            artifactId: subscriptions-viewstore-liquibase
+            type: jar
+            version: '${project.version}'
+
+    - name: subscriptions.handler.command
+      type: queue
+    - name: subscriptions.event
+      type: topic
+    - name: public.event
+      type: topic
+
+  services:
+    # subscriptions provides these service mappings
+    - name: 'subscriptions-service'
+      id: 'subscriptions_service'
+      target: '/subscriptions-service'
+      map:
+        - '/subscriptions-command-api'
+        - '/subscriptions-event-listener'
+        - '/subscriptions-event-processor'
+        - '/subscriptions-query-api'
+        - '/subscriptions-query-view'
+      matcher: '/subscriptions-[^/]+'

@@ -1,0 +1,27 @@
+subscriptions_descriptor:
+  spec_version: 1.0.0
+  service: subscriptions
+  service_component: EVENT_PROCESSOR
+  subscriptions:
+    - name: public event processor publications
+      events:
+        - name: public.subscriptions.event.subscription-created
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-created.json
+        - name: public.subscriptions.event.subscription-activated-successfully
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-activated.json
+        - name: public.subscriptions.event.subscription-deactivated-successfully
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-deactivated.json
+        - name: public.subscriptions.event.subscription-deleted-successfully
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-deleted.json
+        - name: public.subscriptions.event.subscription-created-by-user-successfully
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-created-by-user.json
+        - name: public.subscriptions.event.subscription-subscribed-successfully
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-subscribed.json
+        - name: public.subscriptions.event.subscription-unsubscribed-successfully
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-unsubscribed.json
+        - name: public.subscriptions.event.subscriber-deleted
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscriber-deleted.json
+        - name: public.subscriptions.event.subscriber-delete-failed
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscriber-delete-failed.json
+
+      event_source_name: public

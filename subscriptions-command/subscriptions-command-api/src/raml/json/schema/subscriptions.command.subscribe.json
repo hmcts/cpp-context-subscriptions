@@ -1,0 +1,5 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://moj.gov.uk/cpp/subscriptions/command/api/subscriptions.command.subscribe.json",
+  "additionalProperties": false
+}

@@ -1,0 +1,30 @@
+{
+  "id": "f835ca3e-86a0-468e-b561-f6b1039af07d",
+  "name": "Derby Only",
+  "nowsOrEdts": [
+    "Custody Warrant on Discharge of Extradition Pending Appeal",
+    "Custody Warrant on Extradition"
+  ],
+  "events": [
+    "CRACKED_OR_INEFFECTIVE_TRAIL",
+    "CHANGE_OF_PLEA",
+    "REMAND_STATUS",
+    "DEFENDANT_APPELLANT_ATTENDANCE",
+    "PLEAS_ENTER",
+    "VERDICTS_ENTER",
+    "PRE_SENTENCE_REPORT_REQUESTED"
+  ],
+  "subscribers": [
+    "deby@thirdparty.com"
+  ],
+  "filter": {
+    "filterType": "CASE_REFERENCE",
+    "urn": "324135134"
+  },
+  "courts": [
+    {
+      "courtId": "3803e612-6369-461a-a2cc-25abb374c5cc",
+      "name": "Derby Court House"
+    }
+  ]
+}

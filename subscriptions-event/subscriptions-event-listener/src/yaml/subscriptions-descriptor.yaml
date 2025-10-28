@@ -1,0 +1,25 @@
+subscriptions_descriptor:
+  spec_version: 1.0.0
+  service: subscriptions
+  service_component: EVENT_LISTENER
+  subscriptions:
+    - name: event listener subscriptions
+      events:
+        - name: subscriptions.event.subscription-created
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-created.json
+        - name: subscriptions.event.subscription-activated
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-activated.json
+        - name: subscriptions.event.subscription-deactivated
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-deactivated.json
+        - name: subscriptions.event.subscription-deleted
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-deleted.json
+        - name: subscriptions.event.subscription-created-by-user
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-created-by-user.json
+        - name: subscriptions.event.subscription-subscribed
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-subscribed.json
+        - name: subscriptions.event.subscription-unsubscribed
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-unsubscribed.json
+        - name: subscriptions.event.subscriber-deleted
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscriber-deleted.json
+
+      event_source_name: subscriptions
