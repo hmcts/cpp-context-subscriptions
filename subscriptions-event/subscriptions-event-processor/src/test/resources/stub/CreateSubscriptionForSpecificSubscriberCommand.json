@@ -1,0 +1,29 @@
+{
+  "id": "4a0e892d-c0c5-3c51-95b8-704d8c781771",
+  "name": "Derby Only",
+  "nowsOrEdts": [
+    "Custody Warrant on Extradition"
+  ],
+  "events": [
+    "PLEAS_ENTER"
+  ],
+  "subscribers": [
+    {
+      "active" :true,
+      "emailAddress" :"richard.chapman@acme.com",
+      "id": "4a0e892d-c0c5-3c51-95b8-704d8c781772"
+    }
+
+  ],
+  "filter": {
+    "filterType": "CASE_REFERENCE",
+    "urn": "URN123"
+  },
+  "courts": [
+    {
+      "courtId": "3803e612-6369-461a-a2cc-25abb374c5cc",
+      "name": "Derby Court House"
+    }
+  ],
+  "active": true
+}

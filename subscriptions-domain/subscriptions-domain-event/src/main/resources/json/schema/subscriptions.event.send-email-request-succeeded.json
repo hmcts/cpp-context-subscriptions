@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/send-email-request-succeeded.json",
+  "type": "object",
+  "properties": {
+    "notificationId": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    },
+    "sentTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subscriptionId": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    },
+    "subscriptionName": {
+      "type": "string"
+    },
+    "sendToAddress": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "notificationId",
+    "sentTime",
+    "subscriptionId",
+    "subscriptionName",
+    "sendToAddress"
+  ],
+  "additionalProperties": false
+}

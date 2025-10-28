@@ -1,0 +1,49 @@
+subscriptions_descriptor:
+  spec_version: 1.0.0
+  service: subscriptions
+  service_component: EVENT_PROCESSOR
+  subscriptions:
+    - name: event processor subscriptions
+      events:
+        - name: subscriptions.event.subscription-created
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-created.json
+        - name: subscriptions.event.subscription-activated
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-activated.json
+        - name: subscriptions.event.subscription-deactivated
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-deactivated.json
+        - name: subscriptions.event.subscription-deleted
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-deleted.json
+        - name: subscriptions.event.subscription-created-by-user
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-created-by-user.json
+        - name: subscriptions.event.send-email-requested
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/send-email-requested.json
+        - name: subscriptions.event.subscription-subscribed
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-subscribed.json
+        - name: subscriptions.event.subscription-unsubscribed
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-unsubscribed.json
+        - name: subscriptions.event.subscriber-deleted
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscriber-deleted.json
+        - name: subscriptions.event.subscriber-delete-failed
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscriber-delete-failed.json
+
+
+      event_source_name: subscriptions
+
+    - name: public event subscription
+      events:
+        - name: public.hearing.resulted
+          schema_uri: http://justice.gov.uk/hearing/courts/public.hearing-resulted.json
+        - name: public.events.hearing.hearing-resulted
+          schema_uri: http://justice.gov.uk/hearing/courts/public.events.hearing.hearing-resulted
+        - name: public.notificationnotify.events.notification-failed
+          schema_uri: http://moj.gov.uk/cpp/json/schemas/notificationnotify/events/notification-failed.json
+        - name: public.notificationnotify.events.notification-sent
+          schema_uri: http://moj.gov.uk/cpp/json/schemas/notificationnotify/events/notification-sent.json
+        - name: public.progression.now-document-requested
+          schema_uri: http://justice.gov.uk/core/courts/public.progression.now-document-requested.json
+        - name: public.hearingnows.now-document-requested
+          schema_uri: http://justice.gov.uk/core/courts/public.hearingnows.now-document-requested.json
+        - name: public.hearing.trial-vacated
+          schema_uri: http://cpp.moj.gov.uk/hearing/json/schema/public.hearing.trial-vacated.json
+
+      event_source_name: public

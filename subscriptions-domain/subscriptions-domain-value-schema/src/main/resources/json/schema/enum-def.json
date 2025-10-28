@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/enum-def.json",
+  "definitions": {
+    "events": {
+      "type": "string",
+      "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/events.json",
+      "enum": [
+        "CRACKED_OR_INEFFECTIVE_TRAIL",
+        "CHANGE_OF_PLEA",
+        "REMAND_STATUS",
+        "DEFENDANT_APPELLANT_ATTENDANCE",
+        "PLEAS_ENTER",
+        "VERDICTS_ENTER",
+        "PRE_SENTENCE_REPORT_REQUESTED"
+      ]
+    },
+    "filterType": {
+      "type": "string",
+      "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/filterType.json",
+      "enum": [
+        "CASE_REFERENCE",
+        "DEFENDANT",
+        "AGE",
+        "GENDER",
+        "OFFENCE"
+      ]
+    },
+    "gender": {
+      "type": "string",
+      "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/gender.json",
+      "enum": [
+        "MALE",
+        "FEMALE",
+        "NOT_KNOWN",
+        "NOT_SPECIFIED"
+      ]
+    }
+  }
+}

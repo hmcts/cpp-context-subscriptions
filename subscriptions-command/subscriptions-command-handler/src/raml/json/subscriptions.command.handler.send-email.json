@@ -1,0 +1,47 @@
+{
+  "subscription": {
+    "id": "99c31e71-42f1-4da6-950e-807ec6f4e84c",
+    "name": "Derby Only",
+    "types": [
+      {
+        "nowsOrEdts": [
+          "Custody Warrant on Discharge of Extradition Pending Appeal",
+          "Custody Warrant on Extradition"
+        ],
+        "events": [
+          "Cracked or ineffective trail",
+          "Change of plea",
+          "Remand Status (custody / bail)",
+          "Defendant / appellant attendance",
+          "Pleas enter",
+          "Verdicts enter",
+          "Pre-sentecnce report requested"
+        ]
+      }
+    ],
+    "subscribers": [
+      {
+        "emailAddress": "deby@thirdparty.com",
+        "active": "true"
+      }
+    ],
+    "active": "true",
+    "filter": {
+      "filterType": "URN",
+      "urn": "",
+      "isAdult": true,
+      "defendant": {
+        "firstName": "first Name",
+        "lastName": "last Name",
+        "dateOfBirth": "1920/03/03"
+      },
+      "gender": "Male",
+      "offence": "cjsCode"
+    }
+  },
+  "emailInfo": {
+    "subject": "Case URN123 - plea entered",
+    "body": "John WICK 1982-01-01 Admits",
+    "emailTemplateId": "8a17d777-b697-4675-875d-b9dc9e91f5b2"
+  }
+}

@@ -1,0 +1,25 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+    <changeSet id="07" author="sridhar.girimaji" logicalFilePath="007-create-index-subscription-id-to-court-details-table.xml">
+
+        <createIndex tableName="court_details" indexName="court_details_subscription_id_idx">
+            <column name="subscription_id"/>
+        </createIndex>
+        <createIndex tableName="nowsedt" indexName="nowsedt_subscription_id_idx">
+            <column name="subscription_id"/>
+        </createIndex>
+        <createIndex tableName="subscriber" indexName="subscriber_subscription_id_idx">
+            <column name="subscription_id"/>
+        </createIndex>
+
+        <rollback>
+            <dropIndex indexName="court_details_subscription_id_idx" tableName="court_details"/>
+            <dropIndex indexName="nowsedt_subscription_id_idx" tableName="nowsedt"/>
+            <dropIndex indexName="subscriber_subscription_id_idx" tableName="subscriber"/>
+        </rollback>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://moj.gov.uk/cpp/subscriptions/command/api/subscriptions.command.create-subscription.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "nowsOrEdts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/enum-def.json#/definitions/events"
+      },
+      "minItems": 0
+    },
+    "subscribers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "filter": {
+      "$ref": "#/definitions/filter"
+    },
+    "courts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/court"
+      },
+      "minItems": 1,
+      "maxItems": 5
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "definitions": {
+    "filter": {
+      "type": "object",
+      "properties": {
+        "filterType": {
+          "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/enum-def.json#/definitions/filterType"
+        },
+        "urn": {
+          "type": "string"
+        },
+        "isAdult": {
+          "type": "boolean"
+        },
+        "defendant": {
+          "$ref": "#/definitions/defendant"
+        },
+        "gender": {
+          "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/enum-def.json#/definitions/gender"
+        },
+        "offence": {
+          "type": "string"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "filterType",
+            "urn"
+          ]
+        },
+        {
+          "required": [
+            "filterType",
+            "isAdult"
+          ]
+        },
+        {
+          "required": [
+            "filterType",
+            "defendant"
+          ]
+        },
+        {
+          "required": [
+            "filterType",
+            "gender"
+          ]
+        },
+        {
+          "required": [
+            "filterType",
+            "offence"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "defendant": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/date"
+        }
+      }
+    },
+    "court": {
+      "type": "object",
+      "properties": {
+        "courtId": {
+          "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+        },
+        "name": {
+          "type": "string",
+          "description": "The reference data name for the court centre, required for rendering throughout entire UI journey on CPP and also must be on events for CP Search reasons.  Also rendered on all downstream processes after results are published i.e. NOWs, LAA & other 3rd parties, Court Extract, Certificates of acquittal, conviction, etc. Due to the level of usage an enrichment pattern is implemented to prevent multiple extensive ref data lookups.  The additional complication is that the name is immutable at teh time of the court proceedings and therefore from an historical perspective any ref data lookup must be history aware"
+        }
+      },
+      "required": [
+        "courtId",
+        "name"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

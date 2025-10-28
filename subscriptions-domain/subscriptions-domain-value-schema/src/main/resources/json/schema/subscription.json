@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "nowsOrEdts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/enum-def.json#/definitions/events"
+      },
+      "minItems": 0
+    },
+    "subscribers": {
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/subscribers.json"
+      }
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "filter": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/filter.json"
+    },
+    "courts": {
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/court.json"
+      },
+      "minItems": 1,
+      "maxItems": 5
+    }
+  },
+  "additionalProperties": false
+}

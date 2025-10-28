@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <include file="liquibase/001-create-subscription-table.xml"/>
+    <include file="liquibase/002-create-subscribers-table.xml"/>
+    <include file="liquibase/003-create-types-table.xml"/>
+    <include file="liquibase/004-create-filters-table.xml"/>
+    <include file="liquibase/005-create-courts-table.xml"/>
+    <include file="liquibase/006-drop-process-event-index.xml"/>
+    <include file="liquibase/007-create-index-subscription-id-to-court-details-table.xml"/>
+</databaseChangeLog>

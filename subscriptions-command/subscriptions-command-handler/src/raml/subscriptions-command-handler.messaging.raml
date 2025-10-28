@@ -1,0 +1,40 @@
+#%RAML 0.8
+title: Subscription Command Handler
+baseUri: message://command/handler/message/subscriptions
+
+/subscriptions.handler.command:
+  post:
+    body:
+      application/vnd.subscriptions.command.handler.create-subscription-by-admin+json:
+        schema: !include json/schema/subscriptions.command.handler.create-subscription-by-admin.json
+        example: !include json/subscriptions.command.handler.create-subscription-by-admin.json
+      application/vnd.subscriptions.command.handler.activate-subscription+json:
+        schema: !include json/schema/subscriptions.command.handler.activate-subscription.json
+        example: !include json/subscriptions.command.handler.activate-subscription.json
+      application/vnd.subscriptions.command.handler.deactivate-subscription+json:
+        schema: !include json/schema/subscriptions.command.handler.deactivate-subscription.json
+        example: !include json/subscriptions.command.handler.deactivate-subscription.json
+      application/vnd.subscriptions.command.handler.delete-subscription+json:
+        schema: !include json/schema/subscriptions.command.handler.delete-subscription.json
+        example: !include json/subscriptions.command.handler.delete-subscription.json
+      application/vnd.subscriptions.command.handler.send-email+json:
+        schema: !include json/schema/subscriptions.command.handler.send-email.json
+        example: !include json/subscriptions.command.handler.send-email.json
+      application/vnd.subscriptions.command.handler.create-subscription-by-user+json:
+        schema: !include json/schema/subscriptions.command.handler.create-subscription-by-user.json
+        example: !include json/subscriptions.command.handler.create-subscription-by-user.json
+      application/vnd.subscriptions.command.handler.subscribe+json:
+        schema: !include json/schema/subscriptions.command.handler.subscribe.json
+        example: !include json/subscriptions.command.handler.subscribe.json
+      application/vnd.subscriptions.command.handler.unsubscribe+json:
+        schema: !include json/schema/subscriptions.command.handler.unsubscribe.json
+        example: !include json/subscriptions.command.handler.unsubscribe.json
+      application/vnd.subscriptions.command.handler.handle-send-email-request-succeeded+json:
+        schema: !include json/schema/subscriptions.command.handler.handle-send-email-request-succeeded.json
+        example: !include json/subscriptions.command.handler.handle-send-email-request-succeeded.json
+      application/vnd.subscriptions.command.handler.handle-send-email-request-failed+json:
+        schema: !include json/schema/subscriptions.command.handler.handle-send-email-request-failed.json
+        example: !include json/subscriptions.command.handler.handle-send-email-request-failed.json
+      application/vnd.subscriptions.command.handler.delete-subscriber+json:
+        schema: !include json/schema/subscriptions.command.handler.delete-subscriber.json
+        example: !include json/subscriptions.command.handler.delete-subscriber.json

@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/send-email-request-failed.json",
+  "type": "object",
+  "properties": {
+    "notificationId": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    },
+    "failedTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "errorMessage": {
+      "type": "string"
+    },
+    "statusCode": {
+      "type": "integer"
+    },
+    "subscriptionId": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    },
+    "subscriptionName": {
+      "type": "string"
+    },
+    "sendToAddress": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "notificationId",
+    "failedTime",
+    "errorMessage",
+    "subscriptionId",
+    "subscriptionName",
+    "sendToAddress"
+  ],
+  "additionalProperties": false
+}

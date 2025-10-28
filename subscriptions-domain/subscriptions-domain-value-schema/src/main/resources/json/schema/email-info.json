@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/email-info.json",
+  "type": "object",
+  "properties": {
+    "subject": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "caseLink": {
+      "type": "string"
+    },
+    "emailTemplateId": {
+      "type": "string"
+    },
+    "subscription": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription.json"
+    },
+    "materialId": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

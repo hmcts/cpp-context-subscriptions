@@ -1,0 +1,1584 @@
+{
+  "hearing": {
+    "courtCentre": {
+      "address": {
+        "address1": "The Inhedge",
+        "address2": "Birmingham",
+        "address3": "",
+        "address4": "",
+        "address5": "",
+        "postcode": "B1 9AB"
+      },
+      "code": "B20EY00",
+      "courtHearingLocation": "B20EY01",
+      "id": "5c99d2a9-fbc6-3cc1-a97f-475015714afa",
+      "lja": {
+        "ljaCode": "2923",
+        "ljaName": "Black Country Magistrates' Court"
+      },
+      "name": "Birmingham Magistrates' Court",
+      "roomId": "2f35eb3b-3cb7-30b2-9a49-85d3b3b14ae1",
+      "roomName": "Courtroom 01"
+    },
+    "defenceCounsels": [
+      {
+        "attendanceDays": [
+          "2023-04-11"
+        ],
+        "defendants": [
+          "c3ddb92a-8198-4b6d-bd37-96dab9980bf2",
+          "3159c0bc-f9e2-4b3a-9257-478ec2f8226b"
+        ],
+        "firstName": "Sophia",
+        "id": "618ee604-8fdf-4925-8c55-71e2b1fabe9a",
+        "lastName": "Ali",
+        "middleName": "",
+        "status": "Defence",
+        "title": ""
+      },
+      {
+        "attendanceDays": [
+          "2023-04-11"
+        ],
+        "defendants": [
+          "3159c0bc-f9e2-4b3a-9257-478ec2f8226b",
+          "c3ddb92a-8198-4b6d-bd37-96dab9980bf2"
+        ],
+        "firstName": "Ms",
+        "id": "307446a6-541a-45e2-bdcb-91d4637c5ef7",
+        "lastName": "Ali",
+        "middleName": "",
+        "status": "Defence - Agent for Maurice Andrews",
+        "title": ""
+      }
+    ],
+    "defendantAttendance": [
+      {
+        "attendanceDays": [
+          {
+            "attendanceType": "IN_PERSON",
+            "day": "2023-04-11"
+          }
+        ],
+        "defendantId": "c3ddb92a-8198-4b6d-bd37-96dab9980bf2"
+      },
+      {
+        "attendanceDays": [
+          {
+            "attendanceType": "IN_PERSON",
+            "day": "2023-04-11"
+          }
+        ],
+        "defendantId": "3159c0bc-f9e2-4b3a-9257-478ec2f8226b"
+      }
+    ],
+    "defendantJudicialResults": [
+      {
+        "judicialResult": {
+          "alwaysPublished": true,
+          "canBeSubjectOfBreach": false,
+          "canBeSubjectOfVariation": false,
+          "category": "ANCILLARY",
+          "courtClerk": {
+            "firstName": "Denise",
+            "lastName": "Contractor",
+            "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+          },
+          "d20": false,
+          "excludedFromResults": false,
+          "isAdjournmentResult": false,
+          "isAvailableForCourtExtract": true,
+          "isConvictedResult": false,
+          "isDeleted": false,
+          "isFinancialResult": false,
+          "isNewAmendment": true,
+          "isUnscheduled": false,
+          "judicialResultId": "2234bd94-1bec-4d1c-8729-d96ae42a7a77",
+          "judicialResultPrompts": [
+            {
+              "courtExtract": "Y",
+              "isFinancialImposition": false,
+              "judicialResultPromptTypeId": "6b36e5ff-e116-4dc3-b438-8c02d493959e",
+              "label": "Collection order type",
+              "promptReference": "collectionOrderType",
+              "promptSequence": 100,
+              "type": "FIXL",
+              "usergroups": [
+              ],
+              "value": "Make payments as ordered",
+              "welshLabel": "Math o orchymyn casglu",
+              "welshValue": "Gwneud taliadau yn unol \u00e2\u2019r gorchymyn"
+            }
+          ],
+          "judicialResultTypeId": "9ea0d845-5096-44f6-9ce0-8ae801141eac",
+          "label": "Collection order",
+          "lastSharedDateTime": "2023-04-11",
+          "level": "D",
+          "lifeDuration": false,
+          "offenceId": "f7474eec-4077-4de3-b794-631c328e7c3d",
+          "orderedDate": "2023-04-11",
+          "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+          "parentJudicialResultId": "b784bc8b-5470-4287-9709-7d73f7113006",
+          "parentJudicialResultTypeId": "cfa66730-f81c-4768-a36e-581791cb0270",
+          "postHearingCustodyStatus": "A",
+          "publishedAsAPrompt": false,
+          "publishedForNows": false,
+          "rank": 14000,
+          "resultText": "Collection order\nCollection order type Make payments as ordered",
+          "rollUpPrompts": false,
+          "rootJudicialResultId": "16e115c9-6df9-4c4c-a2b0-f04fd776059d",
+          "rootJudicialResultTypeId": "969f150c-cd05-46b0-9dd9-30891efcc766",
+          "terminatesOffenceProceedings": false,
+          "urgent": false,
+          "usergroups": [
+          ],
+          "welshLabel": "Gorchymyn Casglu"
+        },
+        "masterDefendantId": "3159c0bc-f9e2-4b3a-9257-478ec2f8226b"
+      },
+      {
+        "judicialResult": {
+          "alwaysPublished": true,
+          "canBeSubjectOfBreach": false,
+          "canBeSubjectOfVariation": false,
+          "category": "FINAL",
+          "courtClerk": {
+            "firstName": "Denise",
+            "lastName": "Contractor",
+            "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+          },
+          "d20": false,
+          "excludedFromResults": false,
+          "isAdjournmentResult": false,
+          "isAvailableForCourtExtract": true,
+          "isConvictedResult": false,
+          "isDeleted": false,
+          "isFinancialResult": false,
+          "isNewAmendment": true,
+          "isUnscheduled": false,
+          "judicialResultId": "85117268-ce44-466c-bf65-2b046031ad32",
+          "judicialResultPrompts": [
+            {
+              "courtExtract": "Y",
+              "isFinancialImposition": false,
+              "judicialResultPromptTypeId": "ee7d253a-c629-11e8-a355-529269fb1459",
+              "label": "Date to pay in full by",
+              "promptReference": "PBD",
+              "promptSequence": 100,
+              "type": "DATE",
+              "usergroups": [
+              ],
+              "value": "09/05/2023",
+              "welshLabel": "Dyddiad terfyn ar gyfer talu'r swm llawn",
+              "welshValue": "09/05/2023"
+            }
+          ],
+          "judicialResultTypeId": "bcb5a496-f7cf-11e8-8eb2-f2801f1b9fd1",
+          "label": "Pay by date",
+          "lastSharedDateTime": "2023-04-11",
+          "level": "D",
+          "lifeDuration": false,
+          "offenceId": "f7474eec-4077-4de3-b794-631c328e7c3d",
+          "orderedDate": "2023-04-11",
+          "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+          "parentJudicialResultId": "1f939a17-95bd-44d7-bfbb-0f254bef1e53",
+          "parentJudicialResultTypeId": "4fdd9548-c521-48c9-baa3-1bd2f13a4fcc",
+          "postHearingCustodyStatus": "A",
+          "publishedAsAPrompt": false,
+          "publishedForNows": false,
+          "rank": 91000,
+          "resultDefinitionGroup": "Payment terms",
+          "resultText": "Pay by date\nDate to pay in full by 09/05/2023",
+          "rollUpPrompts": false,
+          "rootJudicialResultId": "16e115c9-6df9-4c4c-a2b0-f04fd776059d",
+          "rootJudicialResultTypeId": "969f150c-cd05-46b0-9dd9-30891efcc766",
+          "terminatesOffenceProceedings": false,
+          "urgent": false,
+          "usergroups": [
+          ],
+          "welshLabel": "Dyddiad terfyn ar gyfer talu"
+        },
+        "masterDefendantId": "3159c0bc-f9e2-4b3a-9257-478ec2f8226b"
+      },
+      {
+        "judicialResult": {
+          "alwaysPublished": false,
+          "canBeSubjectOfBreach": false,
+          "canBeSubjectOfVariation": false,
+          "category": "ANCILLARY",
+          "cjsCode": "3117",
+          "courtClerk": {
+            "firstName": "Denise",
+            "lastName": "Contractor",
+            "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+          },
+          "d20": false,
+          "excludedFromResults": false,
+          "isAdjournmentResult": false,
+          "isAvailableForCourtExtract": true,
+          "isConvictedResult": true,
+          "isDeleted": false,
+          "isFinancialResult": true,
+          "isNewAmendment": true,
+          "isUnscheduled": false,
+          "judicialResultId": "f908f48b-2590-4ee6-956e-fe6fcd79ac57",
+          "judicialResultPrompts": [
+            {
+              "courtExtract": "Y",
+              "isFinancialImposition": true,
+              "judicialResultPromptTypeId": "629a971e-9d7a-4526-838d-0a4cb922b5cb",
+              "label": "Amount of surcharge",
+              "promptReference": "AOS",
+              "promptSequence": 100,
+              "type": "CURR",
+              "usergroups": [
+              ],
+              "value": "\u00a3114.00",
+              "welshLabel": "Swm y gordal",
+              "welshValue": "\u00a3114.00"
+            }
+          ],
+          "judicialResultTypeId": "e866cd11-6073-4fdf-a229-51c9d694e1d0",
+          "label": "Surcharge",
+          "lastSharedDateTime": "2023-04-11",
+          "level": "D",
+          "lifeDuration": false,
+          "offenceId": "f7474eec-4077-4de3-b794-631c328e7c3d",
+          "orderedDate": "2023-04-11",
+          "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+          "postHearingCustodyStatus": "A",
+          "publishedAsAPrompt": false,
+          "publishedForNows": false,
+          "rank": 32700,
+          "resultDefinitionGroup": "Imposition",
+          "resultText": "Surcharge\nAmount of surcharge \u00a3114.00",
+          "rollUpPrompts": true,
+          "rootJudicialResultId": "f908f48b-2590-4ee6-956e-fe6fcd79ac57",
+          "rootJudicialResultTypeId": "e866cd11-6073-4fdf-a229-51c9d694e1d0",
+          "terminatesOffenceProceedings": false,
+          "urgent": false,
+          "usergroups": [
+          ],
+          "welshLabel": "Gordal"
+        },
+        "masterDefendantId": "3159c0bc-f9e2-4b3a-9257-478ec2f8226b"
+      },
+      {
+        "judicialResult": {
+          "alwaysPublished": false,
+          "canBeSubjectOfBreach": false,
+          "canBeSubjectOfVariation": false,
+          "category": "ANCILLARY",
+          "cjsCode": "3117",
+          "courtClerk": {
+            "firstName": "Denise",
+            "lastName": "Contractor",
+            "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+          },
+          "d20": false,
+          "excludedFromResults": false,
+          "isAdjournmentResult": false,
+          "isAvailableForCourtExtract": true,
+          "isConvictedResult": true,
+          "isDeleted": false,
+          "isFinancialResult": true,
+          "isNewAmendment": true,
+          "isUnscheduled": false,
+          "judicialResultId": "0142c719-6f77-4ad8-adcb-790a8084d215",
+          "judicialResultPrompts": [
+            {
+              "courtExtract": "Y",
+              "isFinancialImposition": true,
+              "judicialResultPromptTypeId": "629a971e-9d7a-4526-838d-0a4cb922b5cb",
+              "label": "Amount of surcharge",
+              "promptReference": "AOS",
+              "promptSequence": 100,
+              "type": "CURR",
+              "usergroups": [
+              ],
+              "value": "\u00a364.00",
+              "welshLabel": "Swm y gordal",
+              "welshValue": "\u00a364.00"
+            }
+          ],
+          "judicialResultTypeId": "e866cd11-6073-4fdf-a229-51c9d694e1d0",
+          "label": "Surcharge",
+          "lastSharedDateTime": "2023-04-11",
+          "level": "D",
+          "lifeDuration": false,
+          "offenceId": "2a7afe6f-200e-4dc2-be30-2c4409df2918",
+          "orderedDate": "2023-04-11",
+          "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+          "postHearingCustodyStatus": "A",
+          "publishedAsAPrompt": false,
+          "publishedForNows": false,
+          "rank": 32700,
+          "resultDefinitionGroup": "Imposition",
+          "resultText": "Surcharge\nAmount of surcharge \u00a364.00",
+          "rollUpPrompts": true,
+          "rootJudicialResultId": "0142c719-6f77-4ad8-adcb-790a8084d215",
+          "rootJudicialResultTypeId": "e866cd11-6073-4fdf-a229-51c9d694e1d0",
+          "terminatesOffenceProceedings": false,
+          "urgent": false,
+          "usergroups": [
+          ],
+          "welshLabel": "Gordal"
+        },
+        "masterDefendantId": "c3ddb92a-8198-4b6d-bd37-96dab9980bf2"
+      },
+      {
+        "judicialResult": {
+          "alwaysPublished": true,
+          "canBeSubjectOfBreach": false,
+          "canBeSubjectOfVariation": false,
+          "category": "FINAL",
+          "courtClerk": {
+            "firstName": "Denise",
+            "lastName": "Contractor",
+            "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+          },
+          "d20": false,
+          "excludedFromResults": false,
+          "isAdjournmentResult": false,
+          "isAvailableForCourtExtract": true,
+          "isConvictedResult": false,
+          "isDeleted": false,
+          "isFinancialResult": false,
+          "isNewAmendment": true,
+          "isUnscheduled": false,
+          "judicialResultId": "71abeeae-2ddd-4364-b89a-7a2847871706",
+          "judicialResultPrompts": [
+            {
+              "courtExtract": "Y",
+              "isFinancialImposition": false,
+              "judicialResultPromptTypeId": "ee7d253a-c629-11e8-a355-529269fb1459",
+              "label": "Date to pay in full by",
+              "promptReference": "PBD",
+              "promptSequence": 100,
+              "type": "DATE",
+              "usergroups": [
+              ],
+              "value": "09/05/2023",
+              "welshLabel": "Dyddiad terfyn ar gyfer talu'r swm llawn",
+              "welshValue": "09/05/2023"
+            }
+          ],
+          "judicialResultTypeId": "bcb5a496-f7cf-11e8-8eb2-f2801f1b9fd1",
+          "label": "Pay by date",
+          "lastSharedDateTime": "2023-04-11",
+          "level": "D",
+          "lifeDuration": false,
+          "offenceId": "2a7afe6f-200e-4dc2-be30-2c4409df2918",
+          "orderedDate": "2023-04-11",
+          "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+          "parentJudicialResultId": "9eb13cf8-dde8-40f8-a341-b34515e5c841",
+          "parentJudicialResultTypeId": "4fdd9548-c521-48c9-baa3-1bd2f13a4fcc",
+          "postHearingCustodyStatus": "A",
+          "publishedAsAPrompt": false,
+          "publishedForNows": false,
+          "rank": 91000,
+          "resultDefinitionGroup": "Payment terms",
+          "resultText": "Pay by date\nDate to pay in full by 09/05/2023",
+          "rollUpPrompts": false,
+          "rootJudicialResultId": "741771b6-b070-41d8-b985-9005b6cdac8d",
+          "rootJudicialResultTypeId": "969f150c-cd05-46b0-9dd9-30891efcc766",
+          "terminatesOffenceProceedings": false,
+          "urgent": false,
+          "usergroups": [
+          ],
+          "welshLabel": "Dyddiad terfyn ar gyfer talu"
+        },
+        "masterDefendantId": "c3ddb92a-8198-4b6d-bd37-96dab9980bf2"
+      },
+      {
+        "judicialResult": {
+          "alwaysPublished": true,
+          "canBeSubjectOfBreach": false,
+          "canBeSubjectOfVariation": false,
+          "category": "ANCILLARY",
+          "courtClerk": {
+            "firstName": "Denise",
+            "lastName": "Contractor",
+            "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+          },
+          "d20": false,
+          "excludedFromResults": false,
+          "isAdjournmentResult": false,
+          "isAvailableForCourtExtract": true,
+          "isConvictedResult": false,
+          "isDeleted": false,
+          "isFinancialResult": false,
+          "isNewAmendment": true,
+          "isUnscheduled": false,
+          "judicialResultId": "30852537-17a1-4079-9d73-01439fd5d774",
+          "judicialResultPrompts": [
+            {
+              "courtExtract": "Y",
+              "isFinancialImposition": false,
+              "judicialResultPromptTypeId": "6b36e5ff-e116-4dc3-b438-8c02d493959e",
+              "label": "Collection order type",
+              "promptReference": "collectionOrderType",
+              "promptSequence": 100,
+              "type": "FIXL",
+              "usergroups": [
+              ],
+              "value": "Make payments as ordered",
+              "welshLabel": "Math o orchymyn casglu",
+              "welshValue": "Gwneud taliadau yn unol \u00e2\u2019r gorchymyn"
+            }
+          ],
+          "judicialResultTypeId": "9ea0d845-5096-44f6-9ce0-8ae801141eac",
+          "label": "Collection order",
+          "lastSharedDateTime": "2023-04-11",
+          "level": "D",
+          "lifeDuration": false,
+          "offenceId": "2a7afe6f-200e-4dc2-be30-2c4409df2918",
+          "orderedDate": "2023-04-11",
+          "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+          "parentJudicialResultId": "4c2d6c37-c77e-41ac-bfb4-a7d310e0fe3b",
+          "parentJudicialResultTypeId": "cfa66730-f81c-4768-a36e-581791cb0270",
+          "postHearingCustodyStatus": "A",
+          "publishedAsAPrompt": false,
+          "publishedForNows": false,
+          "rank": 14000,
+          "resultText": "Collection order\nCollection order type Make payments as ordered",
+          "rollUpPrompts": false,
+          "rootJudicialResultId": "741771b6-b070-41d8-b985-9005b6cdac8d",
+          "rootJudicialResultTypeId": "969f150c-cd05-46b0-9dd9-30891efcc766",
+          "terminatesOffenceProceedings": false,
+          "urgent": false,
+          "usergroups": [
+          ],
+          "welshLabel": "Gorchymyn Casglu"
+        },
+        "masterDefendantId": "c3ddb92a-8198-4b6d-bd37-96dab9980bf2"
+      }
+    ],
+    "hasSharedResults": true,
+    "hearingDays": [
+      {
+        "courtCentreId": "5c99d2a9-fbc6-3cc1-a97f-475015714afa",
+        "courtRoomId": "2f35eb3b-3cb7-30b2-9a49-85d3b3b14ae1",
+        "hasSharedResults": true,
+        "isCancelled": false,
+        "listedDurationMinutes": 20,
+        "listingSequence": 1,
+        "sittingDay": "2023-04-11T12:30:00.000Z"
+      }
+    ],
+    "hearingLanguage": "ENGLISH",
+    "id": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+    "judiciary": [
+      {
+        "firstName": "Teresa Stanis-Lawa",
+        "isBenchChairman": true,
+        "isDeputy": false,
+        "judicialId": "a0127bc5-b1ea-3e05-b171-3d8235bb20c2",
+        "judicialRoleType": {
+          "judicialRoleTypeId": "a0127bc5-b1ea-3e05-b171-3d8235bb20c2",
+          "judiciaryType": "Magistrate"
+        },
+        "lastName": "Popplewell",
+        "title": "Mrs",
+        "userId": "d09dc4f3-528e-4496-bdc6-a02c8a1e0e11"
+      },
+      {
+        "firstName": "Eileen Mavis",
+        "isBenchChairman": false,
+        "isDeputy": true,
+        "judicialId": "6edf1415-e96d-4850-8901-eec105e77342",
+        "judicialRoleType": {
+          "judicialRoleTypeId": "6edf1415-e96d-4850-8901-eec105e77342",
+          "judiciaryType": "Magistrate"
+        },
+        "lastName": "Rodgers",
+        "title": "Mrs",
+        "userId": "84bc2601-b685-469c-b677-55a233cde1e1"
+      },
+      {
+        "firstName": "Andrew",
+        "isBenchChairman": false,
+        "isDeputy": true,
+        "judicialId": "80054989-36d9-30b1-9d5e-eeeda32780bd",
+        "judicialRoleType": {
+          "judicialRoleTypeId": "80054989-36d9-30b1-9d5e-eeeda32780bd",
+          "judiciaryType": "Magistrate"
+        },
+        "lastName": "Ball",
+        "title": "Mr",
+        "userId": "395f83b1-4b75-4cb3-9b1d-20704877677f"
+      }
+    ],
+    "jurisdictionType": "MAGISTRATES",
+    "prosecutionCases": [
+      {
+        "caseStatus": "ACTIVE",
+        "cpsOrganisation": "A20AD00",
+        "defendants": [
+          {
+            "courtProceedingsInitiated": "2023-03-24T10:31:58.676Z",
+            "croNumber": "375147/19R",
+            "defendantCaseJudicialResults": [
+              {
+                "alwaysPublished": false,
+                "canBeSubjectOfBreach": false,
+                "canBeSubjectOfVariation": false,
+                "category": "FINAL",
+                "cjsCode": "3011",
+                "courtClerk": {
+                  "firstName": "Denise",
+                  "lastName": "Contractor",
+                  "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                },
+                "d20": false,
+                "excludedFromResults": false,
+                "isAdjournmentResult": false,
+                "isAvailableForCourtExtract": true,
+                "isConvictedResult": true,
+                "isDeleted": false,
+                "isFinancialResult": true,
+                "isNewAmendment": true,
+                "isUnscheduled": false,
+                "judicialResultId": "e50e51b9-a75b-44fb-9f2c-312b345a8023",
+                "judicialResultPrompts": [
+                  {
+                    "courtExtract": "Y",
+                    "isFinancialImposition": true,
+                    "judicialResultPromptTypeId": "f63b0bb5-7d93-4dab-bc3d-b4bd27152871",
+                    "label": "Amount of costs",
+                    "promptReference": "AOC",
+                    "promptSequence": 100,
+                    "type": "CURR",
+                    "usergroups": [
+                    ],
+                    "value": "\u00a3185.00",
+                    "welshLabel": "Swm y costau",
+                    "welshValue": "\u00a3185.00"
+                  }
+                ],
+                "judicialResultTypeId": "f5d492b8-a09b-4f70-9ceb-aa06c306a7dc",
+                "label": "Costs to Crown Prosecution Service",
+                "lastSharedDateTime": "2023-04-11",
+                "level": "C",
+                "lifeDuration": false,
+                "offenceId": "f7474eec-4077-4de3-b794-631c328e7c3d",
+                "orderedDate": "2023-04-11",
+                "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                "postHearingCustodyStatus": "A",
+                "publishedAsAPrompt": false,
+                "publishedForNows": false,
+                "rank": 33500,
+                "resultDefinitionGroup": "Imposition",
+                "resultText": "Costs to Crown Prosecution Service\nAmount of costs \u00a3185.00",
+                "rollUpPrompts": true,
+                "rootJudicialResultId": "e50e51b9-a75b-44fb-9f2c-312b345a8023",
+                "rootJudicialResultTypeId": "f5d492b8-a09b-4f70-9ceb-aa06c306a7dc",
+                "terminatesOffenceProceedings": false,
+                "urgent": false,
+                "usergroups": [
+                ],
+                "welshLabel": "Costau i Wasanaeth Erlyn y Goron"
+              },
+              {
+                "alwaysPublished": false,
+                "category": "ANCILLARY",
+                "cjsCode": "4592",
+                "d20": false,
+                "excludedFromResults": false,
+                "isAdjournmentResult": false,
+                "isAvailableForCourtExtract": false,
+                "isConvictedResult": false,
+                "isFinancialResult": false,
+                "isUnscheduled": false,
+                "judicialResultId": "004ac324-89d4-4876-976b-54c71bf6834e",
+                "judicialResultTypeId": "8c67b30a-418c-11e8-842f-0ed5f89f718b",
+                "label": "Defendant's details changed",
+                "lastSharedDateTime": "2023-04-11",
+                "lifeDuration": false,
+                "orderedDate": "2023-04-11",
+                "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                "publishedAsAPrompt": false,
+                "publishedForNows": false,
+                "rank": 89100,
+                "resultText": "Defendant's details changed",
+                "rollUpPrompts": true,
+                "terminatesOffenceProceedings": false,
+                "urgent": false,
+                "usergroups": [
+                ]
+              }
+            ],
+            "id": "3159c0bc-f9e2-4b3a-9257-478ec2f8226b",
+            "legalAidStatus": "Granted",
+            "masterDefendantId": "3159c0bc-f9e2-4b3a-9257-478ec2f8226b",
+            "offences": [
+              {
+                "arrestDate": "2023-03-24",
+                "chargeDate": "2023-03-24",
+                "convictingCourt": {
+                  "code": "B20EY00",
+                  "id": "5c99d2a9-fbc6-3cc1-a97f-475015714afa",
+                  "lja": {
+                    "ljaCode": "2923",
+                    "ljaName": "Black Country Magistrates' Court"
+                  },
+                  "name": "Birmingham Magistrates' Court",
+                  "roomId": "2f35eb3b-3cb7-30b2-9a49-85d3b3b14ae1"
+                },
+                "convictionDate": "2023-04-11",
+                "count": 0,
+                "id": "f7474eec-4077-4de3-b794-631c328e7c3d",
+                "indicatedPlea": {
+                  "indicatedPleaDate": "2023-04-11",
+                  "indicatedPleaValue": "INDICATED_GUILTY",
+                  "offenceId": "f7474eec-4077-4de3-b794-631c328e7c3d",
+                  "originatingHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                  "source": "IN_COURT"
+                },
+                "isDisposed": true,
+                "judicialResults": [
+                  {
+                    "alwaysPublished": false,
+                    "canBeSubjectOfBreach": false,
+                    "canBeSubjectOfVariation": false,
+                    "category": "FINAL",
+                    "cjsCode": "1015",
+                    "courtClerk": {
+                      "firstName": "Denise",
+                      "lastName": "Contractor",
+                      "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                    },
+                    "d20": false,
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": true,
+                    "isDeleted": false,
+                    "isFinancialResult": true,
+                    "isNewAmendment": true,
+                    "isUnscheduled": false,
+                    "judicialResultId": "16e115c9-6df9-4c4c-a2b0-f04fd776059d",
+                    "judicialResultPrompts": [
+                      {
+                        "courtExtract": "Y",
+                        "isFinancialImposition": true,
+                        "judicialResultPromptTypeId": "7cd1472f-2379-4f5b-9e67-98a43d86e122",
+                        "label": "Amount of fine",
+                        "promptReference": "AOF",
+                        "promptSequence": 100,
+                        "type": "CURR",
+                        "usergroups": [
+                        ],
+                        "value": "\u00a380.00",
+                        "welshLabel": "Swm y ddirwy",
+                        "welshValue": "\u00a380.00"
+                      }
+                    ],
+                    "judicialResultTypeId": "969f150c-cd05-46b0-9dd9-30891efcc766",
+                    "label": "Fine",
+                    "lastSharedDateTime": "2023-04-11",
+                    "level": "O",
+                    "lifeDuration": false,
+                    "orderedDate": "2023-04-11",
+                    "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "rank": 33400,
+                    "resultDefinitionGroup": "Imposition",
+                    "resultText": "Fine\nAmount of fine \u00a380.00",
+                    "rollUpPrompts": true,
+                    "rootJudicialResultId": "16e115c9-6df9-4c4c-a2b0-f04fd776059d",
+                    "rootJudicialResultTypeId": "969f150c-cd05-46b0-9dd9-30891efcc766",
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [
+                    ],
+                    "welshLabel": "Dirwy"
+                  },
+                  {
+                    "alwaysPublished": true,
+                    "canBeSubjectOfBreach": false,
+                    "canBeSubjectOfVariation": false,
+                    "category": "ANCILLARY",
+                    "cjsCode": "3101",
+                    "courtClerk": {
+                      "firstName": "Denise",
+                      "lastName": "Contractor",
+                      "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                    },
+                    "d20": false,
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": false,
+                    "isDeleted": false,
+                    "isFinancialResult": false,
+                    "isNewAmendment": true,
+                    "isUnscheduled": false,
+                    "judicialResultId": "5b96f87a-4fc8-4087-bbd7-34088d243311",
+                    "judicialResultPrompts": [
+                      {
+                        "courtExtract": "Y",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "72413aef-ecb9-4e9b-a143-31d1e9c11584",
+                        "label": "Number of hours",
+                        "promptReference": "numberOfHours",
+                        "promptSequence": 100,
+                        "type": "INT",
+                        "usergroups": [
+                        ],
+                        "value": "100 Hours",
+                        "welshLabel": "Nifer yr oriau",
+                        "welshValue": "100 Hours"
+                      }
+                    ],
+                    "judicialResultTypeId": "9bec5977-1796-4645-9b9e-687d4f23d37d",
+                    "label": "Unpaid work",
+                    "lastSharedDateTime": "2023-04-11",
+                    "level": "O",
+                    "lifeDuration": false,
+                    "orderedDate": "2023-04-11",
+                    "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                    "parentJudicialResultId": "d9364790-b1a9-432e-91ea-b6d56f8b1118",
+                    "parentJudicialResultTypeId": "b2dab2b7-3edd-4223-b1be-3819173ec54d",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "rank": 32200,
+                    "resultDefinitionGroup": "Community Requirement",
+                    "resultText": "Unpaid work\nNumber of hours 100 Hours",
+                    "rollUpPrompts": false,
+                    "rootJudicialResultId": "d4b2331f-8dcd-457b-bf8c-4131116e01b6",
+                    "rootJudicialResultTypeId": "418b3aa7-65ab-4a4a-bab9-2f96b698118c",
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [
+                    ],
+                    "welshLabel": "Gwaith di-d\u00e2l"
+                  },
+                  {
+                    "alwaysPublished": true,
+                    "canBeSubjectOfBreach": false,
+                    "canBeSubjectOfVariation": false,
+                    "category": "ANCILLARY",
+                    "cjsCode": "3135",
+                    "courtClerk": {
+                      "firstName": "Denise",
+                      "lastName": "Contractor",
+                      "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                    },
+                    "d20": false,
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": true,
+                    "isDeleted": false,
+                    "isFinancialResult": false,
+                    "isNewAmendment": true,
+                    "isUnscheduled": false,
+                    "judicialResultId": "a498e39b-47f2-49fd-9228-fe43a89203f9",
+                    "judicialResultPrompts": [
+                      {
+                        "courtExtract": "Y",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "13efdd20-a7ae-11e8-98d0-529269fb1459",
+                        "label": "Property to be forfeited and destroyed",
+                        "promptReference": "propertyToBeForfeitedAndDestroyed",
+                        "promptSequence": 100,
+                        "type": "TXT",
+                        "usergroups": [
+                        ],
+                        "value": "CS Spray",
+                        "welshValue": "CS Spray"
+                      },
+                      {
+                        "courtExtract": "Y",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "7cca9a0e-b11f-4863-9fec-45b9b13f946b",
+                        "label": "Forfeiture and destruction ordered under",
+                        "promptReference": "forfeitureAndDestructionOrderedUnder",
+                        "promptSequence": 200,
+                        "type": "FIXLO",
+                        "usergroups": [
+                        ],
+                        "value": "s153 Sentencing Act 2020",
+                        "welshValue": "s153 Sentencing Act 2020"
+                      }
+                    ],
+                    "judicialResultTypeId": "2852b770-a7ad-11e8-98d0-529269fb1459",
+                    "label": "Forfeiture and destruction",
+                    "lastSharedDateTime": "2023-04-11",
+                    "level": "O",
+                    "lifeDuration": false,
+                    "orderedDate": "2023-04-11",
+                    "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "rank": 36000,
+                    "resultDefinitionGroup": "Forfeiture and deprivation",
+                    "resultText": "Forfeiture and destruction\nProperty to be forfeited and destroyed CS Spray\nForfeiture and destruction ordered under s153 Sentencing Act 2020",
+                    "rollUpPrompts": false,
+                    "rootJudicialResultId": "a498e39b-47f2-49fd-9228-fe43a89203f9",
+                    "rootJudicialResultTypeId": "2852b770-a7ad-11e8-98d0-529269fb1459",
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [
+                    ]
+                  },
+                  {
+                    "alwaysPublished": false,
+                    "canBeSubjectOfBreach": false,
+                    "canBeSubjectOfVariation": false,
+                    "category": "ANCILLARY",
+                    "courtClerk": {
+                      "firstName": "Denise",
+                      "lastName": "Contractor",
+                      "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                    },
+                    "d20": false,
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": true,
+                    "isDeleted": false,
+                    "isFinancialResult": false,
+                    "isNewAmendment": true,
+                    "isUnscheduled": false,
+                    "judicialResultId": "92d6aa8b-a333-4a39-9e13-db60f69750e4",
+                    "judicialResultTypeId": "9161f3cb-e821-44e5-a9ee-4680b358a037",
+                    "label": "Guilty plea taken into account",
+                    "lastSharedDateTime": "2023-04-11",
+                    "level": "O",
+                    "lifeDuration": false,
+                    "orderedDate": "2023-04-11",
+                    "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "rank": 34400,
+                    "resultText": "Guilty plea taken into account\n",
+                    "rollUpPrompts": true,
+                    "rootJudicialResultId": "92d6aa8b-a333-4a39-9e13-db60f69750e4",
+                    "rootJudicialResultTypeId": "9161f3cb-e821-44e5-a9ee-4680b358a037",
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [
+                    ]
+                  },
+                  {
+                    "alwaysPublished": false,
+                    "canBeSubjectOfBreach": true,
+                    "canBeSubjectOfVariation": true,
+                    "category": "FINAL",
+                    "cjsCode": "1116",
+                    "courtClerk": {
+                      "firstName": "Denise",
+                      "lastName": "Contractor",
+                      "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                    },
+                    "d20": false,
+                    "durationElement": {
+                      "durationEndDate": "10/04/2024"
+                    },
+                    "dvlaCode": "M",
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": true,
+                    "isDeleted": false,
+                    "isFinancialResult": false,
+                    "isNewAmendment": true,
+                    "isUnscheduled": false,
+                    "judicialResultId": "d4b2331f-8dcd-457b-bf8c-4131116e01b6",
+                    "judicialResultPrompts": [
+                      {
+                        "courtExtract": "Y",
+                        "isDurationEndDate": true,
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "d6caa3c4-ec9d-41ec-8f86-2c617ef0d5d9",
+                        "label": "End Date",
+                        "promptReference": "endDate",
+                        "promptSequence": 100,
+                        "type": "DATE",
+                        "usergroups": [
+                        ],
+                        "value": "10/04/2024",
+                        "welshLabel": "Dyddiad terfyn",
+                        "welshValue": "10/04/2024"
+                      },
+                      {
+                        "courtExtract": "N",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "29f5b3c7-8d15-4606-9dcf-23f32a21b5ef",
+                        "label": "Responsible officer",
+                        "promptReference": "responsibleOfficer",
+                        "promptSequence": 200,
+                        "type": "FIXL",
+                        "usergroups": [
+                        ],
+                        "value": "an officer of a provider of probation services",
+                        "welshLabel": "Swyddog cyfrifol",
+                        "welshValue": "swyddog darparwr gwasanaethau prawf"
+                      },
+                      {
+                        "courtExtract": "Y",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "f4a4f159-779e-4f35-822a-b559a2415ecb",
+                        "label": "Supervising Court",
+                        "promptReference": "supervisingCourt",
+                        "promptSequence": 300,
+                        "type": "FIXL",
+                        "usergroups": [
+                        ],
+                        "value": "Birmingham Magistrates' Court",
+                        "welshLabel": "Llys sy\u2019n Goruchwylio",
+                        "welshValue": "Birmingham Magistrates' Court"
+                      },
+                      {
+                        "courtExtract": "N",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "68c92035-27fd-4ee6-b03c-fe18ea6dbcb0",
+                        "label": "Probation team to be notified organisation name",
+                        "promptReference": "probationteamtobenotifiedOrganisationName",
+                        "promptSequence": 700,
+                        "type": "NAMEADDRESS",
+                        "usergroups": [
+                        ],
+                        "value": "Midlands Division NPS",
+                        "welshValue": "Midlands Division NPS"
+                      },
+                      {
+                        "courtExtract": "N",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "68c92035-27fd-4ee6-b03c-fe18ea6dbcb0",
+                        "label": "Probation team to be notified email address 1",
+                        "promptReference": "probationteamtobenotifiedEmailAddress1",
+                        "promptSequence": 700,
+                        "type": "NAMEADDRESS",
+                        "usergroups": [
+                        ],
+                        "value": "midlandsnps.court@justice.gov.uk",
+                        "welshValue": "midlandsnps.court@justice.gov.uk"
+                      }
+                    ],
+                    "judicialResultTypeId": "418b3aa7-65ab-4a4a-bab9-2f96b698118c",
+                    "label": "Community order England / Wales",
+                    "lastSharedDateTime": "2023-04-11",
+                    "level": "O",
+                    "lifeDuration": false,
+                    "orderedDate": "2023-04-11",
+                    "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "rank": 30000,
+                    "resultText": "Community order England / Wales\nEnd Date 10/04/2024\nResponsible officer an officer of a provider of probation services\nSupervising Court Birmingham Magistrates' Court\nProbation team to be notified organisation name Midlands Division NPS\nProbation team to be notified email address 1 midlandsnps.court@justice.gov.uk",
+                    "rollUpPrompts": true,
+                    "rootJudicialResultId": "d4b2331f-8dcd-457b-bf8c-4131116e01b6",
+                    "rootJudicialResultTypeId": "418b3aa7-65ab-4a4a-bab9-2f96b698118c",
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [
+                    ]
+                  }
+                ],
+                "laaApplnReference": {
+                  "applicationReference": "7576188",
+                  "effectiveEndDate": "2023-03-28",
+                  "effectiveStartDate": "2023-03-28",
+                  "laaContractNumber": "0Q571N",
+                  "offenceLevelStatus": "Granted",
+                  "statusCode": "GR",
+                  "statusDate": "2023-03-28",
+                  "statusDescription": "Granted (One Advocate)",
+                  "statusId": "98e86937-9652-32a3-a9fb-dbd01eda86a5"
+                },
+                "modeOfTrial": "Either Way",
+                "offenceCode": "FI68247",
+                "offenceDateCode": 1,
+                "offenceDefinitionId": "d9190120-c312-4c2a-8228-10b797f36909",
+                "offenceLegislation": "Contrary to section 5(1)(b) of    and Schedule 6 to the Firearms Act 1968.",
+                "offenceLegislationWelsh": "Yn groes i adran 5(1)(b) ac Atodlen 6 Deddf Drylliau Tanio 1968.",
+                "offenceTitle": "Possess a weapon for the discharge of a noxious liquid / gas / electrical incapacitation device / thing",
+                "offenceTitleWelsh": "Bod \u00e2 meddiant arf sy'n rhyddhau nwy / hylif gwenwynig / dyfais analluogi trydanol /gwrthrych||",
+                "orderIndex": 2,
+                "startDate": "2022-05-17",
+                "wording": "On 17/05/2022 at West Bromwich in the county of West Midlandsq, without the authority of the Secretary of State, had in your possession a weapon designed or adapted for the discharge of  a noxious liquid, namely CS spray"
+              }
+            ],
+            "personDefendant": {
+              "arrestSummonsNumber": "2200000000000464303C",
+              "bailConditions": "",
+              "bailStatus": {
+                "code": "A",
+                "description": "Not applicable",
+                "id": "86009c70-759d-3308-8de4-194886ff9a77"
+              },
+              "personDetails": {
+                "address": {
+                  "address1": "64 Osborn Road",
+                  "address2": "Birmingham",
+                  "postcode": "B11 1PS"
+                },
+                "dateOfBirth": "2003-10-02",
+                "documentationLanguageNeeds": "ENGLISH",
+                "ethnicity": {
+                  "selfDefinedEthnicityCode": "A3",
+                  "selfDefinedEthnicityDescription": "Bangladeshi",
+                  "selfDefinedEthnicityId": "62e6ae30-70c7-42b5-ab39-4f410a4c20fd"
+                },
+                "firstName": "Rahim",
+                "gender": "MALE",
+                "hearingLanguageNeeds": "ENGLISH",
+                "lastName": "HAQUE",
+                "nationalityDescription": "Unknown",
+                "nationalityId": "22ef7a73-df50-4349-8c72-ca3b9ace6363"
+              }
+            },
+            "pncId": "20190040739V",
+            "prosecutionCaseId": "0c2df423-6dcf-4c46-a57c-0aed7ed4cfe3"
+          },
+          {
+            "courtProceedingsInitiated": "2023-03-24T10:31:59.146Z",
+            "croNumber": "154407/22B",
+            "defendantCaseJudicialResults": [
+              {
+                "alwaysPublished": false,
+                "canBeSubjectOfBreach": false,
+                "canBeSubjectOfVariation": false,
+                "category": "FINAL",
+                "cjsCode": "3011",
+                "courtClerk": {
+                  "firstName": "Denise",
+                  "lastName": "Contractor",
+                  "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                },
+                "d20": false,
+                "excludedFromResults": false,
+                "isAdjournmentResult": false,
+                "isAvailableForCourtExtract": true,
+                "isConvictedResult": true,
+                "isDeleted": false,
+                "isFinancialResult": true,
+                "isNewAmendment": true,
+                "isUnscheduled": false,
+                "judicialResultId": "0f9f75d9-70d6-43f1-9b35-b4a01479abe9",
+                "judicialResultPrompts": [
+                  {
+                    "courtExtract": "Y",
+                    "isFinancialImposition": true,
+                    "judicialResultPromptTypeId": "f63b0bb5-7d93-4dab-bc3d-b4bd27152871",
+                    "label": "Amount of costs",
+                    "promptReference": "AOC",
+                    "promptSequence": 100,
+                    "type": "CURR",
+                    "usergroups": [
+                    ],
+                    "value": "\u00a3185.00",
+                    "welshLabel": "Swm y costau",
+                    "welshValue": "\u00a3185.00"
+                  }
+                ],
+                "judicialResultTypeId": "f5d492b8-a09b-4f70-9ceb-aa06c306a7dc",
+                "label": "Costs to Crown Prosecution Service",
+                "lastSharedDateTime": "2023-04-11",
+                "level": "C",
+                "lifeDuration": false,
+                "offenceId": "2a7afe6f-200e-4dc2-be30-2c4409df2918",
+                "orderedDate": "2023-04-11",
+                "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                "postHearingCustodyStatus": "A",
+                "publishedAsAPrompt": false,
+                "publishedForNows": false,
+                "rank": 33500,
+                "resultDefinitionGroup": "Imposition",
+                "resultText": "Costs to Crown Prosecution Service\nAmount of costs \u00a3185.00",
+                "rollUpPrompts": true,
+                "rootJudicialResultId": "0f9f75d9-70d6-43f1-9b35-b4a01479abe9",
+                "rootJudicialResultTypeId": "f5d492b8-a09b-4f70-9ceb-aa06c306a7dc",
+                "terminatesOffenceProceedings": false,
+                "urgent": false,
+                "usergroups": [
+                ],
+                "welshLabel": "Costau i Wasanaeth Erlyn y Goron"
+              }
+            ],
+            "id": "c3ddb92a-8198-4b6d-bd37-96dab9980bf2",
+            "initiationCode": "Q",
+            "masterDefendantId": "c3ddb92a-8198-4b6d-bd37-96dab9980bf2",
+            "offences": [
+              {
+                "arrestDate": "2023-03-24",
+                "chargeDate": "2023-03-24",
+                "convictingCourt": {
+                  "code": "B20EY00",
+                  "id": "5c99d2a9-fbc6-3cc1-a97f-475015714afa",
+                  "lja": {
+                    "ljaCode": "2923",
+                    "ljaName": "Black Country Magistrates' Court"
+                  },
+                  "name": "Birmingham Magistrates' Court",
+                  "roomId": "2f35eb3b-3cb7-30b2-9a49-85d3b3b14ae1"
+                },
+                "convictionDate": "2023-04-11",
+                "count": 0,
+                "id": "2a7afe6f-200e-4dc2-be30-2c4409df2918",
+                "indicatedPlea": {
+                  "indicatedPleaDate": "2023-04-11",
+                  "indicatedPleaValue": "INDICATED_GUILTY",
+                  "offenceId": "2a7afe6f-200e-4dc2-be30-2c4409df2918",
+                  "originatingHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                  "source": "IN_COURT"
+                },
+                "isDisposed": true,
+                "judicialResults": [
+                  {
+                    "alwaysPublished": false,
+                    "canBeSubjectOfBreach": false,
+                    "canBeSubjectOfVariation": false,
+                    "category": "ANCILLARY",
+                    "cjsCode": "3308",
+                    "courtClerk": {
+                      "firstName": "Denise",
+                      "lastName": "Contractor",
+                      "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                    },
+                    "d20": false,
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": true,
+                    "isDeleted": false,
+                    "isFinancialResult": false,
+                    "isNewAmendment": true,
+                    "isUnscheduled": false,
+                    "judicialResultId": "090bda7c-86c7-45c8-bb5f-56b1df7bd2af",
+                    "judicialResultPrompts": [
+                      {
+                        "courtExtract": "Y",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "318c9eb2-cf3c-4592-a353-1b2166c15f81",
+                        "label": "Reasons",
+                        "promptReference": "reasons",
+                        "promptSequence": 100,
+                        "type": "TXT",
+                        "usergroups": [
+                        ],
+                        "value": "Fine uplifted by \u00a340 totalling \u00a3160",
+                        "welshLabel": "Rhesymau",
+                        "welshValue": "Fine uplifted by \u00a340 totalling \u00a3160"
+                      }
+                    ],
+                    "judicialResultTypeId": "72c64a04-0820-4580-bc61-e2d26566dc35",
+                    "label": "Aggravated due to emergency worker offence ",
+                    "lastSharedDateTime": "2023-04-11",
+                    "level": "O",
+                    "lifeDuration": false,
+                    "orderedDate": "2023-04-11",
+                    "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "qualifier": "AS",
+                    "rank": 39600,
+                    "resultText": "Aggravated due to emergency worker offence \nReasons Fine uplifted by \u00a340 totalling \u00a3160",
+                    "resultWording": "",
+                    "rollUpPrompts": true,
+                    "rootJudicialResultId": "090bda7c-86c7-45c8-bb5f-56b1df7bd2af",
+                    "rootJudicialResultTypeId": "72c64a04-0820-4580-bc61-e2d26566dc35",
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [
+                    ]
+                  },
+                  {
+                    "alwaysPublished": false,
+                    "canBeSubjectOfBreach": false,
+                    "canBeSubjectOfVariation": false,
+                    "category": "FINAL",
+                    "cjsCode": "1015",
+                    "courtClerk": {
+                      "firstName": "Denise",
+                      "lastName": "Contractor",
+                      "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                    },
+                    "d20": false,
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": true,
+                    "isDeleted": false,
+                    "isFinancialResult": true,
+                    "isNewAmendment": true,
+                    "isUnscheduled": false,
+                    "judicialResultId": "741771b6-b070-41d8-b985-9005b6cdac8d",
+                    "judicialResultPrompts": [
+                      {
+                        "courtExtract": "Y",
+                        "isFinancialImposition": true,
+                        "judicialResultPromptTypeId": "7cd1472f-2379-4f5b-9e67-98a43d86e122",
+                        "label": "Amount of fine",
+                        "promptReference": "AOF",
+                        "promptSequence": 100,
+                        "type": "CURR",
+                        "usergroups": [
+                        ],
+                        "value": "\u00a3160.00",
+                        "welshLabel": "Swm y ddirwy",
+                        "welshValue": "\u00a3160.00"
+                      }
+                    ],
+                    "judicialResultTypeId": "969f150c-cd05-46b0-9dd9-30891efcc766",
+                    "label": "Fine",
+                    "lastSharedDateTime": "2023-04-11",
+                    "level": "O",
+                    "lifeDuration": false,
+                    "orderedDate": "2023-04-11",
+                    "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "rank": 33400,
+                    "resultDefinitionGroup": "Imposition",
+                    "resultText": "Fine\nAmount of fine \u00a3160.00",
+                    "rollUpPrompts": true,
+                    "rootJudicialResultId": "741771b6-b070-41d8-b985-9005b6cdac8d",
+                    "rootJudicialResultTypeId": "969f150c-cd05-46b0-9dd9-30891efcc766",
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [
+                    ],
+                    "welshLabel": "Dirwy"
+                  },
+                  {
+                    "alwaysPublished": false,
+                    "canBeSubjectOfBreach": false,
+                    "canBeSubjectOfVariation": false,
+                    "category": "FINAL",
+                    "cjsCode": "3012",
+                    "courtClerk": {
+                      "firstName": "Denise",
+                      "lastName": "Contractor",
+                      "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                    },
+                    "d20": false,
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": true,
+                    "isDeleted": false,
+                    "isFinancialResult": true,
+                    "isNewAmendment": true,
+                    "isUnscheduled": false,
+                    "judicialResultId": "de8597a8-812f-483b-afd9-5559eccad83c",
+                    "judicialResultPrompts": [
+                      {
+                        "courtExtract": "Y",
+                        "isFinancialImposition": true,
+                        "judicialResultPromptTypeId": "26985e5b-fe1f-4d7d-a21a-57207c5966e7",
+                        "label": "Amount of compensation",
+                        "promptReference": "AOCOM",
+                        "promptSequence": 100,
+                        "type": "CURR",
+                        "usergroups": [
+                        ],
+                        "value": "\u00a350.00",
+                        "welshLabel": "Swm yr iawndal",
+                        "welshValue": "\u00a350.00"
+                      },
+                      {
+                        "courtExtract": "N",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "5707f766-b5b5-4747-9b15-542e7d170301",
+                        "label": "Minor creditor first name",
+                        "promptReference": "minorcreditornameandaddressFirstName",
+                        "promptSequence": 400,
+                        "type": "NAMEADDRESS",
+                        "usergroups": [
+                          "CPS",
+                          "Defence",
+                          "Judiciary",
+                          "NCES",
+                          "Probation",
+                          "Prosecuting Authorities",
+                          "YOTs"
+                        ],
+                        "value": "PS 20670 Paul",
+                        "welshValue": "PS 20670 Paul"
+                      },
+                      {
+                        "courtExtract": "N",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "5707f766-b5b5-4747-9b15-542e7d170301",
+                        "label": "Minor creditor last name",
+                        "promptReference": "minorcreditornameandaddressLastName",
+                        "promptSequence": 400,
+                        "type": "NAMEADDRESS",
+                        "usergroups": [
+                          "CPS",
+                          "Defence",
+                          "Judiciary",
+                          "NCES",
+                          "Probation",
+                          "Prosecuting Authorities",
+                          "YOTs"
+                        ],
+                        "value": "Bishop",
+                        "welshValue": "Bishop"
+                      },
+                      {
+                        "courtExtract": "N",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "5707f766-b5b5-4747-9b15-542e7d170301",
+                        "label": "Minor creditor address line 1",
+                        "promptReference": "minorcreditornameandaddressAddress1",
+                        "promptSequence": 400,
+                        "type": "NAMEADDRESS",
+                        "usergroups": [
+                          "CPS",
+                          "Defence",
+                          "Judiciary",
+                          "NCES",
+                          "Probation",
+                          "Prosecuting Authorities",
+                          "YOTs"
+                        ],
+                        "value": "West Bromwich Police Station",
+                        "welshValue": "West Bromwich Police Station"
+                      },
+                      {
+                        "courtExtract": "N",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "5707f766-b5b5-4747-9b15-542e7d170301",
+                        "label": "Minor creditor address line 2",
+                        "promptReference": "minorcreditornameandaddressAddress2",
+                        "promptSequence": 400,
+                        "type": "NAMEADDRESS",
+                        "usergroups": [
+                          "CPS",
+                          "Defence",
+                          "Judiciary",
+                          "NCES",
+                          "Probation",
+                          "Prosecuting Authorities",
+                          "YOTs"
+                        ],
+                        "value": "Moor Street",
+                        "welshValue": "Moor Street"
+                      },
+                      {
+                        "courtExtract": "N",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "5707f766-b5b5-4747-9b15-542e7d170301",
+                        "label": "Minor creditor address line 3",
+                        "promptReference": "minorcreditornameandaddressAddress3",
+                        "promptSequence": 400,
+                        "type": "NAMEADDRESS",
+                        "usergroups": [
+                          "CPS",
+                          "Defence",
+                          "Judiciary",
+                          "NCES",
+                          "Probation",
+                          "Prosecuting Authorities",
+                          "YOTs"
+                        ],
+                        "value": "West Bromwich",
+                        "welshValue": "West Bromwich"
+                      },
+                      {
+                        "courtExtract": "N",
+                        "isFinancialImposition": false,
+                        "judicialResultPromptTypeId": "5707f766-b5b5-4747-9b15-542e7d170301",
+                        "label": "Minor creditor post code",
+                        "promptReference": "minorcreditornameandaddressPostCode",
+                        "promptSequence": 400,
+                        "type": "NAMEADDRESS",
+                        "usergroups": [
+                          "CPS",
+                          "Defence",
+                          "Judiciary",
+                          "NCES",
+                          "Probation",
+                          "Prosecuting Authorities",
+                          "YOTs"
+                        ],
+                        "value": "B70 8HS",
+                        "welshValue": "B70 8HS"
+                      }
+                    ],
+                    "judicialResultTypeId": "ae89b99c-e0e3-47b5-b218-24d4fca3ca53",
+                    "label": "Compensation",
+                    "lastSharedDateTime": "2023-04-11",
+                    "level": "O",
+                    "lifeDuration": false,
+                    "orderedDate": "2023-04-11",
+                    "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "rank": 33600,
+                    "resultDefinitionGroup": "Imposition",
+                    "resultText": "Compensation\nAmount of compensation \u00a350.00\nMinor creditor first name PS 20670 Paul\nMinor creditor last name Bishop\nMinor creditor address line 1 West Bromwich Police Station\nMinor creditor address line 2 Moor Street\nMinor creditor address line 3 West Bromwich\nMinor creditor post code B70 8HS",
+                    "rollUpPrompts": true,
+                    "rootJudicialResultId": "de8597a8-812f-483b-afd9-5559eccad83c",
+                    "rootJudicialResultTypeId": "ae89b99c-e0e3-47b5-b218-24d4fca3ca53",
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [
+                    ],
+                    "welshLabel": "Iawndal"
+                  },
+                  {
+                    "alwaysPublished": false,
+                    "canBeSubjectOfBreach": false,
+                    "canBeSubjectOfVariation": false,
+                    "category": "ANCILLARY",
+                    "courtClerk": {
+                      "firstName": "Denise",
+                      "lastName": "Contractor",
+                      "userId": "a7e7c86c-d91b-4f60-aaa5-d4bcbb0830a2"
+                    },
+                    "d20": false,
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": true,
+                    "isDeleted": false,
+                    "isFinancialResult": false,
+                    "isNewAmendment": true,
+                    "isUnscheduled": false,
+                    "judicialResultId": "c9ece1bb-d34a-4860-b6e0-131e1f83269d",
+                    "judicialResultTypeId": "9161f3cb-e821-44e5-a9ee-4680b358a037",
+                    "label": "Guilty plea taken into account",
+                    "lastSharedDateTime": "2023-04-11",
+                    "level": "O",
+                    "lifeDuration": false,
+                    "orderedDate": "2023-04-11",
+                    "orderedHearingId": "09ef242a-1817-4d6c-8ad9-28619dbbea9b",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "rank": 34400,
+                    "resultText": "Guilty plea taken into account\n",
+                    "rollUpPrompts": true,
+                    "rootJudicialResultId": "c9ece1bb-d34a-4860-b6e0-131e1f83269d",
+                    "rootJudicialResultTypeId": "9161f3cb-e821-44e5-a9ee-4680b358a037",
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [
+                    ]
+                  }
+                ],
+                "modeOfTrial": "Either Way",
+                "offenceCode": "CJ88149",
+                "offenceDateCode": 1,
+                "offenceDefinitionId": "64a411a8-ec43-4418-9e18-00c31e44a24e",
+                "offenceLegislation": "Contrary to section 39 of the Criminal Justice Act 1988 and section 1 of the Assaults on Emergency Workers (Offences) Act 2018.",
+                "offenceTitle": "Assault by beating of an emergency worker",
+                "orderIndex": 2,
+                "startDate": "2022-05-17",
+                "wording": "On 17/05/2022 at West Bromwich in the county of West Midlands assaulted PS 20670 Bishop, an emergency worker, namely Police Officer , acting in the exercise of  his  functions as such a worker, by beating  him"
+              }
+            ],
+            "personDefendant": {
+              "arrestSummonsNumber": "2200000000000465211P",
+              "bailConditions": "",
+              "bailStatus": {
+                "code": "A",
+                "description": "Not applicable",
+                "id": "86009c70-759d-3308-8de4-194886ff9a77"
+              },
+              "personDetails": {
+                "address": {
+                  "address1": "FLAT 47",
+                  "address2": "CROFT HOUSE",
+                  "address3": "UNION STREET",
+                  "address4": "WALSALL",
+                  "postcode": "WS1 2HR"
+                },
+                "contact": {
+                  "mobile": "07828127934"
+                },
+                "dateOfBirth": "2004-03-01",
+                "documentationLanguageNeeds": "ENGLISH",
+                "ethnicity": {
+                  "observedEthnicityCode": "3",
+                  "observedEthnicityDescription": "Asian",
+                  "observedEthnicityId": "eccbc87e-4b5c-32fe-a830-8fd9f2a7baf3",
+                  "selfDefinedEthnicityCode": "A2",
+                  "selfDefinedEthnicityDescription": "Pakistani",
+                  "selfDefinedEthnicityId": "cf3f9b91-8142-4df4-bdea-7169f32017b2"
+                },
+                "firstName": "Aryaan",
+                "gender": "MALE",
+                "hearingLanguageNeeds": "ENGLISH",
+                "lastName": "Muhammed",
+                "occupation": "Warehouseman",
+                "occupationCode": "2022"
+              }
+            },
+            "pncId": "20220220519D",
+            "prosecutionAuthorityReference": "2200000000000465211P",
+            "prosecutionCaseId": "0c2df423-6dcf-4c46-a57c-0aed7ed4cfe3"
+          }
+        ],
+        "id": "0c2df423-6dcf-4c46-a57c-0aed7ed4cfe3",
+        "initiationCode": "Q",
+        "originatingOrganisation": "020AP00",
+        "prosecutionCaseIdentifier": {
+          "address": {
+            "address1": "West Midlands Police",
+            "address2": "Lloyd House",
+            "address3": "Colmore Circus, Queensway",
+            "address4": "Birmingham",
+            "postcode": "B4 6NQ"
+          },
+          "caseURN": "20SW1231022",
+          "contact": {
+            "primaryEmail": "WMP_CrownCourtAlerts@west-midlands.pnn.police.uk"
+          },
+          "majorCreditorCode": "PO20",
+          "prosecutionAuthorityCode": "WMIDPF",
+          "prosecutionAuthorityId": "0d19b46d-d245-3c37-a3a9-5a07c020bebb",
+          "prosecutionAuthorityName": "West Midlands Police",
+          "prosecutionAuthorityOUCode": "0200000"
+        },
+        "prosecutor": {
+          "address": {
+            "address1": "Colmore Gate",
+            "address2": "2 Colmore Row",
+            "address3": "Birmingham",
+            "postcode": "B3 2QA"
+          },
+          "isCps": true,
+          "prosecutorCode": "CPS-WM",
+          "prosecutorId": "0c2df423-6dcf-4c46-a57c-0aed7ed4cfe3",
+          "prosecutorName": "CPS West Midlands"
+        }
+      }
+    ],
+    "prosecutionCounsels": [
+      {
+        "attendanceDays": [
+          "2023-04-11"
+        ],
+        "firstName": "Maggie",
+        "id": "5c4b41c3-0ac5-4932-a9f3-c340bd809a95",
+        "lastName": "Meakin",
+        "middleName": "",
+        "prosecutionCases": [
+          "0c2df423-6dcf-4c46-a57c-0aed7ed4cfe3"
+        ],
+        "status": "Prosecution",
+        "title": ""
+      }
+    ],
+    "type": {
+      "description": "First hearing",
+      "id": "4a0e892d-c0c5-3c51-95b8-704d8c781776"
+    }
+  }
+}

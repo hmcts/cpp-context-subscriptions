@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://moj.gov.uk/cpp/subscriptions/query/=/subscriptions.json",
+  "type": "object",
+  "properties": {
+    "subscriptions": {
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/cpp/subscriptions/json/schemas/subscription.json"
+      }
+    }
+  },
+  "additionalProperties": false
+}

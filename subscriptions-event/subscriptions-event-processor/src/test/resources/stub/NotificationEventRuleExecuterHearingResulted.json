@@ -1,0 +1,152 @@
+{
+  "hearing": {
+    "courtCentre": {
+      "address": {
+        "address1": "176A Lavender Hill",
+        "address2": "London",
+        "address3": "",
+        "address4": "",
+        "address5": "",
+        "postcode": "SW11 1JU"
+      },
+      "code": "B01LY00",
+      "id": "5010898a-da9d-427a-98c4-276372d1587a",
+      "lja": {
+        "ljaCode": "2577",
+        "ljaName": "South West London Magistrates' Court"
+      },
+      "name": "Lavender Hill Magistrates' Court",
+      "roomId": "9e4932f7-97b2-3010-b942-ddd2624e4dd8",
+      "roomName": "Courtroom 01"
+    },
+    "hasSharedResults": true,
+    "hearingDays": [
+      {
+        "listedDurationMinutes": 20,
+        "listingSequence": 2,
+        "sittingDay": "2020-09-15T09:01:01.001Z"
+      }
+    ],
+    "hearingLanguage": "ENGLISH",
+    "id": "5010898a-da9d-427a-98c4-276372d1588a",
+    "jurisdictionType": "MAGISTRATES",
+    "prosecutionCases": [
+      {
+        "caseStatus": "INACTIVE",
+        "defendants": [
+          {
+            "courtProceedingsInitiated": "2020-09-11T12:47:36.329Z",
+            "id": "3d995537-74ed-4a0e-b334-afaefa7e1581",
+            "masterDefendantId": "3d995537-74ed-4a0e-b334-afaefa7e1581",
+            "offences": [
+              {
+                "arrestDate": "2005-11-19",
+                "chargeDate": "2004-12-09",
+                "count": 0,
+                "id": "1ea23e51-6cfe-4a30-8da3-2c93db43789a",
+                "judicialResults": [
+                  {
+                    "alwaysPublished": false,
+                    "category": "FINAL",
+                    "cjsCode": "1017",
+                    "courtClerk": {
+                      "firstName": "Erica",
+                      "lastName": "Wilson",
+                      "userId": "31ec3a16-8721-498c-8da5-f099390ee254"
+                    },
+                    "d20": false,
+                    "excludedFromResults": false,
+                    "isAdjournmentResult": false,
+                    "isAvailableForCourtExtract": true,
+                    "isConvictedResult": true,
+                    "isDeleted": false,
+                    "isFinancialResult": false,
+                    "isUnscheduled": false,
+                    "judicialResultId": "21cc77b8-c29a-4d7c-85ae-a6cf2feafba0",
+                    "judicialResultTypeId": "3f608dba-20ad-4710-bebc-d78b4b3ff08d",
+                    "label": "Absolute discharge",
+                    "lastSharedDateTime": "2020-09-15",
+                    "lifeDuration": false,
+                    "orderedDate": "2020-09-15",
+                    "orderedHearingId": "5010898a-da9d-427a-98c4-276372d1588a",
+                    "postHearingCustodyStatus": "A",
+                    "publishedAsAPrompt": false,
+                    "publishedForNows": false,
+                    "rank": 15900,
+                    "resultText": "Absolute discharge\n",
+                    "rollUpPrompts": true,
+                    "terminatesOffenceProceedings": false,
+                    "urgent": false,
+                    "usergroups": [],
+                    "welshLabel": "Rhyddhad diamod"
+                  }
+                ],
+                "modeOfTrial": "Summary",
+                "offenceCode": "TW01046",
+                "offenceDateCode": 1,
+                "offenceDefinitionId": "62fa56a4-3cea-41b7-a062-4d71e8ca74bc",
+                "offenceLegislation": "Contrary to byelaw 19 and 31(1) of the Tyne and Wear Metro Byelaws made under sections 58 and 62 of the Tyneside Metropolitan Railway Act 1973.",
+                "offenceTitle": "Occupy reserved seat / berth without a valid ticket on the Tyne and Wear Metro",
+                "orderIndex": 500,
+                "proceedingsConcluded": true,
+                "startDate": "2004-12-09",
+                "wording": "Has a violent past and fear that he will commit further offences and\n                interfere with witnesse",
+                "plea": {
+                  "originatingHearingId": "88cdf36e-93e4-41b0-8277-17d9dba7f06f",
+                  "delegatedPowers": {
+                    "userId": "88cdf36e-93e4-41b0-8277-17d9dba7f06f",
+                    "firstName": "a",
+                    "lastName": "a"
+                  },
+                  "offenceId": "1ea23e51-6cfe-4a30-8da3-2c93db43789a",
+                  "pleaDate": "0000-01-01",
+                  "pleaValue": "GUILTY"
+                }
+              }
+            ],
+            "personDefendant": {
+              "arrestSummonsNumber": "TFL",
+              "bailConditions": "",
+              "bailStatus": {
+                "code": "A",
+                "description": "Not applicable",
+                "id": "86009c70-759d-3308-8de4-194886ff9a77"
+              },
+              "personDetails": {
+                "address": {
+                  "address1": "592",
+                  "address2": "StreetDescription",
+                  "address3": "Locality2O"
+                },
+                "dateOfBirth": "1968-01-17",
+                "documentationLanguageNeeds": "ENGLISH",
+                "firstName": "Robert",
+                "gender": "MALE",
+                "lastName": "Ormsby",
+                "title": "Ormsby"
+              }
+            },
+            "proceedingsConcluded": true,
+            "prosecutionAuthorityReference": "TFL",
+            "prosecutionCaseId": "5e736df9-a172-4c71-83ba-bd82591cd681"
+          }
+        ],
+        "id": "5010898a-da9d-427a-98c4-276372d1581a",
+        "initiationCode": "C",
+        "originatingOrganisation": "0450000",
+        "prosecutionCaseIdentifier": {
+          "majorCreditorCode": "PF45",
+          "prosecutionAuthorityCode": "SURTEST9",
+          "prosecutionAuthorityId": "125baa4d-ffeb-448b-852c-5ab695fdfcc7",
+          "prosecutionAuthorityName": "Surrey Police test",
+          "prosecutionAuthorityOUCode": "A45AA00",
+          "caseURN": "URN123"
+        }
+      }
+    ],
+    "type": {
+      "description": "First hearing",
+      "id": "4a0e892d-c0c5-3c51-95b8-704d8c781776"
+    }
+  }
+}

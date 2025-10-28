@@ -1,0 +1,80 @@
+package uk.gov.moj.cpp.subscriptions.command.api.accesscontrol;
+
+import uk.gov.moj.cpp.accesscontrol.drools.Outcome;
+import uk.gov.moj.cpp.accesscontrol.drools.Action;
+import uk.gov.moj.cpp.subscriptions.command.api.accesscontrol.PermissionConstants;
+
+
+global uk.gov.moj.cpp.accesscontrol.common.providers.UserAndGroupProvider userAndGroupProvider;
+
+rule "Command - API - Action - subscriptions.command.create-subscription-by-admin"
+  when
+    $outcome: Outcome();
+    $action: Action(name == "subscriptions.command.create-subscription-by-admin");
+     eval(userAndGroupProvider.hasPermission($action, PermissionConstants.getSubscriptionsPermission()));
+  then
+    $outcome.setSuccess(true);
+end
+
+rule "Command - API - Action - subscriptions.command.activate-subscription"
+  when
+    $outcome: Outcome();
+    $action: Action(name == "subscriptions.command.activate-subscription");
+     eval(userAndGroupProvider.hasPermission($action, PermissionConstants.getSubscriptionsPermission()));
+  then
+    $outcome.setSuccess(true);
+end
+
+rule "Command - API - Action - subscriptions.command.deactivate-subscription"
+  when
+    $outcome: Outcome();
+    $action: Action(name == "subscriptions.command.deactivate-subscription");
+     eval(userAndGroupProvider.hasPermission($action, PermissionConstants.getSubscriptionsPermission()));
+  then
+    $outcome.setSuccess(true);
+end
+
+rule "Command - API - Action - subscriptions.command.delete-subscription"
+  when
+    $outcome: Outcome();
+    $action: Action(name == "subscriptions.command.delete-subscription");
+     eval(userAndGroupProvider.hasPermission($action, PermissionConstants.getSubscriptionsPermission()));
+  then
+    $outcome.setSuccess(true);
+end
+
+rule "Command - API - Action - subscriptions.command.create-subscription-by-user"
+  when
+    $outcome: Outcome();
+    $action: Action(name == "subscriptions.command.create-subscription-by-user");
+    eval(userAndGroupProvider.hasPermission($action, PermissionConstants.getSubscriberPermission()));
+  then
+    $outcome.setSuccess(true);
+end
+
+rule "Command - API - Action - subscriptions.command.subscribe"
+  when
+    $outcome: Outcome();
+    $action: Action(name == "subscriptions.command.subscribe");
+    eval(userAndGroupProvider.hasPermission($action, PermissionConstants.getSubscriberPermission()));
+  then
+    $outcome.setSuccess(true);
+end
+
+rule "Command - API - Action - subscriptions.command.unsubscribe"
+  when
+    $outcome: Outcome();
+    $action: Action(name == "subscriptions.command.unsubscribe");
+    eval(userAndGroupProvider.hasPermission($action, PermissionConstants.getSubscriberPermission()));
+  then
+    $outcome.setSuccess(true);
+end
+
+rule "Command - API - Action - subscriptions.command.delete-subscriber"
+  when
+    $outcome: Outcome();
+    $action: Action(name == "subscriptions.command.delete-subscriber");
+    eval(userAndGroupProvider.hasPermission($action, PermissionConstants.getSubscriberPermission()));
+  then
+    $outcome.setSuccess(true);
+end

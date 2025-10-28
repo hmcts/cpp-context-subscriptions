@@ -1,0 +1,77 @@
+#%RAML 0.8
+title: subscription-command-api - Command API
+baseUri: http://localhost:8080/subscriptions-command-api/command/api/rest/subscriptions
+protocols: [ HTTP ]
+
+/subscriptions:
+  post:
+    description: |
+      Create a subscription
+      ...
+      (mapping):
+        requestType: application/vnd.subscriptions.command.create-subscription-by-admin+json
+        name: subscriptions.command.create-subscription-by-admin
+      (mapping):
+        requestType: application/vnd.subscriptions.command.create-subscription-by-user+json
+        name: subscriptions.command.create-subscription-by-user
+      ...
+    body:
+     application/vnd.subscriptions.command.create-subscription-by-admin+json:
+        example: !include json/subscriptions.command.create-subscription-by-admin.json
+        schema: !include json/schema/subscriptions.command.create-subscription-by-admin.json
+     application/vnd.subscriptions.command.create-subscription-by-user+json:
+        example: !include json/subscriptions.command.create-subscription-by-user.json
+        schema: !include json/schema/subscriptions.command.create-subscription-by-user.json
+
+    responses:
+      202:
+        description: Request accepted
+
+/subscriptions/{subscriptionId}:
+  post:
+    description: |
+      Activate/Deactivate a subscription
+      ...
+      (mapping):
+        requestType: application/vnd.subscriptions.command.activate-subscription+json
+        name: subscriptions.command.activate-subscription
+      (mapping):
+        requestType: application/vnd.subscriptions.command.deactivate-subscription+json
+        name: subscriptions.command.deactivate-subscription
+      (mapping):
+        requestType: application/vnd.subscriptions.command.delete-subscription+json
+        name: subscriptions.command.delete-subscription
+      (mapping):
+        requestType: application/vnd.subscriptions.command.subscribe+json
+        name: subscriptions.command.subscribe
+      (mapping):
+        requestType: application/vnd.subscriptions.command.unsubscribe+json
+        name: subscriptions.command.unsubscribe
+      (mapping):
+        requestType: application/vnd.subscriptions.command.delete-subscriber+json
+        name: subscriptions.command.delete-subscriber
+      ...
+    body:
+     application/vnd.subscriptions.command.activate-subscription+json:
+        example: !include json/subscriptions.command.activate-subscription.json
+        schema: !include json/schema/subscriptions.command.activate-subscription.json
+     application/vnd.subscriptions.command.deactivate-subscription+json:
+        example: !include json/subscriptions.command.deactivate-subscription.json
+        schema: !include json/schema/subscriptions.command.deactivate-subscription.json
+     application/vnd.subscriptions.command.delete-subscription+json:
+        example: !include json/subscriptions.command.delete-subscription.json
+        schema: !include json/schema/subscriptions.command.delete-subscription.json
+     application/vnd.subscriptions.command.subscribe+json:
+        example: !include json/subscriptions.command.subscribe.json
+        schema: !include json/schema/subscriptions.command.subscribe.json
+     application/vnd.subscriptions.command.unsubscribe+json:
+        example: !include json/subscriptions.command.unsubscribe.json
+        schema: !include json/schema/subscriptions.command.unsubscribe.json
+     application/vnd.subscriptions.command.delete-subscriber+json:
+        example: !include json/subscriptions.command.delete-subscriber.json
+        schema: !include json/schema/subscriptions.command.delete-subscriber.json
+
+    responses:
+      202:
+        description: Request accepted
+

@@ -1,0 +1,1 @@
+<h2>Trial effectiveness set</h2><p>Trial for case URN123 is %TYPE%.</p><a _target="blank" href="http://localhost:8080/prosecution-casefile/case-at-a-glance/%CASE_ID%">Access the case </a>for full details.
