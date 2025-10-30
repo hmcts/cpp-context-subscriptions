@@ -3,12 +3,12 @@
     <parent>
         <artifactId>subscriptions-domain</artifactId>
         <groupId>uk.gov.moj.cpp.subscriptions</groupId>
-        <version>17.0.44-CCT-2357-SNAPSHOT</version>
+        <version>17.0.45-CCT-2357-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>subscriptions-domain-transformation</artifactId>
-  <version>17.0.44-CCT-2357-SNAPSHOT</version>
+  <version>17.0.45-CCT-2357-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
