@@ -21,7 +21,7 @@
         <sonar.scm.provider>git</sonar.scm.provider>
         <mvn.site.url>file://${project.build.directory}/site</mvn.site.url>
         <cpp.framework.action.mapping.enabled>true</cpp.framework.action.mapping.enabled>
-        <coredomain.version>17.102.11</coredomain.version>
+        <coredomain.version>17.104.0-M5-CCT-2357</coredomain.version>
         <notification.notify.version>17.0.24</notification.notify.version>
         <material.version>17.0.57</material.version>
         <hearing.version>17.0.81</hearing.version>
