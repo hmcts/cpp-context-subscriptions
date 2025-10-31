@@ -3,14 +3,12 @@
     <parent>
         <artifactId>subscriptions-viewstore</artifactId>
         <groupId>uk.gov.moj.cpp.subscriptions</groupId>
-        <version>17.0.43-CCT-2415-SNAPSHOT</version>
+        <version>17.0.43-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>subscriptions-viewstore-persistence</artifactId>
-    <properties>
-        <h2.version>1.4.196</h2.version>
-    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -142,12 +140,6 @@
         <dependency>
             <groupId>org.apache.deltaspike.cdictrl</groupId>
             <artifactId>deltaspike-cdictrl-openejb</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
