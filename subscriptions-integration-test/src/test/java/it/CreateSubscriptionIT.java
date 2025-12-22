@@ -13,7 +13,7 @@ import uk.gov.justice.services.common.http.HeaderConstants;
 import uk.gov.moj.cpp.platform.test.feature.toggle.FeatureStubber;
 import uk.gov.moj.cpp.subscriptions.helper.EventListener;
 
-import javax.json.Json;
+import uk.gov.justice.services.messaging.JsonObjects;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,7 +88,7 @@ public class CreateSubscriptionIT {
     private void deleteAndVerifySubscription() {
         final EventListener eventListener = new EventListener(SUBSCRIPTION_DELETE_PUBLIC_EVENT);
         //given
-        final String payload = Json.createObjectBuilder().build().toString();
+        final String payload = JsonObjects.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -109,7 +109,7 @@ public class CreateSubscriptionIT {
     private void activateAndVerifySubscription() {
         final EventListener eventListener = new EventListener(SUBSCRIPTION_ACTIVATE_PUBLIC_EVENT);
         //given
-        final String payload = Json.createObjectBuilder().build().toString();
+        final String payload = JsonObjects.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -141,7 +141,7 @@ public class CreateSubscriptionIT {
     private void deactivateAndVerifySubscription() {
         final EventListener eventListener = new EventListener(SUBSCRIPTION_DEACTIVATE_PUBLIC_EVENT);
         //given
-        final String payload = Json.createObjectBuilder().build().toString();
+        final String payload = JsonObjects.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
