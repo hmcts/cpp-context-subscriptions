@@ -7,7 +7,7 @@ import static java.lang.String.format;
 import static java.lang.System.lineSeparator;
 import static java.util.UUID.randomUUID;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static javax.json.Json.createObjectBuilder;
+import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
 import static javax.ws.rs.core.Response.Status.OK;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
