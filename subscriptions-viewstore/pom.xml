@@ -5,7 +5,7 @@
     <parent>
         <groupId>uk.gov.moj.cpp.subscriptions</groupId>
         <artifactId>subscriptions-parent</artifactId>
-        <version>17.104.46-CHD-1832-SNAPSHOT</version>
+        <version>17.104.46-CHD-1784-SNAPSHOT</version>
     </parent>
 
     <artifactId>subscriptions-viewstore</artifactId>
