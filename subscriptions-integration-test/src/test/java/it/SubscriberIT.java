@@ -1,6 +1,6 @@
 package it;
 
-import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
+
 import static com.google.common.collect.ImmutableMap.of;
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.isJson;
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.withJsonPath;
@@ -31,6 +31,8 @@ import uk.gov.moj.cpp.subscriptions.helper.EventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.json.Json;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -125,7 +127,7 @@ public class SubscriberIT extends BaseIT {
 
 
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -179,7 +181,7 @@ public class SubscriberIT extends BaseIT {
         final EventListener deleteSubscriptionEventListener = new EventListener(SUBSCRIPTION_DEACTIVATE_PUBLIC_EVENT);
 
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -210,7 +212,7 @@ public class SubscriberIT extends BaseIT {
         final EventListener deleteSubscriptionEventListener = new EventListener(SUBSCRIPTION_DELETE_PUBLIC_EVENT);
 
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -238,7 +240,7 @@ public class SubscriberIT extends BaseIT {
 
         final EventListener eventListener = new EventListener(SUBSCRIBER_DELETE_FAILED_PUBLIC_EVENT);
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -255,7 +257,7 @@ public class SubscriberIT extends BaseIT {
     private void deleteAndVerifySubscription() {
         final EventListener eventListener = new EventListener(SUBSCRIPTION_DELETE_PUBLIC_EVENT);
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -279,7 +281,7 @@ public class SubscriberIT extends BaseIT {
 
         final EventListener eventListener = new EventListener(SUBSCRIPTION_SUBSCRIBE_PUBLIC_EVENT);
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -314,7 +316,7 @@ public class SubscriberIT extends BaseIT {
 
         final EventListener eventListener = new EventListener(SUBSCRIPTION_UNSUBSCRIBE_PUBLIC_EVENT);
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),

@@ -2,7 +2,7 @@ package uk.gov.moj.cpp.subscriptions.query.api;
 
 import static java.util.Optional.ofNullable;
 import static java.util.UUID.randomUUID;
-import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
+import static javax.json.Json.createObjectBuilder;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
