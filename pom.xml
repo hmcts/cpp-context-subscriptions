@@ -9,7 +9,7 @@
 
     <groupId>uk.gov.moj.cpp.subscriptions</groupId>
     <artifactId>subscriptions-parent</artifactId>
-    <version>17.0.48-SNAPSHOT</version>
+    <version>17.0.47</version>
     <packaging>pom</packaging>
     <name>Subscription Microservice - Parent</name>
     <description>Subscription Microservice - Subscription Context</description>
