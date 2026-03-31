@@ -78,3 +78,12 @@ rule "Command - API - Action - subscriptions.command.delete-subscriber"
   then
     $outcome.setSuccess(true);
 end
+
+rule "Command - API - Action - subscriptions.command.delete-subscriber-via-bdf"
+  when
+    $outcome: Outcome();
+    $action: Action(name == "subscriptions.command.delete-subscriber-via-bdf");
+    eval(userAndGroupProvider.isSystemUser($action));
+  then
+    $outcome.setSuccess(true);
+end

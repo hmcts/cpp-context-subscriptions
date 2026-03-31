@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://moj.gov.uk/cpp/subscriptions/command/api/subscriptions.command.delete-subscriber-via-bdf.json",
+  "type": "object",
+  "properties": {
+    "subscriptionId": {
+      "$ref": "http://justice.gov.uk/domain/core/common/definitions.json#/definitions/uuid"
+    },
+    "subscriber": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "subscriber"
+  ],
+  "additionalProperties": false
+}

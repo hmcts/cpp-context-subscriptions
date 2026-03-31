@@ -14,6 +14,7 @@ import static uk.gov.moj.cpp.subscriptions.json.schemas.Subscription.subscriptio
 
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleteFailed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted;
+import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.Subscribers;
 import uk.gov.moj.cpp.subscriptions.json.schemas.Subscription;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionActivated;
@@ -484,6 +485,102 @@ public class SubscriptionAggregateTest {
         assertThat(deactivateList.get(0), instanceOf(SubscriberDeleted.class));
         assertThat(deactivateList.get(1), instanceOf(SubscriptionDeactivated.class));
 
+        assertThat(subscriptionAggregate.getSubscribers(), hasSize(1));
+        assertThat(subscriptionAggregate.getActive(), is(false));
+    }
+
+    @Test
+    public void shouldEmitFailedPrivateMessageWhenSubscriptionIsDeletedForDeleteSubscriberViaBdf() {
+        //Given
+        final Subscribers subscribers1 = subscribers().withId(randomUUID()).withActive(true).build();
+        final Subscription subscription = subscription().withId(randomUUID()).withActive(true).withSubscribers(asList(subscribers1)).build();
+        final UUID organisationId = randomUUID();
+        subscriptionAggregate.createSubscription(organisationId, subscription).collect(toList());
+        subscriptionAggregate.deleteSubscription(organisationId, subscription.getId()).collect(toList());
+        assertThat(subscriptionAggregate.isDeleted(), is(true));
+
+        //When
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, EMAIL);
+
+        //Then
+        final List<?> events = deleteSubscriber.collect(toList());
+        assertThat(events.get(0), instanceOf(SubscriberDeleteFailed.class));
+    }
+
+    @Test
+    public void shouldEmitFailedPrivateMessageWhenSubscriberNotInSubscriptionForDeleteSubscriberViaBdf() {
+        //Given
+        final Subscribers subscribers1 = subscribers().withId(randomUUID()).withEmailAddress(EMAIL).withActive(true).build();
+        final Subscription subscription = subscription().withId(randomUUID()).withActive(true).withSubscribers(asList(subscribers1)).build();
+        final UUID organisationId = randomUUID();
+        subscriptionAggregate.createSubscription(organisationId, subscription).collect(toList());
+
+        //When
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, "unknown@test.com");
+
+        //Then
+        final List<?> events = deleteSubscriber.collect(toList());
+        assertThat(events.get(0), instanceOf(SubscriberDeleteFailed.class));
+    }
+
+    @Test
+    public void shouldRaiseSubscriberDeletedViaBdfPrivateMessageForGivenSubscriberWithOtherSubscribersActive() {
+        //Given
+        final Subscribers subscribers1 = subscribers().withId(randomUUID()).withEmailAddress(EMAIL).withActive(true).build();
+        final Subscribers subscribers2 = subscribers().withId(randomUUID()).withEmailAddress("test2@test.com").withActive(true).build();
+        final Subscription subscription = subscription().withId(randomUUID()).withActive(true).withSubscribers(asList(subscribers1, subscribers2)).build();
+        final UUID organisationId = randomUUID();
+        subscriptionAggregate.createSubscription(organisationId, subscription).collect(toList());
+        assertThat(subscriptionAggregate.getSubscribers(), hasSize(2));
+
+        //When
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, EMAIL);
+
+        //Then
+        final List<?> events = deleteSubscriber.collect(toList());
+        assertThat(events.get(0), instanceOf(SubscriberDeletedViaBdf.class));
+        assertThat(events, hasSize(1));
+        assertThat(subscriptionAggregate.getSubscribers(), hasSize(1));
+        assertThat(subscriptionAggregate.getSubscribers().stream().noneMatch(s -> s.getEmailAddress().equals(EMAIL)), is(true));
+    }
+
+    @Test
+    public void shouldRaiseSubscriberDeletedViaBdfAndSubscriptionDeletedWhenOnlyOneSubscriber() {
+        //Given
+        final Subscribers subscribers1 = subscribers().withId(randomUUID()).withEmailAddress(EMAIL).withActive(true).build();
+        final Subscription subscription = subscription().withId(randomUUID()).withActive(true).withSubscribers(asList(subscribers1)).build();
+        final UUID organisationId = randomUUID();
+        subscriptionAggregate.createSubscription(organisationId, subscription).collect(toList());
+        assertThat(subscriptionAggregate.getSubscribers(), hasSize(1));
+
+        //When
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, EMAIL);
+
+        //Then
+        final List<?> events = deleteSubscriber.collect(toList());
+        assertThat(events.get(0), instanceOf(SubscriberDeletedViaBdf.class));
+        assertThat(events.get(1), instanceOf(SubscriptionDeleted.class));
+        assertThat(subscriptionAggregate.getSubscribers(), empty());
+        assertThat(subscriptionAggregate.isDeleted(), is(true));
+    }
+
+    @Test
+    public void shouldRaiseSubscriberDeletedViaBdfAndSubscriptionDeactivatedWhenOtherSubscribersAreInactive() {
+        //Given
+        final Subscribers subscribers1 = subscribers().withId(randomUUID()).withEmailAddress(EMAIL).withActive(true).build();
+        final Subscribers subscribers2 = subscribers().withId(randomUUID()).withEmailAddress("test1@test.com").withActive(false).build();
+        final Subscription subscription = subscription().withId(randomUUID()).withActive(true).withSubscribers(asList(subscribers1, subscribers2)).build();
+        final UUID organisationId = randomUUID();
+        subscriptionAggregate.createSubscription(organisationId, subscription).collect(toList());
+        assertThat(subscriptionAggregate.getSubscribers(), hasSize(2));
+
+        //When
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, EMAIL);
+
+        //Then
+        final List<?> events = deleteSubscriber.collect(toList());
+        assertThat(events.get(0), instanceOf(SubscriberDeletedViaBdf.class));
+        assertThat(events.get(1), instanceOf(SubscriptionDeactivated.class));
         assertThat(subscriptionAggregate.getSubscribers(), hasSize(1));
         assertThat(subscriptionAggregate.getActive(), is(false));
     }

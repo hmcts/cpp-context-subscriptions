@@ -13,6 +13,7 @@ import uk.gov.justice.services.eventsourcing.source.core.exception.EventStreamEx
 import uk.gov.justice.services.messaging.Envelope;
 import uk.gov.moj.cpp.subscriptions.aggregate.SubscriptionAggregate;
 import uk.gov.moj.cpp.subscriptions.json.schemas.handler.DeleteSubscriber;
+import uk.gov.moj.cpp.subscriptions.json.schemas.handler.DeleteSubscriberViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.handler.Subscribe;
 import uk.gov.moj.cpp.subscriptions.json.schemas.handler.Unsubscribe;
 
@@ -55,6 +56,15 @@ public class SubscriberHandler {
         final EventStream eventStream = eventSource.getStreamById(subscribe.getSubscriptionId());
         final SubscriptionAggregate subscriptionAggregate = aggregateService.get(eventStream, SubscriptionAggregate.class);
         final Stream<Object> events = subscriptionAggregate.deleteSubscriber(subscribe.getSubscriptionId(), subscribe.getOrganisationId(), subscribe.getSubscriber());
+        appendMetaDataInEventStream(envelope, eventStream, events);
+    }
+
+    @Handles("subscriptions.command.handler.delete-subscriber-via-bdf")
+    public void handleDeleteSubscriberViaBdf(final Envelope<DeleteSubscriberViaBdf> envelope) throws EventStreamException {
+        final DeleteSubscriberViaBdf command = envelope.payload();
+        final EventStream eventStream = eventSource.getStreamById(command.getSubscriptionId());
+        final SubscriptionAggregate subscriptionAggregate = aggregateService.get(eventStream, SubscriptionAggregate.class);
+        final Stream<Object> events = subscriptionAggregate.deleteSubscriberViaBdf(command.getSubscriptionId(),subscriptionAggregate.getOrganisationId(), command.getSubscriber());
         appendMetaDataInEventStream(envelope, eventStream, events);
     }
 }
