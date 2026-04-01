@@ -54,4 +54,10 @@ public class SubscriptionEventProcessor {
 
     }
 
+    @Handles("subscriptions.event.subscription-deleted-via-bdf")
+    public void handleSubscriptionDeletedViaBdf(final Envelope<SubscriptionDeleted> envelope) {
+        sendPublicEvent(SUBSCRIPTION_DELETED_PUBLIC_EVENT, envelope.metadata(), envelope.payload(), sender);
+
+    }
+
 }

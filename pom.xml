@@ -9,7 +9,7 @@
 
     <groupId>uk.gov.moj.cpp.subscriptions</groupId>
     <artifactId>subscriptions-parent</artifactId>
-    <version>17.0.48-SNAPSHOT</version>
+    <version>17.0.48-SNI-8705-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Subscription Microservice - Parent</name>
     <description>Subscription Microservice - Subscription Context</description>
@@ -71,3 +71,5 @@
         <module>subscriptions-healthchecks</module>
     </modules>
 </project>
+
+
