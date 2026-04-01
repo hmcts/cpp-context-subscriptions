@@ -239,6 +239,7 @@ public class SubscriptionAggregate implements Aggregate {
                 }),
                 when(SubscriptionDeleted.class).apply(e -> this.deleted = true),
                 when(SubscriberDeleted.class).apply(e -> this.subscribers = this.subscribers.stream().filter(s -> !s.getEmailAddress().equals(e.getSubscriber())).collect(toList())),
+                when(SubscriberDeleteFailed.class).apply(e -> {}),
                 when(SubscriberDeletedViaBdf.class).apply(e -> this.subscribers = this.subscribers.stream().filter(s -> !s.getEmailAddress().equals(e.getSubscriber())).collect(toList()))
         );
     }
