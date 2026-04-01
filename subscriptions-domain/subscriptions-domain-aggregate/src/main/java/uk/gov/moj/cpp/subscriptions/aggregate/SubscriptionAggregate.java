@@ -166,30 +166,30 @@ public class SubscriptionAggregate implements Aggregate {
         return apply(streamBuilder.build());
     }
 
-    public Stream<Object> deleteSubscriberViaBdf(final UUID subscriptionId, final UUID organisationId, final String subscriber) {
+    public Stream<Object> deleteSubscriberViaBdf(final String subscriber) {
         if (isDeleted()) {
-            return apply(of(buildDeleteFailedEvent(subscriptionId, organisationId, subscriber, "Subscription does not exist")
+            return apply(of(buildDeleteFailedEvent(id, organisationId, subscriber, "Subscription does not exist")
             ));
         }
 
         if (this.subscribers.stream().noneMatch(s -> s.getEmailAddress().equals(subscriber))) {
-            return apply(of(buildDeleteFailedEvent(subscriptionId, organisationId, subscriber, "Subscriber does not subscribe to given subscription")));
+            return apply(of(buildDeleteFailedEvent(id, organisationId, subscriber, "Subscriber does not subscribe to given subscription")));
         }
 
         final Stream.Builder<Object> streamBuilder = Stream.builder();
 
-        streamBuilder.add(subscriberDeletedViaBdf().withSubscriber(subscriber).withSubscriptionId(subscriptionId).build());
+        streamBuilder.add(subscriberDeletedViaBdf().withSubscriber(subscriber).withSubscriptionId(id).build());
 
         if (subscribers.size() == 1) {
             streamBuilder.add(subscriptionDeleted()
-                    .withSubscriptionId(subscriptionId)
+                    .withSubscriptionId(id)
                     .withOrganisationId(organisationId)
                     .build());
         } else {
             final boolean hasOtherActiveSubscribers = subscribers.stream().anyMatch(s -> !s.getEmailAddress().equals(subscriber) && s.getActive());
             if (!hasOtherActiveSubscribers) {
                 streamBuilder.add(subscriptionDeactivated()
-                        .withSubscriptionId(subscriptionId)
+                        .withSubscriptionId(id)
                         .withOrganisationId(organisationId)
                         .build());
             }
@@ -239,7 +239,6 @@ public class SubscriptionAggregate implements Aggregate {
                 }),
                 when(SubscriptionDeleted.class).apply(e -> this.deleted = true),
                 when(SubscriberDeleted.class).apply(e -> this.subscribers = this.subscribers.stream().filter(s -> !s.getEmailAddress().equals(e.getSubscriber())).collect(toList())),
-                when(SubscriberDeleteFailed.class).apply(e -> {}),
                 when(SubscriberDeletedViaBdf.class).apply(e -> this.subscribers = this.subscribers.stream().filter(s -> !s.getEmailAddress().equals(e.getSubscriber())).collect(toList()))
         );
     }

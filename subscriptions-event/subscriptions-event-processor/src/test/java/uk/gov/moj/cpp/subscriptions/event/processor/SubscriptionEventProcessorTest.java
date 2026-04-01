@@ -128,4 +128,21 @@ public class SubscriptionEventProcessorTest {
         final Envelope<?> messageEnvelope = captor.getValue();
         assertThat(messageEnvelope.metadata().name(), is("public.subscriptions.event.subscription-created-by-user-successfully"));
     }
+
+    @Test
+    public void shouldProcessPrivateDeleteSubscriptionViaBdfAndPublicDeleteSubscriptionRaised() {
+
+        final SubscriptionDeleted subscriptionDeleted = subscriptionDeleted().build();
+
+        final Envelope<SubscriptionDeleted> envelope = envelopeFrom(
+                metadataWithRandomUUID("subscriptions.event.subscription-deleted-via-bdf"),
+                subscriptionDeleted);
+
+        subscriptionEventProcessor.handleSubscriptionDeletedViaBdf(envelope);
+
+        verify(sender).send(captor.capture());
+
+        final Envelope<?> messageEnvelope = captor.getValue();
+        assertThat(messageEnvelope.metadata().name(), is("public.subscriptions.event.subscription-deleted-successfully"));
+    }
 }

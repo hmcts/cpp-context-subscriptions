@@ -64,7 +64,7 @@ public class SubscriberHandler {
         final DeleteSubscriberViaBdf command = envelope.payload();
         final EventStream eventStream = eventSource.getStreamById(command.getSubscriptionId());
         final SubscriptionAggregate subscriptionAggregate = aggregateService.get(eventStream, SubscriptionAggregate.class);
-        final Stream<Object> events = subscriptionAggregate.deleteSubscriberViaBdf(command.getSubscriptionId(),subscriptionAggregate.getOrganisationId(), command.getSubscriber());
+        final Stream<Object> events = subscriptionAggregate.deleteSubscriberViaBdf(command.getSubscriber());
         appendMetaDataInEventStream(envelope, eventStream, events);
     }
 }

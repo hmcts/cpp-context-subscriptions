@@ -500,7 +500,7 @@ public class SubscriptionAggregateTest {
         assertThat(subscriptionAggregate.isDeleted(), is(true));
 
         //When
-        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, EMAIL);
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(EMAIL);
 
         //Then
         final List<?> events = deleteSubscriber.collect(toList());
@@ -516,7 +516,7 @@ public class SubscriptionAggregateTest {
         subscriptionAggregate.createSubscription(organisationId, subscription).collect(toList());
 
         //When
-        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, "unknown@test.com");
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf("unknown@test.com");
 
         //Then
         final List<?> events = deleteSubscriber.collect(toList());
@@ -534,7 +534,7 @@ public class SubscriptionAggregateTest {
         assertThat(subscriptionAggregate.getSubscribers(), hasSize(2));
 
         //When
-        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, EMAIL);
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(EMAIL);
 
         //Then
         final List<?> events = deleteSubscriber.collect(toList());
@@ -554,7 +554,7 @@ public class SubscriptionAggregateTest {
         assertThat(subscriptionAggregate.getSubscribers(), hasSize(1));
 
         //When
-        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, EMAIL);
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(EMAIL);
 
         //Then
         final List<?> events = deleteSubscriber.collect(toList());
@@ -575,7 +575,7 @@ public class SubscriptionAggregateTest {
         assertThat(subscriptionAggregate.getSubscribers(), hasSize(2));
 
         //When
-        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(subscription.getId(), organisationId, EMAIL);
+        final Stream<Object> deleteSubscriber = subscriptionAggregate.deleteSubscriberViaBdf(EMAIL);
 
         //Then
         final List<?> events = deleteSubscriber.collect(toList());
