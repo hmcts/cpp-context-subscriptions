@@ -1,7 +1,7 @@
 package uk.gov.moj.cpp.subscriptions.event.processor.service;
 
 import static java.util.UUID.randomUUID;
-import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
+import static javax.json.Json.createObjectBuilder;
 import static uk.gov.justice.services.messaging.JsonEnvelope.metadataBuilder;
 
 import uk.gov.justice.services.common.converter.JsonObjectToObjectConverter;

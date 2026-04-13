@@ -1,6 +1,6 @@
 package uk.gov.moj.cpp.subscriptions.query.api.service;
 
-import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
+import static javax.json.Json.createObjectBuilder;
 import static org.slf4j.LoggerFactory.getLogger;
 import static uk.gov.justice.services.core.annotation.Component.COMMAND_API;
 

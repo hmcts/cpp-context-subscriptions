@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import uk.gov.justice.services.common.http.HeaderConstants;
 import uk.gov.moj.cpp.platform.test.feature.toggle.FeatureStubber;
 
-import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
+import javax.json.Json;
+
 import static com.google.common.collect.ImmutableMap.of;
 import static java.lang.String.format;
 import static java.util.UUID.randomUUID;
@@ -67,7 +68,7 @@ class SubscriptionsFeatureDisableIT {
     @Test
     void shouldNotAllowUserToDeactivateSubscription() {
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", id)),
@@ -78,7 +79,7 @@ class SubscriptionsFeatureDisableIT {
     @Test
     void shouldNotAllowUserToActivateSubscription() {
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", id)),
@@ -89,7 +90,7 @@ class SubscriptionsFeatureDisableIT {
     @Test
     void shouldNotAllowUserToDeleteSubscription() {
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", id)),
@@ -112,7 +113,7 @@ class SubscriptionsFeatureDisableIT {
     @Test
     void shouldNotAllowUserToSubscribeSubscription() {
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", id)),
@@ -123,7 +124,7 @@ class SubscriptionsFeatureDisableIT {
     @Test
     void shouldNotAllowUserToSubscribeUnsubscription() {
         //given
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", id)),
@@ -147,7 +148,7 @@ class SubscriptionsFeatureDisableIT {
     @Test
     void shouldNotConsumeMessageFromNotificationSent() {
         final String notificationId = randomUUID().toString();
-        final String payload = createObjectBuilder()
+        final String payload = Json.createObjectBuilder()
                 .add("notificationId", notificationId)
                 .add("sentTime", "2021-05-09T08:31:40Z")
                 .build().toString();
@@ -161,7 +162,7 @@ class SubscriptionsFeatureDisableIT {
     @Test
     void shouldNotConsumeMessageFromNotificationFailed() {
         final String notificationId = randomUUID().toString();
-        final String payload = createObjectBuilder()
+        final String payload = Json.createObjectBuilder()
                 .add("notificationId", notificationId)
                 .add("failedTime", "2021-05-09T08:31:40Z")
                 .add("statusCode", 500)
@@ -242,7 +243,7 @@ class SubscriptionsFeatureDisableIT {
 
     @Test
     void shouldNotAllowDeleteSubscriberForUser() {
-        final String payload = createObjectBuilder().build().toString();
+        final String payload = Json.createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", id)),
