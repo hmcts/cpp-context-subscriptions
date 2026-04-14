@@ -13,7 +13,6 @@ import uk.gov.justice.services.common.http.HeaderConstants;
 import uk.gov.moj.cpp.platform.test.feature.toggle.FeatureStubber;
 import uk.gov.moj.cpp.subscriptions.helper.EventListener;
 
-import javax.json.Json;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +25,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static javax.ws.rs.core.Response.Status.OK;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
 import static uk.gov.justice.services.test.utils.core.http.RequestParamsBuilder.requestParams;
 import static uk.gov.justice.services.test.utils.core.http.RestPoller.poll;
 import static uk.gov.justice.services.test.utils.core.matchers.ResponsePayloadMatcher.payload;
@@ -88,7 +88,7 @@ public class CreateSubscriptionIT {
     private void deleteAndVerifySubscription() {
         final EventListener eventListener = new EventListener(SUBSCRIPTION_DELETE_PUBLIC_EVENT);
         //given
-        final String payload = Json.createObjectBuilder().build().toString();
+        final String payload = createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -109,7 +109,7 @@ public class CreateSubscriptionIT {
     private void activateAndVerifySubscription() {
         final EventListener eventListener = new EventListener(SUBSCRIPTION_ACTIVATE_PUBLIC_EVENT);
         //given
-        final String payload = Json.createObjectBuilder().build().toString();
+        final String payload = createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
@@ -141,7 +141,7 @@ public class CreateSubscriptionIT {
     private void deactivateAndVerifySubscription() {
         final EventListener eventListener = new EventListener(SUBSCRIPTION_DEACTIVATE_PUBLIC_EVENT);
         //given
-        final String payload = Json.createObjectBuilder().build().toString();
+        final String payload = createObjectBuilder().build().toString();
 
         //when
         makePostCall(getWriteUrl(format("/subscriptions/%s", ID)),
