@@ -102,4 +102,14 @@ public class SubscriberCommandApiTest {
                 withJsonPath("$.subscriber", equalTo("test@test.com"))
         )));
     }
+
+    @Test
+    public void shouldHandleDeleteSubscriberViaBdf() {
+        final MetadataBuilder metadataBuilder = metadataWithRandomUUID("subscriptions.command.delete-subscriber-via-bdf");
+        when(command.metadata()).thenReturn(metadataBuilder.build());
+        when(command.payloadAsJsonObject()).thenReturn(createObjectBuilder().build());
+        subscriberCommandApi.deleteSubscriberViaBdf(command);
+        verify(sender).send(jsonEnvelopeArgumentCaptor.capture());
+        assertThat(jsonEnvelopeArgumentCaptor.getValue().metadata().name(), equalTo("subscriptions.command.handler.delete-subscriber-via-bdf"));
+    }
 }

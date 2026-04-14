@@ -7,14 +7,17 @@ import uk.gov.justice.services.core.annotation.Handles;
 import uk.gov.justice.services.core.annotation.ServiceComponent;
 import uk.gov.justice.services.messaging.JsonEnvelope;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted;
+import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionSubscribed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionUnsubscribed;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscriber;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription;
 import uk.gov.moj.cpp.subscriptions.persistence.repository.SubscriptionsRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -52,6 +55,20 @@ public class SubscriberEventListener {
         }
     }
 
+
+    @Handles("subscriptions.event.subscriber-deleted-via-bdf")
+    public void handleDeleteSubscriberViaBdf(final JsonEnvelope event) {
+        final SubscriberDeletedViaBdf subscriberDeletedViaBdf = jsonObjectConverter.convert(event.payloadAsJsonObject(), SubscriberDeletedViaBdf.class);
+        final Subscription subscriptionFromRepo = subscriptionsRepository.findBy(subscriberDeletedViaBdf.getSubscriptionId());
+        final List<Subscriber> subscribers = subscriptionFromRepo.getSubscribers().stream()
+                .filter(s -> s.getEmailAddress().equals(subscriberDeletedViaBdf.getSubscriber()))
+                .collect(Collectors.toUnmodifiableList());
+        subscribers.forEach(subscriber -> {
+            final Subscription subscription = subscriber.getSubscription();
+            subscription.getSubscribers().remove(subscriber);
+            subscriptionsRepository.save(subscription);
+        });
+    }
 
     private void processSubscribeUnsubscribe(final String subscriber, final UUID subscriptionId, final boolean isSubscribed) {
         final Subscription subscription = subscriptionsRepository.findBy(subscriptionId);
