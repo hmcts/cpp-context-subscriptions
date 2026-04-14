@@ -4,7 +4,7 @@
     <parent>
         <groupId>uk.gov.moj.cpp.subscriptions</groupId>
         <artifactId>subscriptions-command</artifactId>
-        <version>17.0.49-rel-3rd-line-2610-SNAPSHOT</version>
+        <version>17.0.50-rel-3rd-line-2610-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
