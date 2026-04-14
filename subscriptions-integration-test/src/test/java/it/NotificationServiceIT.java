@@ -4,6 +4,7 @@ package it;
 import static com.google.common.collect.ImmutableMap.of;
 import static com.jayway.jsonpath.matchers.JsonPathMatchers.withJsonPath;
 import static java.lang.String.format;
+import static java.lang.System.lineSeparator;
 import static java.util.UUID.randomUUID;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
