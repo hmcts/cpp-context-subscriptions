@@ -5,6 +5,7 @@ import static java.util.stream.Stream.of;
 import static uk.gov.justice.domain.aggregate.matcher.EventSwitcher.match;
 import static uk.gov.justice.domain.aggregate.matcher.EventSwitcher.when;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted.subscriberDeleted;
+import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf.subscriberDeletedViaBdf;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.Subscribers.subscribers;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionActivated.subscriptionActivated;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionCreated.subscriptionCreated;
@@ -21,6 +22,7 @@ import uk.gov.moj.cpp.subscriptions.json.schemas.Filter;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SendEmailRequested;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleteFailed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted;
+import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.Subscribers;
 import uk.gov.moj.cpp.subscriptions.json.schemas.Subscription;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionActivated;
@@ -164,6 +166,37 @@ public class SubscriptionAggregate implements Aggregate {
         return apply(streamBuilder.build());
     }
 
+    public Stream<Object> deleteSubscriberViaBdf(final String subscriber) {
+        if (isDeleted()) {
+            return apply(of(buildDeleteFailedEvent(id, organisationId, subscriber, "Subscription does not exist")
+            ));
+        }
+
+        if (this.subscribers.stream().noneMatch(s -> s.getEmailAddress().equals(subscriber))) {
+            return apply(of(buildDeleteFailedEvent(id, organisationId, subscriber, "Subscriber does not subscribe to given subscription")));
+        }
+
+        final Stream.Builder<Object> streamBuilder = Stream.builder();
+
+        streamBuilder.add(subscriberDeletedViaBdf().withSubscriber(subscriber).withOrganisationId(organisationId).withSubscriptionId(id).build());
+
+        if (subscribers.size() == 1) {
+            streamBuilder.add(subscriptionDeleted()
+                    .withSubscriptionId(id)
+                    .withOrganisationId(organisationId)
+                    .build());
+        } else {
+            final boolean hasOtherActiveSubscribers = subscribers.stream().anyMatch(s -> !s.getEmailAddress().equals(subscriber) && s.getActive());
+            if (!hasOtherActiveSubscribers) {
+                streamBuilder.add(subscriptionDeactivated()
+                        .withSubscriptionId(id)
+                        .withOrganisationId(organisationId)
+                        .build());
+            }
+        }
+        return apply(streamBuilder.build());
+    }
+
     private SubscriberDeleteFailed buildDeleteFailedEvent(final UUID subscriptionId, final UUID organisationId, final String subscriber, final String s) {
         return SubscriberDeleteFailed.subscriberDeleteFailed()
                 .withSubscriptionId(subscriptionId)
@@ -206,8 +239,8 @@ public class SubscriptionAggregate implements Aggregate {
                 }),
                 when(SubscriptionDeleted.class).apply(e -> this.deleted = true),
                 when(SubscriberDeleted.class).apply(e -> this.subscribers = this.subscribers.stream().filter(s -> !s.getEmailAddress().equals(e.getSubscriber())).collect(toList())),
-                when(SubscriberDeleteFailed.class).apply(e -> {})
-
+                when(SubscriberDeleteFailed.class).apply(e -> {}),
+                when(SubscriberDeletedViaBdf.class).apply(e -> this.subscribers = this.subscribers.stream().filter(s -> !s.getEmailAddress().equals(e.getSubscriber())).collect(toList()))
         );
     }
 

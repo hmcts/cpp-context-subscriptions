@@ -9,6 +9,7 @@ import uk.gov.justice.services.core.sender.Sender;
 import uk.gov.justice.services.messaging.Envelope;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleteFailed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted;
+import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionSubscribed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionUnsubscribed;
 
@@ -37,6 +38,11 @@ public class SubscriberEventProcessor {
 
     @Handles("subscriptions.event.subscriber-deleted")
     public void handleDeletedSubscribe(final Envelope<SubscriberDeleted> envelope) {
+        sendPublicEvent(SUBSCRIBER_DELETE_SUBSCRIBE_PUBLIC_EVENT, envelope.metadata(), envelope.payload(), sender);
+    }
+
+    @Handles("subscriptions.event.subscriber-deleted-via-bdf")
+    public void handleDeletedSubscribeViaBdf(final Envelope<SubscriberDeletedViaBdf> envelope) {
         sendPublicEvent(SUBSCRIBER_DELETE_SUBSCRIBE_PUBLIC_EVENT, envelope.metadata(), envelope.payload(), sender);
     }
 
