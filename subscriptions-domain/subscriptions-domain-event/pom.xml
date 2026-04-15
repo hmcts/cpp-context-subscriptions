@@ -5,7 +5,7 @@
     <parent>
         <groupId>uk.gov.moj.cpp.subscriptions</groupId>
         <artifactId>subscriptions-domain</artifactId>
-        <version>17.0.49-RE-SNAPSHOT</version>
+        <version>17.0.50-RE-SNAPSHOT</version>
     </parent>
 
     <artifactId>subscriptions-domain-event</artifactId>
