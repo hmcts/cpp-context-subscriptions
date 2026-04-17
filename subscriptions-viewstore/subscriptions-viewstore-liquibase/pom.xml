@@ -5,7 +5,7 @@
     <parent>
         <groupId>uk.gov.moj.cpp.subscriptions</groupId>
         <artifactId>subscriptions-viewstore</artifactId>
-        <version>17.0.49-RBSD-2609-SNAPSHOT</version>
+        <version>17.0.49-PEG-2848-R-SNAPSHOT</version>
     </parent>
     <artifactId>subscriptions-viewstore-liquibase</artifactId>
     <properties>
