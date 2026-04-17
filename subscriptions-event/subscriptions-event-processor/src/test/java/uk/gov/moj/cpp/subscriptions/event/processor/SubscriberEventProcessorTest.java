@@ -7,7 +7,7 @@ import static uk.gov.justice.services.messaging.Envelope.envelopeFrom;
 import static uk.gov.justice.services.test.utils.core.messaging.MetadataBuilderFactory.metadataWithRandomUUID;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleteFailed.subscriberDeleteFailed;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted.subscriberDeleted;
-import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionCreated.subscriptionCreated;
+import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf.subscriberDeletedViaBdf;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionSubscribed.subscriptionSubscribed;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionUnsubscribed.subscriptionUnsubscribed;
 
@@ -15,7 +15,7 @@ import uk.gov.justice.services.core.sender.Sender;
 import uk.gov.justice.services.messaging.Envelope;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleteFailed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted;
-import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionCreated;
+import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionSubscribed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionUnsubscribed;
 
@@ -43,11 +43,11 @@ public class SubscriberEventProcessorTest {
     public void shouldProcessPrivateSubscriptionSubscribeAndPublicSubscribedRaised() {
 
 
-        final SubscriptionSubscribed subscriptionCreated = subscriptionSubscribed().build();
+        final SubscriptionSubscribed subscriptionSubscribed = subscriptionSubscribed().build();
 
         final Envelope<SubscriptionSubscribed> envelope = envelopeFrom(
                 metadataWithRandomUUID("subscriptions.event.subscription-subscribed"),
-                subscriptionCreated);
+                subscriptionSubscribed);
 
         subscriberEventProcessor.handleSubscribe(envelope);
 
@@ -61,11 +61,11 @@ public class SubscriberEventProcessorTest {
     public void shouldProcessPrivateSubscriptionUnsubscribeAndPublicUnsubscribedRaised() {
 
 
-        final SubscriptionUnsubscribed subscriptionCreated = subscriptionUnsubscribed().build();
+        final SubscriptionUnsubscribed subscriptionUnsubscribed = subscriptionUnsubscribed().build();
 
         final Envelope<SubscriptionUnsubscribed> envelope = envelopeFrom(
                 metadataWithRandomUUID("subscriptions.event.subscription-unsubscribed"),
-                subscriptionCreated);
+                subscriptionUnsubscribed);
 
         subscriberEventProcessor.handleUnsubscribe(envelope);
 
@@ -79,11 +79,11 @@ public class SubscriberEventProcessorTest {
     public void shouldProcessPrivateDeleteSubscribeAndPublicDeleteSubscribedRaised() {
 
 
-        final SubscriberDeleted subscriptionCreated = subscriberDeleted().build();
+        final SubscriberDeleted subscriberDeleted = subscriberDeleted().build();
 
         final Envelope<SubscriberDeleted> envelope = envelopeFrom(
                 metadataWithRandomUUID("subscriptions.event.subscriber-deleted"),
-                subscriptionCreated);
+                subscriberDeleted);
 
         subscriberEventProcessor.handleDeletedSubscribe(envelope);
 
@@ -94,14 +94,33 @@ public class SubscriberEventProcessorTest {
     }
 
     @Test
+    public void shouldProcessPrivateDeleteSubscribeAndPublicDeleteSubscribedViaBdfRaised() {
+
+
+        final SubscriberDeletedViaBdf subscriberDeletedViaBdf = subscriberDeletedViaBdf().build();
+
+        final Envelope<SubscriberDeletedViaBdf> envelope = envelopeFrom(
+                metadataWithRandomUUID("subscriptions.event.subscriber-deleted-via-bdf"),
+                subscriberDeletedViaBdf);
+
+        subscriberEventProcessor.handleDeletedSubscribeViaBdf(envelope);
+
+        verify(sender).send(captor.capture());
+
+        final Envelope<?> messageEnvelope = captor.getValue();
+        assertThat(messageEnvelope.metadata().name(), is("public.subscriptions.event.subscriber-deleted"));
+    }
+
+
+    @Test
     public void shouldProcessPrivateDeleteSubscribeFailedAndPublicDeleteSubscribeFailedRaised() {
 
 
-        final SubscriberDeleteFailed subscriptionCreated = subscriberDeleteFailed().build();
+        final SubscriberDeleteFailed subscriptionDeleteFailed = subscriberDeleteFailed().build();
 
         final Envelope<SubscriberDeleteFailed> envelope = envelopeFrom(
                 metadataWithRandomUUID("subscriptions.event.subscriber-delete-failed"),
-                subscriptionCreated);
+                subscriptionDeleteFailed);
 
         subscriberEventProcessor.handleDeletedSubscribeFailed(envelope);
 
