@@ -5,7 +5,7 @@
     <parent>
         <groupId>uk.gov.moj.cpp.subscriptions</groupId>
         <artifactId>subscriptions-parent</artifactId>
-        <version>17.0.48-RBSD-2609-SNAPSHOT</version>
+        <version>17.0.49-RBSD-2609-SNAPSHOT</version>
     </parent>
 
     <artifactId>subscriptions-viewstore</artifactId>
