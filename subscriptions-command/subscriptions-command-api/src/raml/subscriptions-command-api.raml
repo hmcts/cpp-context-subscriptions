@@ -50,6 +50,9 @@ protocols: [ HTTP ]
       (mapping):
         requestType: application/vnd.subscriptions.command.delete-subscriber+json
         name: subscriptions.command.delete-subscriber
+      (mapping):
+        requestType: application/vnd.subscriptions.command.delete-subscriber-via-bdf+json
+        name: subscriptions.command.delete-subscriber-via-bdf
       ...
     body:
      application/vnd.subscriptions.command.activate-subscription+json:
@@ -70,6 +73,9 @@ protocols: [ HTTP ]
      application/vnd.subscriptions.command.delete-subscriber+json:
         example: !include json/subscriptions.command.delete-subscriber.json
         schema: !include json/schema/subscriptions.command.delete-subscriber.json
+     application/vnd.subscriptions.command.delete-subscriber-via-bdf+json:
+        example: !include json/subscriptions.command.delete-subscriber-via-bdf.json
+        schema: !include json/schema/subscriptions.command.delete-subscriber-via-bdf.json
 
     responses:
       202:

@@ -21,5 +21,7 @@ subscriptions_descriptor:
           schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscription-unsubscribed.json
         - name: subscriptions.event.subscriber-deleted
           schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscriber-deleted.json
+        - name: subscriptions.event.subscriber-deleted-via-bdf
+          schema_uri: http://cpp.moj.gov.uk/subscriptions/json/schemas/subscriber-deleted-via-bdf.json
 
       event_source_name: subscriptions

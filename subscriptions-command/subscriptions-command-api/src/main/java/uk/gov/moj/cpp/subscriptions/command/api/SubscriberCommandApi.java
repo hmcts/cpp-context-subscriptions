@@ -78,6 +78,14 @@ public class SubscriberCommandApi {
         sender.send(envelopeFrom(metadata, payloadWithOrganisationId));
     }
 
+    @Handles("subscriptions.command.delete-subscriber-via-bdf")
+    public void deleteSubscriberViaBdf(final JsonEnvelope envelope) {
+        final Metadata metadata = metadataFrom(envelope.metadata())
+                .withName("subscriptions.command.handler.delete-subscriber-via-bdf")
+                .build();
+        sender.send(envelopeFrom(metadata, envelope.payloadAsJsonObject()));
+    }
+
     private String extractOrganisationId(final JsonObject response) {
         if(response.containsKey(ORGANISATION_ID) && nonNull(response.getString(ORGANISATION_ID))) {
             return response.getString(ORGANISATION_ID);
