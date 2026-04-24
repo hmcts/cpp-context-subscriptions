@@ -5,7 +5,7 @@
     <parent>
         <groupId>uk.gov.moj.cpp.subscriptions</groupId>
         <artifactId>subscriptions-domain</artifactId>
-        <version>17.0.52-CIMD3210-SNAPSHOT</version>
+        <version>17.0.53-CIMD3210-SNAPSHOT</version>
     </parent>
 
     <artifactId>subscriptions-domain-aggregate</artifactId>
