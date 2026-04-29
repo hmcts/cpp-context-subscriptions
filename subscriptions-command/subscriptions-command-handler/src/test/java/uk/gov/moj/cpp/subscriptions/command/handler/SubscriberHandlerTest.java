@@ -24,6 +24,7 @@ import static uk.gov.moj.cpp.subscriptions.json.schemas.Subscribers.subscribers;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.Subscription.subscription;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionCreated.subscriptionCreated;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.handler.DeleteSubscriber.deleteSubscriber;
+import static uk.gov.moj.cpp.subscriptions.json.schemas.handler.DeleteSubscriberViaBdf.deleteSubscriberViaBdf;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.handler.Subscribe.subscribe;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.handler.Unsubscribe.unsubscribe;
 
@@ -36,11 +37,13 @@ import uk.gov.justice.services.messaging.Envelope;
 import uk.gov.justice.services.messaging.JsonEnvelope;
 import uk.gov.moj.cpp.subscriptions.aggregate.SubscriptionAggregate;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted;
+import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionCreated;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionDeleted;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionSubscribed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionUnsubscribed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.handler.DeleteSubscriber;
+import uk.gov.moj.cpp.subscriptions.json.schemas.handler.DeleteSubscriberViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.handler.Subscribe;
 import uk.gov.moj.cpp.subscriptions.json.schemas.handler.Unsubscribe;
 
@@ -85,7 +88,8 @@ public class SubscriberHandlerTest {
             SubscriptionSubscribed.class,
             SubscriptionUnsubscribed.class,
             SubscriptionDeleted.class,
-            SubscriberDeleted.class
+            SubscriberDeleted.class,
+            SubscriberDeletedViaBdf.class
     );
 
     @Test
@@ -107,6 +111,13 @@ public class SubscriberHandlerTest {
         assertThat(subscriberHandler, isHandler(COMMAND_HANDLER)
                 .with(method("handleDeleteSubscriber")
                         .thatHandles(SUBSCRIPTIONS_COMMAND_HANDLER_DELETE_SUBSCRIBER)));
+    }
+
+    @Test
+    public void shouldHandleDeleteSubscriberViaBdfCommand() {
+        assertThat(subscriberHandler, isHandler(COMMAND_HANDLER)
+                .with(method("handleDeleteSubscriberViaBdf")
+                        .thatHandles("subscriptions.command.handler.delete-subscriber-via-bdf")));
     }
 
     @Test
@@ -218,6 +229,27 @@ public class SubscriberHandlerTest {
                 .withMetadataFrom(requestEnvelope);
     }
 
+    @Test
+    public void shouldProcessDeleteSubscriberViaBdfRaisePrivateEvent() throws Exception {
+        subscriptionAggregate = spy(SubscriptionAggregate.class);
+        when(eventSource.getStreamById(any())).thenReturn(eventStream);
+        when(aggregateService.get(eventStream, SubscriptionAggregate.class)).thenReturn(subscriptionAggregate);
+
+        final SubscriptionCreated subscriptionCreated = subscriptionCreated()
+                .withOrganisationId(randomUUID())
+                .withSubscription(subscription()
+                        .withId(SUBSCRIPTION_ID)
+                        .withActive(true)
+                        .withSubscribers(asList(subscribers().withId(randomUUID()).withEmailAddress("test").withActive(true).build(),
+                                subscribers().withId(randomUUID()).withEmailAddress("test1").withActive(true).build())).build()).build();
+        subscriptionAggregate.apply(subscriptionCreated);
+
+        final Envelope<DeleteSubscriberViaBdf> envelope = createDeleteSubscriberViaBdfHandlerEnvelope();
+        subscriberHandler.handleDeleteSubscriberViaBdf(envelope);
+
+        verifySubscriberHandlerResults("subscriptions.event.subscriber-deleted-via-bdf", "$.subscriptionId");
+    }
+
     private Envelope<DeleteSubscriber> createDeleteSubscribeHandlerEnvelope() {
         final DeleteSubscriber subscribe = deleteSubscriber()
                 .withSubscriptionId(SUBSCRIPTION_ID)
@@ -234,5 +266,18 @@ public class SubscriberHandlerTest {
                 .withMetadataFrom(requestEnvelope);
     }
 
+    private Envelope<DeleteSubscriberViaBdf> createDeleteSubscriberViaBdfHandlerEnvelope() {
+        final DeleteSubscriberViaBdf command = deleteSubscriberViaBdf()
+                .withSubscriptionId(SUBSCRIPTION_ID)
+                .withSubscriber("test")
+                .build();
 
+        final JsonEnvelope requestEnvelope = envelopeFrom(
+                metadataWithRandomUUID(randomUUID().toString()),
+                createObjectBuilder().build());
+
+        return Enveloper.envelop(command)
+                .withName("subscriptions.command.handler.delete-subscriber-via-bdf")
+                .withMetadataFrom(requestEnvelope);
+    }
 }
