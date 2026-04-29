@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted.subscriberDeleted;
+import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf.subscriberDeletedViaBdf;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionSubscribed.subscriptionSubscribed;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionUnsubscribed.subscriptionUnsubscribed;
 import static uk.gov.moj.cpp.subscriptions.persistence.entity.Subscriber.builder;
@@ -14,13 +15,16 @@ import uk.gov.justice.services.common.converter.JsonObjectToObjectConverter;
 import uk.gov.justice.services.messaging.JsonEnvelope;
 import uk.gov.justice.services.messaging.Metadata;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeleted;
+import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionSubscribed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionUnsubscribed;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscriber;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription;
 import uk.gov.moj.cpp.subscriptions.persistence.repository.SubscriptionsRepository;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.json.JsonObject;
@@ -188,9 +192,46 @@ public class SubscriberEventListenerTest {
         verify(subscriptionsRepository).save(subscriptionsRepositoryArgumentCaptor.capture());
         final Subscription updatedSubscription = subscriptionsRepositoryArgumentCaptor.getValue();
         assertThat(updatedSubscription.getSubscribers().stream().noneMatch(s -> s.getEmailAddress().equals(EMAIL)), is(true));
-
-
     }
 
+    @Test
+    public void shouldDeleteSubscriberViaBdf() {
+        when(envelope.payloadAsJsonObject()).thenReturn(payload);
+        final SubscriberDeletedViaBdf subscriberDeletedViaBdf = subscriberDeletedViaBdf()
+                .withSubscriptionId(randomUUID())
+                .withSubscriber(EMAIL)
+                .build();
 
+        when(jsonObjectToObjectConverter.convert(payload, SubscriberDeletedViaBdf.class)).thenReturn(subscriberDeletedViaBdf);
+
+        final List<Subscriber> subscribers = new ArrayList<>();
+        final uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription subscription =
+                uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription.builder()
+                        .withId(subscriberDeletedViaBdf.getSubscriptionId())
+                        .withActive(true)
+                        .build();
+
+        final Subscriber subscriberToDelete = builder()
+                .withId(randomUUID())
+                .withEmailAddress(EMAIL)
+                .withActive(true)
+                .withSubscription(subscription)
+                .build();
+        final Subscriber otherSubscriber = builder()
+                .withId(randomUUID())
+                .withEmailAddress(EMAIL2)
+                .withActive(true)
+                .withSubscription(subscription)
+                .build();
+        subscribers.add(subscriberToDelete);
+        subscribers.add(otherSubscriber);
+        subscription.setSubscribers(new HashSet<>(subscribers));
+
+        when(subscriptionsRepository.findBy(subscriberDeletedViaBdf.getSubscriptionId())).thenReturn(subscription);
+        subscriberEventListener.handleDeleteSubscriberViaBdf(envelope);
+
+        verify(subscriptionsRepository).save(subscriptionsRepositoryArgumentCaptor.capture());
+        final Subscription updatedSubscription = subscriptionsRepositoryArgumentCaptor.getValue();
+        assertThat(updatedSubscription.getSubscribers().stream().noneMatch(s -> s.getEmailAddress().equals(EMAIL)), is(true));
+    }
 }
