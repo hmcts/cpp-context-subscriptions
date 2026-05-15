@@ -21,10 +21,10 @@
         <sonar.scm.provider>git</sonar.scm.provider>
         <mvn.site.url>file://${project.build.directory}/site</mvn.site.url>
         <cpp.framework.action.mapping.enabled>true</cpp.framework.action.mapping.enabled>
-        <coredomain.version>17.104.3</coredomain.version>
-        <notification.notify.version>17.0.24</notification.notify.version>
-        <material.version>17.0.75</material.version>
-        <hearing.version>17.0.133</hearing.version>
+        <coredomain.version>17.104.4</coredomain.version>
+        <notification.notify.version>17.104.46</notification.notify.version>
+        <material.version>17.0.80</material.version>
+        <hearing.version>17.104.161</hearing.version>
         <jgitflow.maven.developBranchName>main</jgitflow.maven.developBranchName>
     </properties>
 
