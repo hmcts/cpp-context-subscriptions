@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/result.json",
+  "description": "The details for a result rendered in a now document",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string"
+    },
+    "welshLabel": {
+      "type": "string"
+    },
+    "resultIdentifier": {
+      "type": "string"
+    },
+    "nowRequirementText": {
+      "type": "array",
+      "description": "A collection of all the now requirement text items for now requirements associated to the given result",
+      "title": "nowRequirementTextItems",
+      "items": {
+        "$ref": "http://justice.gov.uk/core/courts/nowdocument/now-text.json"
+      }
+    },
+    "publishedForNows": {
+      "description": "Determines that when this result published it is published for NOWs only and not for LAA, Court Extract & SPI",
+      "type": "boolean"
+    },
+    "prompts": {
+      "type": "array",
+      "title": "prompts",
+      "items": {
+        "$ref": "http://justice.gov.uk/core/courts/nowdocument/prompt.json"
+      }
+    },
+    "resultWording": {
+      "type": "string"
+    },
+    "welshResultWording": {
+      "type": "string"
+    },
+    "resultDefinitionGroup": {
+      "description": "The result definition group for filtering purposes",
+      "type": "string"
+    },
+    "sequence": {
+      "type": "number"
+    },
+    "resultText": {
+      "type": "string"
+    },
+    "primary": {
+      "type": "boolean"
+    },
+    "resultId": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "label"
+  ],
+  "additionalProperties": false
+}

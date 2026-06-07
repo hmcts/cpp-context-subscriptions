@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/emailRenderingVocabulary.json",
+  "description": "The name value pair for rendering the content of an email",
+  "type": "object",
+  "properties": {
+    "label": {
+      "description": "The value label entered into the email template",
+      "type": "string"
+    },
+    "value": {
+      "description": "The value for the label required to be included in the email",
+      "type": "string"
+    }
+  },
+  "required": [
+    "label", "value"
+  ],
+  "additionalProperties": false
+}

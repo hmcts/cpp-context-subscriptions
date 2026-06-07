@@ -59,6 +59,9 @@
                             <includes>
                                 <include>**/*.json</include>
                             </includes>
+                            <excludes>
+                                <exclude>**/global/nowdocument/**</exclude>
+                            </excludes>
                             <generatorProperties implementation="uk.gov.justice.generation.pojo.core.PojoGeneratorProperties">
                                 <plugins>
                                     <plugin>

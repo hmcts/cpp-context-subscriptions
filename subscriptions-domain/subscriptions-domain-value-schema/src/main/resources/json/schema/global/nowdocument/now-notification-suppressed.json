@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/now-notification-suppressed.json",
+  "description": "The details required to suppress a now document",
+  "type": "object",
+
+  "properties": {
+    "materialId": {
+      "$ref": "../courtsDefinitions.json#/definitions/uuid"
+    },
+    "masterDefendantId": {
+      "$ref": "../courtsDefinitions.json#/definitions/uuid"
+    },
+    "defendantName": {
+      "type": "string"
+    },
+    "caseUrns": {
+      "description": "defendant cases",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "templateName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "materialId",
+    "masterDefendantId",
+    "defendantName",
+    "caseUrns",
+    "templateName"
+  ],
+  "additionalProperties": false
+}

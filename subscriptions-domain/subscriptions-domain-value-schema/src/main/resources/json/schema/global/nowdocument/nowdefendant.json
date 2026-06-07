@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/nowdefendant.json",
+  "description": "The details of a defendant rendered in a now document",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date"
+    },
+    "address": {
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress.json"
+    },
+    "pncId": {
+      "type": "string"
+    },
+    "nationality": {
+      "type": "string"
+    },
+    "prosecutingAuthorityReference": {
+      "description": "aka defendantASN when authority is a police force",
+      "type": "string"
+    },
+    "mobileNumber": {
+      "type": "string"
+    },
+    "landLineNumber": {
+      "type": "string"
+    },
+    "nationalInsuranceNumber": {
+      "type": "string"
+    },
+    "ethnicity": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "driverNumber": {
+      "type": "string"
+    },
+    "defendantResults": {
+      "type": "array",
+      "items": {
+        "$ref": "http://justice.gov.uk/core/courts/nowdocument/result.json"
+      }
+    },
+    "solicitor": {
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowsolicitor.json"
+    },
+    "occupation": {
+      "type": "string"
+    },
+    "occupationWelsh": {
+      "type": "string"
+    },
+    "aliasNames": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "title": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "middleName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "isCivil": {
+      "type": "boolean"
+    },
+    "selfDefinedEthnicity": {
+      "type": "string"
+    },
+    "interpreterLanguageNeeds": {
+      "description": "The person interpreter needs",
+      "type": "string"
+    },
+    "specialNeeds": {
+      "description": "The person special needs indicted any special needs that must be met by the courts process e.g. wheelchair access",
+      "type": "string"
+    },
+    "isYouth": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "additionalProperties": false
+}

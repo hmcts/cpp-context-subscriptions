@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/now-distribution.json",
+  "description": "The distribution details for the NOW document",
+  "type": "object",
+  "properties": {
+    "firstClassLetter": {
+      "type": "boolean"
+    },
+    "secondClassLetter": {
+      "type": "boolean"
+    },
+    "email": {
+      "type": "boolean"
+    },
+    "emailTemplateName": {
+      "type": "string"
+    },
+    "bilingualEmailTemplateName": {
+      "type": "string"
+    },
+    "emailAddress": {
+      "type": "string",
+      "format": "email"
+    },
+    "emailContent": {
+      "description": "The collection of dynamic name value pairs used for rendering an email",
+      "type": "array",
+      "items": {
+        "$ref": "http://justice.gov.uk/core/courts/nowdocument/emailRenderingVocabulary.json"
+      }
+    },
+    "isNotificationApi": {
+      "type": "boolean"
+    }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "firstClassLetter"
+      ]
+    },
+    {
+      "required": [
+        "secondClassLetter"
+      ]
+    },
+    {
+      "required": [
+        "email",
+        "emailTemplateName"
+      ]
+    },
+    {
+      "required": [
+        "isNotificationApi"
+      ]
+    }
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/next-hearing-court-details.json",
+  "description": "The details for a next hearing in a now document",
+  "type": "object",
+  "properties": {
+    "courtName": {
+      "type": "string"
+    },
+    "welshCourtName": {
+      "type": "string"
+    },
+    "roomName": {
+      "type": "string"
+    },
+    "welshRoomName": {
+      "type": "string"
+    },
+    "hearingWeekCommencing": {
+      "type": "string"
+    },
+    "hearingDate": {
+      "type": "string"
+    },
+    "hearingTime": {
+      "type": "string"
+    },
+    "courtAddress": {
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress.json"
+    },
+    "welshCourtAddress": {
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress.json"
+    }
+  },
+  "required": [
+    "courtName",
+    "courtAddress"
+  ],
+  "additionalProperties": false
+}

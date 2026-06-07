@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/defendant-case-offence.json",
+  "description": "The offence details for a defendant on a case and the offence results rendered in a NOW document",
+  "type": "object",
+  "properties": {
+    "wording": {
+      "type": "string"
+    },
+    "welshWording": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "welshTitle": {
+      "type": "string"
+    },
+    "legislation": {
+      "description": "The legislation for the offence",
+      "type": "string"
+    },
+    "welshLegislation": {
+      "description": "The legislation for the offence in Welsh language",
+      "type": "string"
+    },
+    "civilOffence": {
+      "description": "Indicates that the offence is a civil matter rather than a criminal one",
+      "type": "boolean"
+    },
+    "dvlaCode": {
+      "description": "The dvla code for the offence e.g. SP50",
+      "type": "string"
+    },
+    "startDate": {
+      "description": "The start date of the offence",
+      "type": "string",
+      "format": "date"
+    },
+    "endDate": {
+      "description": "The end date of the offence",
+      "type": "string",
+      "format": "date"
+    },
+    "displayText": {
+      "description": "The formatted offence details.  string.Format('{0}{1}{2}{1}{3}', title, Environment.NewLine, legislation, wording)",
+      "type": "string"
+    },
+    "convictionDate": {
+      "description": "Indicates that prosecution of this offence has led to a criminal conviction.  Not relevant for civil cases",
+      "type": "string"
+    },
+    "convictingCourtCode": {
+      "description": "Indicates the code of Convicting court when that prosecution of this offence has led to a criminal conviction. Not relevant for civil cases",
+      "type": "string"
+    },
+    "convictionStatus": {
+      "description": "Indicates the status of a conviction.  Null when offence is civil.  Not Convicted when there is not a conviction date.  Otherwise Convicted",
+      "type": "string"
+    },
+    "plea": {
+      "description": "The plea entered against the offence",
+      "type": "string"
+    },
+    "vehicleRegistration": {
+      "description": "The vehicle registration relevant to the offence",
+      "type": "string"
+    },
+    "results": {
+      "type": "array",
+      "title": "results",
+      "items": {
+        "$ref": "http://justice.gov.uk/core/courts/nowdocument/result.json"
+      }
+    },
+    "alcoholReadingAmount": {
+      "type": "integer"
+    },
+    "alcoholReadingMethodCode": {
+      "type": "string"
+    },
+    "alcoholReadingMethodDescription": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "modeOfTrial": {
+      "type": "string"
+    },
+    "allocationDecision": {
+      "type": "string"
+    },
+    "verdictType": {
+      "type": "string"
+    },
+    "count": {
+      "type": "integer"
+    },
+    "orderIndex": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "wording",
+    "startDate"
+  ],
+  "additionalProperties": false
+}

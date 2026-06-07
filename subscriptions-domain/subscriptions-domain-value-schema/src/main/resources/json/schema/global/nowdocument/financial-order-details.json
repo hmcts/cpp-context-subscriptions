@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/financial-order-details.json",
+  "description": "The details for a financial order rendered in a now document",
+  "type": "object",
+  "properties": {
+    "enforcementPhoneNumber": {
+      "description": "Determined from reference data based on the LJA of the court",
+      "type": "string"
+    },
+    "enforcementAddress": {
+      "description": "Determined from reference data based on the LJA of the court",
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress.json"
+    },
+    "enforcementEmail": {
+      "description": "Determined from reference data based on the LJA of the court",
+      "type": "string",
+      "format": "email"
+    },
+    "accountingDivisionCode": {
+      "description": "Determined from reference data based on the LJA of the court",
+      "type": "integer"
+    },
+    "accountPaymentReference": {
+      "description": "Provided by GOB",
+      "type": "string"
+    },
+    "bacsBankName": {
+      "description": "Determined from reference data based on the LJA of the court",
+      "type": "string"
+    },
+    "bacsSortCode": {
+      "description": "Determined from reference data based on the LJA of the court",
+      "type": "string"
+    },
+    "bacsAccountNumber": {
+      "description": "Determined from reference data based on the LJA of the court",
+      "type": "string"
+    },
+    "totalAmountImposed": {
+      "type": "string"
+    },
+    "totalBalance": {
+      "type": "string"
+    },
+    "paymentTerms": {
+      "type": "string"
+    },
+    "minorCreditor": {
+      "type": "object",
+      "properties": {
+        "minorCreditorId": {
+          "description": "UUID of the minor creditor (Compensatee) in Common Platform",
+          "type": "string",
+          "maxLength": 36
+        },
+        "minorCreditorAccountNumber": {
+          "description": "GoB-generated account number for the minor creditor",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "minorCreditorId",
+        "minorCreditorAccountNumber"
+      ]
+    }
+  },
+  "required": [
+    "totalAmountImposed",
+    "totalBalance"
+  ],
+  "additionalProperties": false
+}

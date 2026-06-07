@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/prosecution-case.json",
+  "description": "The case details and the associated defendant case results and defendant case offence results rendered in a NOW document",
+  "type": "object",
+  "properties": {
+    "reference": {
+      "type": "string"
+    },
+    "prosecutor": {
+      "description": "The name of the prosecuting authority",
+      "type": "string"
+    },
+    "prosecutorOUCode": {
+      "description": "The OU Code of the prosecuting authority",
+      "type": "string"
+    },
+    "prosecutorWelsh": {
+      "description": "The name of the prosecuting authority",
+      "type": "string"
+    },
+    "prosecutorAddress": {
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress.json"
+    },
+    "prosecutorWelshAddress": {
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress.json"
+    },
+    "caseMarkers": {
+      "type": "array",
+      "title": "caseMarkers",
+      "items": {
+        "type": "string"
+      }
+    },
+    "defendantCaseResults": {
+      "type": "array",
+      "title": "defendantCaseResults",
+      "items": {
+        "$ref": "http://justice.gov.uk/core/courts/nowdocument/result.json"
+      }
+    },
+    "defendantCaseOffences": {
+      "type": "array",
+      "title": "defendantCaseOffences",
+      "items": {
+        "$ref": "http://justice.gov.uk/core/courts/nowdocument/defendant-case-offence.json"
+      }
+    },
+    "applicationType": {
+      "description": "The CJS Title for the court application type",
+      "type": "string"
+    },
+    "applicationTypeWelsh": {
+      "type": "string"
+    },
+    "applicationLegislation": {
+      "type": "string"
+    },
+    "applicationLegislationWelsh": {
+      "type": "string"
+    },
+    "applicationReceivedDate": {
+      "description": "The date that the application was received by HMCTS",
+      "type": "string",
+      "format": "date"
+    },
+    "applicationParticulars": {
+      "description": "The particulars of the application when not covered by the associated document",
+      "type": "string"
+    },
+    "applicationParticularsWelsh": {
+      "type": "string"
+    },
+    "allegationOrComplaintStartDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "allegationOrComplaintEndDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "applicationCode": {
+      "description": "The CJS Code for the court application type",
+      "type": "string"
+    },
+    "isApplication": {
+      "type": "boolean"
+    },
+    "isClonedOffence": {
+      "type": "boolean"
+    },
+    "isCps": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reference",
+    "defendantCaseOffences"
+  ],
+  "additionalProperties": false
+}

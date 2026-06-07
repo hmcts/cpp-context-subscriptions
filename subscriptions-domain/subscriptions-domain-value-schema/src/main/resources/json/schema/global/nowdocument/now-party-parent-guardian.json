@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/now-party-parent-guardian.json",
+  "description": "The details of a court application applicant rendered in a now document",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "middleName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "address": {
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress.json"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date"
+    },
+    "mobileNumber": {
+      "type": "string"
+    },
+    "landlineNumber": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}
