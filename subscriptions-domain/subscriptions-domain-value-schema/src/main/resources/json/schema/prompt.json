@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/prompt-v2.json",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/prompt-v2.json",
   "description": "The details for a result prompt rendered in a now document",
   "type": "object",
   "properties": {

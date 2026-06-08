@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/defendant-case-offence-v2.json",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/defendant-case-offence-v2.json",
   "description": "The offence details for a defendant on a case and the offence results rendered in a NOW document",
   "type": "object",
   "properties": {
@@ -70,7 +70,7 @@
       "type": "array",
       "title": "results",
       "items": {
-        "$ref": "http://justice.gov.uk/core/courts/nowdocument/result-v2.json"
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/result-v2.json"
       }
     },
     "alcoholReadingAmount": {

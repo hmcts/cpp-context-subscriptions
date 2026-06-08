@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/order-court-v2.json",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/order-court-v2.json",
   "description": "The court that has order the nows",
   "type": "object",
   "properties": {
@@ -20,10 +20,10 @@
       "type": "string"
     },
     "address": {
-      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress-v2.json"
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowaddress-v2.json"
     },
     "welshAddress": {
-      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress-v2.json"
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowaddress-v2.json"
     },
     "welshCourtCentre": {
       "description": "Indicates that the court centre is located under Welsh regulation i.e. is in Wales",

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/order-addressee-v2.json",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/order-addressee-v2.json",
   "description": "The addressee that a now document is addressed to",
   "type": "object",
   "properties": {
@@ -8,7 +8,7 @@
       "type": "string"
     },
     "address": {
-      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress-v2.json"
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowaddress-v2.json"
     }
   },
   "additionalProperties": false

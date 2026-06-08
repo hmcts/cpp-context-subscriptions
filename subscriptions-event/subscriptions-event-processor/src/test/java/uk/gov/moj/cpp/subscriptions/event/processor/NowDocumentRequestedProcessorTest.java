@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 import static uk.gov.justice.core.courts.CourtCentre.courtCentre;
 import static uk.gov.justice.core.courts.Hearing.hearing;
 import static uk.gov.justice.core.courts.NowDocumentRequested.nowDocumentRequested;
-import static uk.gov.justice.core.courts.nowdocument.NowDocumentRequestV2.nowDocumentRequestV2;
+import static uk.gov.moj.cpp.subscriptions.nowdocument.json.schemas.NowDocumentRequestV2.nowDocumentRequestV2;
 import static uk.gov.justice.services.messaging.Envelope.envelopeFrom;
 import static uk.gov.justice.services.test.utils.core.messaging.MetadataBuilderFactory.metadataWithRandomUUIDAndName;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.EmailInfo.emailInfo;

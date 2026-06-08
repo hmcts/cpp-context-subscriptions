@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/nowdefendant-v2.json",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowdefendant-v2.json",
   "description": "The details of a defendant rendered in a now document",
   "type": "object",
   "properties": {
@@ -12,7 +12,7 @@
       "format": "date"
     },
     "address": {
-      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress-v2.json"
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowaddress-v2.json"
     },
     "pncId": {
       "type": "string"
@@ -45,11 +45,11 @@
     "defendantResults": {
       "type": "array",
       "items": {
-        "$ref": "http://justice.gov.uk/core/courts/nowdocument/result-v2.json"
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/result-v2.json"
       }
     },
     "solicitor": {
-      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowsolicitor-v2.json"
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowsolicitor-v2.json"
     },
     "occupation": {
       "type": "string"

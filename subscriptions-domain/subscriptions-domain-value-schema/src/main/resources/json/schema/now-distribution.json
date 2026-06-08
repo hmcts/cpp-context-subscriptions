@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/now-distribution-v2.json",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-distribution-v2.json",
   "description": "The distribution details for the NOW document",
   "type": "object",
   "properties": {
@@ -27,7 +27,7 @@
       "description": "The collection of dynamic name value pairs used for rendering an email",
       "type": "array",
       "items": {
-        "$ref": "http://justice.gov.uk/core/courts/nowdocument/emailRenderingVocabulary-v2.json"
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/emailRenderingVocabulary-v2.json"
       }
     },
     "isNotificationApi": {

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/now-party-v2.json",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-party-v2.json",
   "description": "The details of a court application applicant rendered in a now document",
   "type": "object",
   "properties": {
@@ -20,7 +20,7 @@
       "type": "string"
     },
     "address": {
-      "$ref": "http://justice.gov.uk/core/courts/nowdocument/nowaddress-v2.json"
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowaddress-v2.json"
     },
     "dateOfBirth": {
       "type": "string",
