@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/now-notification-suppressed.json",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/now-notification-suppressed-v2.json",
   "description": "The details required to suppress a now document",
   "type": "object",
 

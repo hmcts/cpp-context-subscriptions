@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/now-document-request.json",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/now-document-request-v2.json",
   "description": "The details required to generate a now document",
   "type": "object",
   "properties": {
@@ -49,14 +49,14 @@
     },
     "nowDistribution": {
       "description": "The details for distributing the Now",
-      "$ref": "http://justice.gov.uk/core/courts/nowdocument/now-distribution.json"
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/now-distribution-v2.json"
     },
     "storageRequired": {
       "description": "Indicates if the generated document should be stored.  In combination with nowDistribution supports the need to store only or distribute only or store and distribute",
       "type": "boolean"
     },
     "nowContent": {
-      "$ref": "http://justice.gov.uk/core/courts/nowdocument/now-document-content.json"
+      "$ref": "http://justice.gov.uk/core/courts/nowdocument/now-document-content-v2.json"
     },
     "templateName": {
       "type": "string"

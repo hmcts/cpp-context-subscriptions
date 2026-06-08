@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 import static uk.gov.justice.core.courts.CourtCentre.courtCentre;
 import static uk.gov.justice.core.courts.Hearing.hearing;
 import static uk.gov.justice.core.courts.NowDocumentRequested.nowDocumentRequested;
-import static uk.gov.justice.core.courts.nowdocument.NowDocumentRequest.nowDocumentRequest;
+import static uk.gov.justice.core.courts.nowdocument.NowDocumentRequestV2.nowDocumentRequestV2;
 import static uk.gov.justice.services.messaging.Envelope.envelopeFrom;
 import static uk.gov.justice.services.test.utils.core.messaging.MetadataBuilderFactory.metadataWithRandomUUIDAndName;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.EmailInfo.emailInfo;
@@ -90,7 +90,7 @@ public class NowDocumentRequestedProcessorTest {
         final UUID hearingId = randomUUID();
 
         final NowDocumentRequested nowDocumentRequested = nowDocumentRequested()
-                .withNowDocumentRequest(nowDocumentRequest().withHearingId(hearingId).build()).build();
+                .withNowDocumentRequest(nowDocumentRequestV2().withHearingId(hearingId).build()).build();
         final Envelope<NowDocumentRequested> nowDocumentRequestedEnvelope = envelopeFrom(metadataWithRandomUUIDAndName().build(),
                 nowDocumentRequested);
 
@@ -128,7 +128,7 @@ public class NowDocumentRequestedProcessorTest {
         final UUID hearingId = randomUUID();
 
         final NowDocumentRequested nowDocumentRequested = nowDocumentRequested()
-                .withNowDocumentRequest(nowDocumentRequest().withHearingId(hearingId).build()).build();
+                .withNowDocumentRequest(nowDocumentRequestV2().withHearingId(hearingId).build()).build();
         final Envelope<NowDocumentRequested> nowDocumentRequestedEnvelope = envelopeFrom(metadataWithRandomUUIDAndName().build(),
                 nowDocumentRequested);
 
@@ -146,7 +146,7 @@ public class NowDocumentRequestedProcessorTest {
         final UUID hearingId = randomUUID();
 
         final NowDocumentRequested nowDocumentRequested = nowDocumentRequested()
-                .withNowDocumentRequest(nowDocumentRequest().withHearingId(hearingId).build()).build();
+                .withNowDocumentRequest(nowDocumentRequestV2().withHearingId(hearingId).build()).build();
         final Envelope<NowDocumentRequested> nowDocumentRequestedEnvelope = envelopeFrom(metadataWithRandomUUIDAndName().build(),
                 nowDocumentRequested);
 
@@ -184,7 +184,7 @@ public class NowDocumentRequestedProcessorTest {
         final UUID hearingId = randomUUID();
 
         final NowDocumentRequested nowDocumentRequested = nowDocumentRequested()
-                .withNowDocumentRequest(nowDocumentRequest().withHearingId(hearingId).build()).build();
+                .withNowDocumentRequest(nowDocumentRequestV2().withHearingId(hearingId).build()).build();
         final Envelope<NowDocumentRequested> nowDocumentRequestedEnvelope = envelopeFrom(metadataWithRandomUUIDAndName().build(),
                 nowDocumentRequested);
 

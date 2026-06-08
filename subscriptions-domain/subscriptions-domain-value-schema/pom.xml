@@ -57,11 +57,14 @@
                             <outputDirectory>${project.build.directory}/generated-sources
                             </outputDirectory>
                             <includes>
-                                <include>**/*.json</include>
+                                <include>**/court.json</include>
+                                <include>**/defendant.json</include>
+                                <include>**/email-info.json</include>
+                                <include>**/enum-def.json</include>
+                                <include>**/filter.json</include>
+                                <include>**/subscribers.json</include>
+                                <include>**/subscription.json</include>
                             </includes>
-                            <excludes>
-                                <exclude>**/global/nowdocument/**</exclude>
-                            </excludes>
                             <generatorProperties implementation="uk.gov.justice.generation.pojo.core.PojoGeneratorProperties">
                                 <plugins>
                                     <plugin>

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/emailRenderingVocabulary.json",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/emailRenderingVocabulary-v2.json",
   "description": "The name value pair for rendering the content of an email",
   "type": "object",
   "properties": {

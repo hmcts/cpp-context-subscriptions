@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://justice.gov.uk/core/courts/nowdocument/now-text.json",
+  "id": "http://justice.gov.uk/core/courts/nowdocument/now-text-v2.json",
   "description": "The details of variable text for a given now or now requirement",
   "type": "object",
   "properties": {

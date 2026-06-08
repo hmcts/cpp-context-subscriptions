@@ -17,9 +17,9 @@ import uk.gov.justice.core.courts.Defendant;
 import uk.gov.justice.core.courts.Gender;
 import uk.gov.justice.core.courts.LegalEntityDefendant;
 import uk.gov.justice.core.courts.Organisation;
-import uk.gov.justice.core.courts.nowdocument.NowDocumentContent;
-import uk.gov.justice.core.courts.nowdocument.Nowdefendant;
-import uk.gov.justice.core.courts.nowdocument.ProsecutionCase;
+import uk.gov.justice.core.courts.nowdocument.NowDocumentContentV2;
+import uk.gov.justice.core.courts.nowdocument.NowdefendantV2;
+import uk.gov.justice.core.courts.nowdocument.ProsecutionCaseV2;
 import uk.gov.moj.cpp.subscriptions.event.processor.filterprocessing.filters.AbstractFilterStrategy;
 import uk.gov.moj.cpp.subscriptions.event.processor.service.ApplicationParameters;
 import uk.gov.moj.cpp.subscriptions.json.schemas.EmailInfo;
@@ -31,16 +31,16 @@ import java.util.UUID;
 
 public class NowEdtEventRule extends AbstractEventRule {
 
-    private NowDocumentContent nowDocumentContent;
-    private ProsecutionCase prosecutionCase;
-    private Nowdefendant defendant;
+    private NowDocumentContentV2 nowDocumentContent;
+    private ProsecutionCaseV2 prosecutionCase;
+    private NowdefendantV2 defendant;
     private UUID materialId;
     private String nowEdtName;
     private Subscription subscription;
     private AbstractFilterStrategy filterStrategy;
 
-    public NowEdtEventRule(final NowDocumentContent nowDocumentContent,
-                           final ProsecutionCase prosecutionCase,
+    public NowEdtEventRule(final NowDocumentContentV2 nowDocumentContent,
+                           final ProsecutionCaseV2 prosecutionCase,
                            final UUID materialId,
                            final String nowEdtName,
                            final Subscription subscription,
