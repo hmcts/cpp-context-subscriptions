@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-result-definitions-text-v2.json",
+  "description": "Dynamic model for result definitions text that vary per renderd result definition now type combination",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {}
+}
