@@ -1,7 +1,7 @@
 package uk.gov.moj.cpp.subscriptions.event.processor.service;
 
 import uk.gov.justice.services.common.configuration.Value;
-import uk.gov.moj.cpp.material.url.MaterialUrlGenerator;
+import uk.gov.moj.cpp.subscriptions.material.client.MaterialUrlGenerator;
 
 import java.util.UUID;
 
