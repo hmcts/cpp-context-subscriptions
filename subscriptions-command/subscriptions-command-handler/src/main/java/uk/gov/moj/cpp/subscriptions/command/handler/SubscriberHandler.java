@@ -19,7 +19,7 @@ import uk.gov.moj.cpp.subscriptions.json.schemas.handler.Unsubscribe;
 
 import java.util.stream.Stream;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @ServiceComponent(COMMAND_HANDLER)
 public class SubscriberHandler {

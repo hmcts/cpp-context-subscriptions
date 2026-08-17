@@ -4,7 +4,7 @@
     <parent>
         <groupId>uk.gov.moj.cpp.subscriptions</groupId>
         <artifactId>subscriptions-query</artifactId>
-        <version>17.104.5-SNAPSHOT</version>
+        <version>25.104.0-M1-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -17,13 +17,13 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
         </dependency>
         <dependency>
             <groupId>uk.gov.moj.cpp.common</groupId>
@@ -140,9 +140,15 @@
                 </executions>
                 <dependencies>
                     <dependency>
-                        <groupId>javax</groupId>
-                        <artifactId>javaee-api</artifactId>
+                        <groupId>jakarta.platform</groupId>
+                        <artifactId>jakarta.jakartaee-api</artifactId>
                         <version>${javaee-api.version}</version>
+                    </dependency>
+                    <dependency>
+                        <!-- raml-parser uses javax.xml.bind.* (pre-EE9 namespace); pin 2.3.2 on the generator plugin classpath -->
+                        <groupId>jakarta.xml.bind</groupId>
+                        <artifactId>jakarta.xml.bind-api</artifactId>
+                        <version>${jakarta.xml.bind-api.raml.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -151,9 +157,15 @@
                 <artifactId>rest-client-generator-plugin</artifactId>
                 <dependencies>
                     <dependency>
-                        <groupId>javax</groupId>
-                        <artifactId>javaee-api</artifactId>
+                        <groupId>jakarta.platform</groupId>
+                        <artifactId>jakarta.jakartaee-api</artifactId>
                         <version>${javaee-api.version}</version>
+                    </dependency>
+                    <dependency>
+                        <!-- raml-parser uses javax.xml.bind.* (pre-EE9 namespace); pin 2.3.2 on the generator plugin classpath -->
+                        <groupId>jakarta.xml.bind</groupId>
+                        <artifactId>jakarta.xml.bind-api</artifactId>
+                        <version>${jakarta.xml.bind-api.raml.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

@@ -13,7 +13,7 @@ import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriberDeletedViaBdf;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionSubscribed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionUnsubscribed;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @ServiceComponent(EVENT_PROCESSOR)
 public class SubscriberEventProcessor {

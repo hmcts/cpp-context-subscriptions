@@ -14,9 +14,9 @@ import uk.gov.moj.cpp.subscriptions.json.schemas.Subscribers;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
+import jakarta.inject.Inject;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
 
 public class EmailInfoSender {
 

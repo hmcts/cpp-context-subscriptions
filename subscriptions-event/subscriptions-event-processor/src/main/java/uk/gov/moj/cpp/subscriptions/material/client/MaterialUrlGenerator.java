@@ -2,7 +2,7 @@ package uk.gov.moj.cpp.subscriptions.material.client;
 
 import java.util.UUID;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * Subscriptions-owned copy of material's URL-building helper (decouples subscriptions from the
