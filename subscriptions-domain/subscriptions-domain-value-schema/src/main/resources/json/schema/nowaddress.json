@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowaddress-v2.json",
+  "description": "The address rendered in a NOW document",
+  "type": "object",
+  "properties": {
+    "line1": {
+      "type": "string"
+    },
+    "welshLine1": {
+      "type": "string"
+    },
+    "line2": {
+      "type": "string"
+    },
+    "welshLine2": {
+      "type": "string"
+    },
+    "line3": {
+      "type": "string"
+    },
+    "welshLine3": {
+      "type": "string"
+    },
+    "line4": {
+      "type": "string"
+    },
+    "welshLine4": {
+      "type": "string"
+    },
+    "line5": {
+      "type": "string"
+    },
+    "welshLine5": {
+      "type": "string"
+    },
+    "postCode": {
+      "type": "string"
+    },
+    "emailAddress1": {
+      "type": "string",
+      "format": "email"
+    },
+    "emailAddress2": {
+      "type": "string",
+      "format": "email"
+    }
+  },
+  "additionalProperties": false
+}

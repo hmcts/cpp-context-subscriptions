@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/next-hearing-court-details-v2.json",
+  "description": "The details for a next hearing in a now document",
+  "type": "object",
+  "properties": {
+    "courtName": {
+      "type": "string"
+    },
+    "welshCourtName": {
+      "type": "string"
+    },
+    "roomName": {
+      "type": "string"
+    },
+    "welshRoomName": {
+      "type": "string"
+    },
+    "hearingWeekCommencing": {
+      "type": "string"
+    },
+    "hearingDate": {
+      "type": "string"
+    },
+    "hearingTime": {
+      "type": "string"
+    },
+    "courtAddress": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowaddress-v2.json"
+    },
+    "welshCourtAddress": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowaddress-v2.json"
+    }
+  },
+  "required": [
+    "courtName",
+    "courtAddress"
+  ],
+  "additionalProperties": false
+}
