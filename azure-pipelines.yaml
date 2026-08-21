@@ -31,6 +31,7 @@ pool:
 variables:
   sonarqubeProject: "uk.gov.moj.cpp.subscriptions:subscriptions-parent"
   service_Name: 'subscriptions'
+  docker_build_image: true # build and push the subscriptions-service Docker image on team/main builds
   itTest_Folder: 'subscriptions-integration-test'
   LANG : 'en_GB.UTF-8'
   LC_ALL : 'en_GB.UTF-8'
@@ -50,3 +51,5 @@ stages:
           serviceName: ${{ variables['service_Name'] }}
           itTestFolder: ${{ variables['itTest_Folder'] }}
           aksDeployBranch: 'wildfly40'
+          dockerfilePath: docker/Dockerfile_subscriptions-service
+          repository: hmcts/subscriptions-service
