@@ -12,8 +12,8 @@ import uk.gov.justice.services.messaging.JsonEnvelope;
 import uk.gov.moj.cpp.subscriptions.query.SubscriptionsQueryView;
 import uk.gov.moj.cpp.subscriptions.query.api.service.UserAndGroupsService;
 
-import javax.inject.Inject;
-import javax.json.JsonObject;
+import jakarta.inject.Inject;
+import jakarta.json.JsonObject;
 
 @ServiceComponent(Component.QUERY_API)
 public class SubscriptionsQueryApi {

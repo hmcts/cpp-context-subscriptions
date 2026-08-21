@@ -7,7 +7,7 @@ import uk.gov.justice.services.messaging.Envelope;
 import uk.gov.justice.services.messaging.JsonEnvelope;
 import uk.gov.justice.services.messaging.Metadata;
 
-import javax.json.JsonObject;
+import jakarta.json.JsonObject;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
