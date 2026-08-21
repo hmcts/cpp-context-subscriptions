@@ -6,10 +6,10 @@ import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static uk.gov.justice.core.courts.nowdocument.DefendantCaseOffence.defendantCaseOffence;
-import static uk.gov.justice.core.courts.nowdocument.NowDocumentContent.nowDocumentContent;
-import static uk.gov.justice.core.courts.nowdocument.Nowdefendant.nowdefendant;
-import static uk.gov.justice.core.courts.nowdocument.ProsecutionCase.prosecutionCase;
+import static uk.gov.moj.cpp.subscriptions.json.schemas.DefendantCaseOffenceV2.defendantCaseOffenceV2;
+import static uk.gov.moj.cpp.subscriptions.json.schemas.NowDocumentContentV2.nowDocumentContentV2;
+import static uk.gov.moj.cpp.subscriptions.json.schemas.NowdefendantV2.nowdefendantV2;
+import static uk.gov.moj.cpp.subscriptions.json.schemas.ProsecutionCaseV2.prosecutionCaseV2;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.Filter.filter;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.FilterType.AGE;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.FilterType.CASE_REFERENCE;
@@ -18,9 +18,9 @@ import static uk.gov.moj.cpp.subscriptions.json.schemas.FilterType.GENDER;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.FilterType.OFFENCE;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.Gender.MALE;
 
-import uk.gov.justice.core.courts.nowdocument.NowDocumentContent;
-import uk.gov.justice.core.courts.nowdocument.Nowdefendant;
-import uk.gov.justice.core.courts.nowdocument.ProsecutionCase;
+import uk.gov.moj.cpp.subscriptions.json.schemas.NowDocumentContentV2;
+import uk.gov.moj.cpp.subscriptions.json.schemas.NowdefendantV2;
+import uk.gov.moj.cpp.subscriptions.json.schemas.ProsecutionCaseV2;
 import uk.gov.moj.cpp.subscriptions.event.processor.filterprocessing.events.NowEdtEventRule;
 import uk.gov.moj.cpp.subscriptions.event.processor.service.ApplicationParameters;
 import uk.gov.moj.cpp.subscriptions.json.schemas.Defendant;
@@ -44,11 +44,11 @@ public class NowEdtEventRuleTest {
     @Test
     public void shouldNotExecuteWhenDefendantsNotPresentInPublicEvent() {
         final Subscription subscription = createCommonSubscription();
-        final ProsecutionCase prosecutionCase = createProsecutionCase();
+        final ProsecutionCaseV2 prosecutionCase = createProsecutionCase();
 
         final String nowEdtName = "Admission to hospital on committal to Crown Court";
 
-        final NowDocumentContent nowDocumentContent = nowDocumentContent()
+        final NowDocumentContentV2 nowDocumentContent = nowDocumentContentV2()
                 .withOrderName(nowEdtName)
                 .withCases(asList(prosecutionCase))
                 .build();
@@ -69,11 +69,11 @@ public class NowEdtEventRuleTest {
     public void shouldNotExecuteWhenCasesNotPresentInPublicEvent() {
         final Subscription subscription = createCommonSubscription();
 
-        final ProsecutionCase prosecutionCase = createProsecutionCase();
+        final ProsecutionCaseV2 prosecutionCase = createProsecutionCase();
 
         final String nowEdtName = "Admission to hospital on committal to Crown Court";
 
-        final NowDocumentContent nowDocumentContent = nowDocumentContent()
+        final NowDocumentContentV2 nowDocumentContent = nowDocumentContentV2()
                 .withOrderName(nowEdtName)
                 .withCases(null)
                 .build();
@@ -189,10 +189,10 @@ public class NowEdtEventRuleTest {
                         .build()).build();
     }
 
-    private ProsecutionCase createProsecutionCase() {
-        return prosecutionCase()
+    private ProsecutionCaseV2 createProsecutionCase() {
+        return prosecutionCaseV2()
                 .withReference("URN123")
-                .withDefendantCaseOffences(asList(defendantCaseOffence()
+                .withDefendantCaseOffences(asList(defendantCaseOffenceV2()
                         .withCode("OffenceCode1")
                         .withTitle("Offence Title")
                         .build()))
@@ -200,7 +200,7 @@ public class NowEdtEventRuleTest {
     }
 
     private void executeWithSubscription(final Subscription subscription) {
-        final Nowdefendant nowdefendant = nowdefendant()
+        final NowdefendantV2 nowdefendant = nowdefendantV2()
                 .withFirstName("John")
                 .withLastName("Smith")
                 .withDateOfBirth("1972-07-01")
@@ -208,11 +208,11 @@ public class NowEdtEventRuleTest {
                 .withIsYouth("y")
                 .build();
 
-        final ProsecutionCase prosecutionCase = createProsecutionCase();
+        final ProsecutionCaseV2 prosecutionCase = createProsecutionCase();
 
         final String nowEdtName = "Admission to hospital on committal to Crown Court";
 
-        final NowDocumentContent nowDocumentContent = nowDocumentContent()
+        final NowDocumentContentV2 nowDocumentContent = nowDocumentContentV2()
                 .withDefendant(nowdefendant)
                 .withOrderName(nowEdtName)
                 .withCases(asList(prosecutionCase))
@@ -236,15 +236,15 @@ public class NowEdtEventRuleTest {
     }
 
     private void executeWithSubscriptionForLegalEntityDefendant(final Subscription subscription) {
-        final Nowdefendant nowdefendant = nowdefendant()
+        final NowdefendantV2 nowdefendant = nowdefendantV2()
                 .withName("ABC Corporation")
                 .build();
 
-        final ProsecutionCase prosecutionCase = createProsecutionCase();
+        final ProsecutionCaseV2 prosecutionCase = createProsecutionCase();
 
         final String nowEdtName = "Admission to hospital on committal to Crown Court";
 
-        final NowDocumentContent nowDocumentContent = nowDocumentContent()
+        final NowDocumentContentV2 nowDocumentContent = nowDocumentContentV2()
                 .withDefendant(nowdefendant)
                 .withOrderName(nowEdtName)
                 .withCases(asList(prosecutionCase))
@@ -269,15 +269,15 @@ public class NowEdtEventRuleTest {
 
 
     private void shouldNotexecuteWithSubscriptionForLegalEntityDefendant(final Subscription subscription) {
-        final Nowdefendant nowdefendant = nowdefendant()
+        final NowdefendantV2 nowdefendant = nowdefendantV2()
                 .withName("ABC Corporation")
                 .build();
 
-        final ProsecutionCase prosecutionCase = createProsecutionCase();
+        final ProsecutionCaseV2 prosecutionCase = createProsecutionCase();
 
         final String nowEdtName = "Admission to hospital on committal to Crown Court";
 
-        final NowDocumentContent nowDocumentContent = nowDocumentContent()
+        final NowDocumentContentV2 nowDocumentContent = nowDocumentContentV2()
                 .withDefendant(nowdefendant)
                 .withOrderName(nowEdtName)
                 .withCases(asList(prosecutionCase))
