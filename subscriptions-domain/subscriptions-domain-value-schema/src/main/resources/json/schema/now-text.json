@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-text-v2.json",
+  "description": "The details of variable text for a given now or now requirement",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    },
+    "welshValue": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "label",
+    "value"
+  ],
+  "additionalProperties": false
+}
