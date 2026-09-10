@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-document-content-v2.json",
+  "description": "The contents of a now document",
+  "type": "object",
+  "properties": {
+    "orderName": {
+      "type": "string"
+    },
+    "welshOrderName": {
+      "type": "string"
+    },
+    "courtClerkName": {
+      "type": "string"
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "amendmentDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "orderingCourt": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/order-court-v2.json"
+    },
+    "orderAddressee": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/order-addressee-v2.json"
+    },
+    "defendant": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/nowdefendant-v2.json"
+    },
+    "applicants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-party-v2.json"
+      }
+    },
+    "respondents": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-party-v2.json"
+      }
+    },
+    "thirdParties": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-party-v2.json"
+      }
+    },
+    "parentGuardian": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-party-parent-guardian-v2.json"
+    },
+    "financialOrderDetails": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/financial-order-details-v2.json"
+    },
+    "nextHearingCourtDetails": {
+      "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/next-hearing-court-details-v2.json"
+    },
+    "civilNow": {
+      "description": "Indicates that the now refers to offences that are civil rather than criminal",
+      "type": "boolean"
+    },
+    "cases": {
+      "title": "cases",
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/prosecution-case-v2.json"
+      }
+    },
+    "distinctResults": {
+      "description": "Only provided when there are distinct result requirement settings for a given now.  Provides a distinct collection of results and their prompts across defendants, offences and prosecution cases",
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/result-v2.json"
+      }
+    },
+    "distinctPrompts": {
+      "description": "Only provided when there are distinct result requirement settings for a given now.  Provides a distinct collection of prompts across defendants, offences and prosecution cases",
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/prompt-v2.json"
+      }
+    },
+    "caseApplicationReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "nowText": {
+      "title": "nowTextItems",
+      "description": "A collection of all the now text items for the given now",
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-text-v2.json"
+      }
+    },
+    "nowRequirementText": {
+      "title": "nowRequirementTextItems",
+      "description": "A collection of all the now requirement text items for now requirements associated to the given now",
+      "type": "array",
+      "items": {
+        "$ref": "http://cpp.moj.gov.uk/subscriptions/json/schemas/now-text-v2.json"
+      }
+    }
+  },
+  "required": [
+    "orderName",
+    "courtClerkName",
+    "orderDate"
+  ],
+  "additionalProperties": false
+}
