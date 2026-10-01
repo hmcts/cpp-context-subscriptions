@@ -105,17 +105,6 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>uk.gov.moj.cpp.material</groupId>
-            <artifactId>material-client</artifactId>
-            <version>${material.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>uk.gov.justice.services</groupId>
-                    <artifactId>test-utils-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>uk.gov.moj.cpp.hearing</groupId>
             <artifactId>hearing-query-api</artifactId>
             <version>${hearing.version}</version>
