@@ -9,7 +9,7 @@
 
     <groupId>uk.gov.moj.cpp.subscriptions</groupId>
     <artifactId>subscriptions-parent</artifactId>
-    <version>17.104.7-SNAPSHOT</version>
+    <version>17.104.0-CIVIL-T3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Subscription Microservice - Parent</name>
     <description>Subscription Microservice - Subscription Context</description>
@@ -21,7 +21,7 @@
         <sonar.scm.provider>git</sonar.scm.provider>
         <mvn.site.url>file://${project.build.directory}/site</mvn.site.url>
         <cpp.framework.action.mapping.enabled>true</cpp.framework.action.mapping.enabled>
-        <coredomain.version>17.104.4</coredomain.version>
+        <coredomain.version>17.104.5-CIVIL-T3-SNAPSHOT</coredomain.version>
         <notification.notify.version>17.104.46</notification.notify.version>
         <material.version>17.0.80</material.version>
         <hearing.version>17.104.161</hearing.version>
