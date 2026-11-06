@@ -5,6 +5,7 @@ import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static uk.gov.moj.cpp.subscriptions.persistence.constants.EventType.CHANGE_OF_PLEA;
 import static uk.gov.moj.cpp.subscriptions.persistence.constants.FilterType.DEFENDANT;
 import static uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription.builder;
@@ -18,6 +19,12 @@ import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.NonUniqueResultException;
+import jakarta.persistence.PersistenceException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -134,6 +141,60 @@ public class SubscriberRepositoryTest {
         assertThat(persistedSubscriber.getId(), is(subscriber.getId()));
         assertThat(persistedSubscriber.getEmailAddress(), is("findme@test.com"));
         assertThat(persistedSubscriber.isActive(), is(true));
+    }
+
+    @Test
+    public void chd01_loadingASubscriberWithANullActiveColumnThrows() {
+        final UUID subscriberId = randomUUID();
+        insertSubscriberWithNullActive(subscriberId);
+
+        assertThrows(PersistenceException.class, () -> subscribersRepository.findBy(subscriberId));
+    }
+
+    @Test
+    public void chd06_findSubscriberByEmailAddressForSubscriptionThrowsNoResultExceptionWhenNothingMatches() {
+        final Subscription subscription = subscriptionWithSubscribers("someone@test.com");
+        subscriptionsRepository.saveAndFlush(subscription);
+
+        assertThrows(NoResultException.class,
+                () -> subscribersRepository.findSubscriberByEmailAddressForSubscription("nobody@test.com", subscription.getId()));
+    }
+
+    @Test
+    public void chd06_findSubscriberByEmailAddressForSubscriptionThrowsNonUniqueResultExceptionWhenSeveralMatch() {
+        final Subscription subscription = subscriptionWithSubscribers("twice@test.com", "twice@test.com");
+        subscriptionsRepository.saveAndFlush(subscription);
+
+        assertThrows(NonUniqueResultException.class,
+                () -> subscribersRepository.findSubscriberByEmailAddressForSubscription("twice@test.com", subscription.getId()));
+    }
+
+    private Subscription subscriptionWithSubscribers(final String... emailAddresses) {
+        final Subscription subscription = builder()
+                .withId(randomUUID())
+                .withName("Subscription Name")
+                .withActive(true)
+                .build();
+        final Set<Subscriber> subscribers = new HashSet<>();
+        for (final String emailAddress : emailAddresses) {
+            subscribers.add(Subscriber.builder().withId(randomUUID()).withEmailAddress(emailAddress).withActive(true).withSubscription(subscription).build());
+        }
+        subscription.setSubscribers(subscribers);
+        return subscription;
+    }
+
+    private void insertSubscriberWithNullActive(final UUID subscriberId) {
+        final Subscription subscription = subscriptionWithSubscribers();
+        subscriptionsRepository.saveAndFlush(subscription);
+
+        final EntityManager entityManager = hibernateTestEntityManagerProvider.getEntityManager();
+        entityManager.createNativeQuery("ALTER TABLE subscriber ALTER COLUMN active SET NULL").executeUpdate();
+        entityManager.createNativeQuery("INSERT INTO subscriber (id, email_address, subscription_id, active) VALUES (?1, 'legacy@test.com', ?2, NULL)")
+                .setParameter(1, subscriberId)
+                .setParameter(2, subscription.getId())
+                .executeUpdate();
+        entityManager.flush();
+        entityManager.clear();
     }
 
 }

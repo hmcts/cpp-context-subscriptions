@@ -1,5 +1,7 @@
 package uk.gov.moj.cpp.subscriptions.query.api.rules;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -7,6 +9,7 @@ import static uk.gov.moj.cpp.subscriptions.query.api.accesscontrol.PermissionCon
 import static uk.gov.moj.cpp.subscriptions.query.api.accesscontrol.PermissionConstants.getSubscriptionsPermission;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,6 +21,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.kie.api.KieServices;
 import org.kie.api.runtime.ExecutionResults;
 import org.mockito.Mock;
 
@@ -65,6 +69,17 @@ public class SubscriptionsQueryRuleExecutorTest extends BaseDroolsAccessControlT
         assertFailureOutcome(executionResults);
         verify(userAndGroupProvider).hasPermission(action, actions.getAccess());
         verifyNoMoreInteractions(userAndGroupProvider);
+    }
+
+    @Test
+    public void chd02_queryApiKieBaseLoadsEveryRuleInTheDrl() {
+        assertThat(ruleCountInKieBase("QUERY_API"), is(3));
+    }
+
+    private int ruleCountInKieBase(final String kieBaseName) {
+        return KieServices.get().getKieClasspathContainer().getKieBase(kieBaseName).getKiePackages().stream()
+                .mapToInt(kiePackage -> kiePackage.getRules().size())
+                .sum();
     }
 
 
