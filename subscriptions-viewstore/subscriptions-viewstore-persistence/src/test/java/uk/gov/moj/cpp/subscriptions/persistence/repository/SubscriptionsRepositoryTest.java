@@ -3,6 +3,7 @@ package uk.gov.moj.cpp.subscriptions.persistence.repository;
 import static java.time.LocalDate.parse;
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.toList;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -300,8 +301,10 @@ public class SubscriptionsRepositoryTest {
     }
 
     @Test
-    public void chd05_removeOfANullSubscriptionThrowsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> subscriptionsRepository.remove(null));
+    public void chd05_removeOfANullSubscriptionThrowsWithIllegalArgumentExceptionAsTheRootCause() {
+        final RuntimeException thrown = assertThrows(RuntimeException.class, () -> subscriptionsRepository.remove(null));
+
+        assertThat(rootCauseOf(thrown), instanceOf(IllegalArgumentException.class));
     }
 
     @Test
@@ -352,6 +355,14 @@ public class SubscriptionsRepositoryTest {
                 .setParameter(1, subscriptionId)
                 .executeUpdate();
         flushAndClear();
+    }
+
+    private Throwable rootCauseOf(final Throwable throwable) {
+        Throwable rootCause = throwable;
+        while (rootCause.getCause() != null) {
+            rootCause = rootCause.getCause();
+        }
+        return rootCause;
     }
 
     private void flushAndClear() {
