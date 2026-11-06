@@ -8,7 +8,7 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static uk.gov.moj.cpp.subscriptions.persistence.constants.FilterType.DEFENDANT;
 import static uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription.builder;
 
-import uk.gov.justice.services.test.utils.persistence.BaseTransactionalJunit4Test;
+import uk.gov.justice.services.test.utils.persistence.HibernateTestEntityManagerProvider;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Court;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Filter;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.NowsEdt;
@@ -20,18 +20,32 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.inject.Inject;
-
 import com.google.common.collect.Sets;
-import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
-@RunWith(CdiTestRunner.class)
-public class SubscriptionsRepositoryTest extends BaseTransactionalJunit4Test {
+/**
+ * Real-JPA test for {@link SubscriptionsRepository} (post DeltaSpike Data → plain JPA migration). Runs at
+ * build time (Surefire) against an in-memory H2 via {@link HibernateTestEntityManagerProvider} — the JPQL and
+ * native queries are exercised against a real database (schema generated from the entities), each test rolled
+ * back. No docker required, so it stays a {@code …Test}.
+ */
+public class SubscriptionsRepositoryTest {
 
-    @Inject
+    private static final String PERSISTENCE_UNIT = "subscriptions-test-persistence-unit";
+
+    @RegisterExtension
+    static HibernateTestEntityManagerProvider hibernateTestEntityManagerProvider =
+            new HibernateTestEntityManagerProvider(PERSISTENCE_UNIT);
+
     private SubscriptionsRepository subscriptionsRepository;
+
+    @BeforeEach
+    void createRepositoryWithInjectedEntityManager() {
+        subscriptionsRepository = new SubscriptionsRepository();
+        hibernateTestEntityManagerProvider.injectEntityManagerInto(subscriptionsRepository);
+    }
 
     @Test
     public void shouldSaveTheGivenSubscriptionAndGetById() {
@@ -49,8 +63,8 @@ public class SubscriptionsRepositoryTest extends BaseTransactionalJunit4Test {
 
         subscription.setCourts(courts);
         final Set<NowsEdt> nowsEdts = new HashSet<>();
-        final NowsEdt custodialDocument = NowsEdt.builder().withId(randomUUID()).withName("Custodial Document").build();
-        final NowsEdt custodialRemanDocument = NowsEdt.builder().withId(randomUUID()).withName("Custodial Remand Document").build();
+        final NowsEdt custodialDocument = NowsEdt.builder().withId(randomUUID()).withName("Custodial Document").withSubscription(subscription).build();
+        final NowsEdt custodialRemanDocument = NowsEdt.builder().withId(randomUUID()).withName("Custodial Remand Document").withSubscription(subscription).build();
 
         nowsEdts.add(custodialDocument);
         nowsEdts.add(custodialRemanDocument);
@@ -233,6 +247,24 @@ public class SubscriptionsRepositoryTest extends BaseTransactionalJunit4Test {
         assertThat(persistedSubscriptions.get(0).getId(), is(subscription.getId()));
         assertThat(persistedSubscriptions.get(0).getName(), is(subscription.getName()));
         assertThat(persistedSubscriptions.get(0).getNowsEdts(), hasSize(2));
+    }
+
+    @Test
+    public void shouldRemoveTheGivenSubscription() {
+
+        final Subscription subscription = builder()
+                .withId(randomUUID())
+                .withName("Subscription Name")
+                .withOrganisationId(randomUUID())
+                .withActive(true)
+                .build();
+
+        subscriptionsRepository.saveAndFlush(subscription);
+        assertThat(subscriptionsRepository.findBy(subscription.getId()).getId(), is(subscription.getId()));
+
+        subscriptionsRepository.remove(subscription);
+
+        assertThat(subscriptionsRepository.findByOrganisationId(subscription.getOrganisationId()), hasSize(0));
     }
 
 }
