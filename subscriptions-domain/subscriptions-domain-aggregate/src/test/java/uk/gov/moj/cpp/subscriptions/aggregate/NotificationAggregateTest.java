@@ -7,6 +7,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 
+import uk.gov.justice.services.common.converter.jackson.ObjectMapperProducer;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SendEmailRequestFailed;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SendEmailRequestSucceeded;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SendEmailRequested;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,6 +26,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class NotificationAggregateTest {
+
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapperProducer().objectMapper();
 
     @InjectMocks
     private NotificationAggregate notificationAggregate;
@@ -119,5 +124,20 @@ public class NotificationAggregateTest {
                 500);
         final List<?> eventList = eventStream.collect(toList());
         assertThat(eventList, empty());
+    }
+
+    @Test
+    public void chd03_utcSentTimeFromTheCommandIsWrittenToTheStoredEventUnchanged() throws Exception {
+        final ZonedDateTime sentTimeFromCommand = OBJECT_MAPPER.readValue("\"2026-07-04T05:06:07.890Z\"", ZonedDateTime.class);
+
+        final JsonNode storedEvent = OBJECT_MAPPER.valueToTree(sendEmailRequestSucceededWithSentTime(sentTimeFromCommand));
+
+        assertThat(storedEvent.get("sentTime").asText(), is("2026-07-04T05:06:07.890Z"));
+    }
+
+    private SendEmailRequestSucceeded sendEmailRequestSucceededWithSentTime(final ZonedDateTime sentTime) {
+        final UUID notificationId = randomUUID();
+        notificationAggregate.sendEmail(notificationId, "abc@xyz.com", "subject", "body", randomUUID(), "subscription name", null, null, null, null);
+        return (SendEmailRequestSucceeded) notificationAggregate.handleSendEmailSucceeded(notificationId, sentTime).collect(toList()).get(0);
     }
 }

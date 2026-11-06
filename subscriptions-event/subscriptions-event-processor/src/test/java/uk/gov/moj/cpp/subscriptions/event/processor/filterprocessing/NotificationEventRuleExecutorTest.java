@@ -1,5 +1,6 @@
 package uk.gov.moj.cpp.subscriptions.event.processor.filterprocessing;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.text.MessageFormat.format;
 import static java.util.Collections.singletonList;
 import static java.util.UUID.randomUUID;
@@ -12,6 +13,7 @@ import static uk.gov.justice.hearing.courts.HearingResulted.hearingResulted;
 import static uk.gov.moj.cpp.subscriptions.json.schemas.Subscription.subscription;
 
 import uk.gov.justice.hearing.courts.HearingResulted;
+import uk.gov.justice.services.common.converter.jackson.ObjectMapperProducer;
 import uk.gov.moj.cpp.subscriptions.event.processor.helper.FileResourceObjectMapper;
 import uk.gov.moj.cpp.subscriptions.event.processor.service.ApplicationParameters;
 import uk.gov.moj.cpp.subscriptions.event.processor.service.HearingService;
@@ -22,11 +24,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 @ExtendWith(MockitoExtension.class)
 public class NotificationEventRuleExecutorTest {
@@ -40,6 +45,8 @@ public class NotificationEventRuleExecutorTest {
 
     @InjectMocks
     private NotificationEventRuleExecutor notificationEventRuleExecutor;
+
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapperProducer().objectMapper();
 
     private FileResourceObjectMapper fileResourceObjectMapper = new FileResourceObjectMapper();
 
@@ -81,5 +88,22 @@ public class NotificationEventRuleExecutorTest {
         List<EmailInfo> emailInfos = notificationEventRuleExecutor.execute(hearingResulted.getHearing(), subscriptions);
 
         assertThat(emailInfos.size(), is(0));
+    }
+
+    @Test
+    public void chd08_hearingResultedPayloadKeepsEveryFieldThroughTheCoreDomainModels() throws Exception {
+        assertPayloadSurvivesHearingResultedRoundTrip("stub/NotificationEventRuleExecuterHearingResulted.json");
+    }
+
+    @Test
+    public void chd08_hearingResultedWithDefendantInitiationCodeKeepsEveryFieldThroughTheCoreDomainModels() throws Exception {
+        assertPayloadSurvivesHearingResultedRoundTrip("stub/NotificationEventHearingResultedWithDefendantInitiationCode.json");
+    }
+
+    private void assertPayloadSurvivesHearingResultedRoundTrip(final String stubPath) throws Exception {
+        final String payload = new String(getClass().getClassLoader().getResourceAsStream(stubPath).readAllBytes(), UTF_8);
+        final HearingResulted hearingResulted = OBJECT_MAPPER.readValue(payload, HearingResulted.class);
+
+        JSONAssert.assertEquals(payload, OBJECT_MAPPER.writeValueAsString(hearingResulted), JSONCompareMode.LENIENT);
     }
 }
