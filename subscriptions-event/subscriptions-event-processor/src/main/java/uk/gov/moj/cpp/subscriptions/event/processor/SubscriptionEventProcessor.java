@@ -13,7 +13,7 @@ import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionCreatedByUser;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionDeactivated;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SubscriptionDeleted;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @ServiceComponent(EVENT_PROCESSOR)
 public class SubscriptionEventProcessor {
