@@ -3,6 +3,7 @@ package uk.gov.moj.cpp.subscriptions.persistence.repository;
 import static java.time.LocalDate.parse;
 import static java.util.UUID.randomUUID;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,7 +18,6 @@ import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscriber;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -109,9 +109,9 @@ public class SubscriberRepositoryTest {
         assertThat(persistedSubscription1.getSubscribers().stream().anyMatch(c -> c.getEmailAddress().equals(subscriber2.getEmailAddress())), is(true));
         assertThat(persistedSubscription1.getSubscribers().stream().filter(s -> s.getId().equals(subscriber2.getId())).filter(s -> s.isActive()).findFirst().isPresent(), is(true));
 
-        final Optional<Subscriber> subscriberByEmailAddressForSubscription = subscribersRepository.findSubscriberByEmailAddressForSubscription("test1@test.com", persistedSubscription.getId());
-        assertThat(subscriberByEmailAddressForSubscription.isPresent(), is(true));
-        assertThat(subscriberByEmailAddressForSubscription.get().isActive(), is(true));
+        final Subscriber subscriberByEmailAddressForSubscription = subscribersRepository.findSubscriberByEmailAddressForSubscription("test1@test.com", persistedSubscription.getId());
+        assertThat(subscriberByEmailAddressForSubscription, notNullValue());
+        assertThat(subscriberByEmailAddressForSubscription.isActive(), is(true));
 
     }
 

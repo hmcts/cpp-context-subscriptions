@@ -9,7 +9,8 @@ Risks come from the Stage 2 review (CHD-01..CHD-14) and the BC catalogue on
 [Parity Testing Java17 → Java25](https://hmcts.atlassian.net/wiki/spaces/CTP/pages/279752455).
 
 Every parity test asserts the **Java 17 behaviour**, so a Java 25 failure is a behaviour change to triage in Stage 5.
-No production code was changed. One expectation (CHD-05) was corrected in both copies after the Java 17 run; see "Java 17 results".
+One expectation (CHD-05) was corrected in both copies after the Java 17 run; see "Java 17 results". The only
+production change is the Stage 5 fix for CHD-06; see "Stage 5 decisions".
 
 **The JVM default zone is UTC, so other zones aren't a scenario.** The framework's `EntityManagerProducer.create()`
 calls `TimeZone.setDefault(UTC)` (persistence-deltaspike 17.x and persistence-jpa 25.104.x), and the containers run in
@@ -25,8 +26,8 @@ tests here therefore use UTC input only. See "Removed parity tests".
 | CHD-03 (BC-08) | Low | A UTC `sentTime` from the command must reach the stored event unchanged | `NotificationAggregateTest.chd03_utcSentTimeFromTheCommandIsWrittenToTheStoredEventUnchanged` | ✅ Pass | ✅ Pass (`2026-07-04T05:06:07.890Z` in, same string out) | None. The in-memory zone (`Z` vs `Z[UTC]`) is only visible through `toString()`/`equals()`, and nothing reads `sentTime` back from the event |
 | CHD-04 | Low | `save()` always `merge()`s: create, update and redelivery of the same id | `SubscriptionsRepositoryTest.chd04_saveWithAnExistingIdUpdatesTheRowAndRepeatingTheSaveIsIdempotent` | ✅ Pass | ✅ Pass | None |
 | CHD-05 | Low | `remove(null)` for an unknown subscription id | `SubscriptionsRepositoryTest.chd05_removeOfANullSubscriptionThrowsWithIllegalArgumentExceptionAsTheRootCause` | ✅ Pass (`QueryInvocationException` wrapping `IllegalArgumentException`) | ✅ Pass (`IllegalArgumentException` directly) | None |
-| CHD-06 (BC-01/02) | Low | `findSubscriberByEmailAddressForSubscription` no-match / multi-match | `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNoResultExceptionWhenNothingMatches` | ✅ Pass | ❌ **Fail**: nothing thrown (returns `Optional.empty()`) | No production caller, so **accept** and document; or restore `Subscriber` + `getSingleResult()` if the team wants strict parity |
-|  |  |  | `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNonUniqueResultExceptionWhenSeveralMatch` | ✅ Pass | ❌ **Fail**: nothing thrown (`findFirst()` picks one) | Same as above |
+| CHD-06 (BC-01/02) | Low | `findSubscriberByEmailAddressForSubscription` no-match / multi-match | `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNoResultExceptionWhenNothingMatches` | ✅ Pass | ✅ Pass after the Stage 5 fix (was ❌: nothing thrown, returned `Optional.empty()`) | **Fixed**: restored `main`'s `Subscriber` return type and `getSingleResult()` |
+|  |  |  | `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNonUniqueResultExceptionWhenSeveralMatch` | ✅ Pass | ✅ Pass after the Stage 5 fix (was ❌: nothing thrown, `findFirst()` picked one) | **Fixed**, as above |
 | CHD-07 (BC-24) | Low | Rewritten finders: empty result and court filtering | `SubscriptionsRepositoryTest.chd07_findersReturnAnEmptyListWhenNothingMatches`, `SubscriptionsRepositoryTest.chd07_findByCourtIdReturnsOnlyTheSubscriptionsForThatCourt` | ✅ Pass | ✅ Pass | None. pgjdbc UUID binding is only covered by the ITs (H2 here) |
 | CHD-08 (BC-15) | Medium | core-domain 25.104.6 models dropping fields from a real `hearing.resulted` payload | `NotificationEventRuleExecutorTest.chd08_hearingResultedPayloadKeepsEveryFieldThroughTheCoreDomainModels`, `NotificationEventRuleExecutorTest.chd08_hearingResultedWithDefendantInitiationCodeKeepsEveryFieldThroughTheCoreDomainModels` | ✅ Pass | ✅ Pass (no field lost, LENIENT compare) | None |
 | CHD-09 (BC-13) | Low–Medium | everit date-time strictness on inbound `notification-sent.sentTime` | `NotificationEventProcessorTest.chd09_*` (3 accept: no fraction, millis, micros; 2 reject: no zone, date only) | ✅ Pass | ✅ Pass (all 5) | None |
@@ -36,19 +37,29 @@ tests here therefore use UTC input only. See "Removed parity tests".
 | CHD-13 (BC-06) | Low | Lazy back-references loaded outside a transaction | Not tested (the query view only reads EAGER collections) | — | — | None |
 | CHD-14 (BC-12/16/17/21) | Low | Framework tier | Not unit-testable here; command/query REST covered by the 35 ITs (green) | — | — | Check on live run |
 
-## Failing tests (to triage in Stage 5)
+## Stage 5 decisions
 
-1. `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNoResultExceptionWhenNothingMatches`
-2. `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNonUniqueResultExceptionWhenSeveralMatch`
+| ID | Failing tests (before) | Root cause in the upgrade diff | Decision | Why |
+|---|---|---|---|---|
+| CHD-06 (BC-01/02) | `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNoResultExceptionWhenNothingMatches`, `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNonUniqueResultExceptionWhenSeveralMatch` | The DeltaSpike `@Query` method returning `Subscriber` (single-result mode, `getSingleResult()`) was rewritten as `Optional<Subscriber>` with `getResultStream().findFirst()`. No match became `Optional.empty()` instead of `NoResultException`, and several matches silently returned one row instead of `NonUniqueResultException` | **Fixed** | Restores `main`'s signature and semantics with a one-method change. Same approach Narayan asked for in the cpp-context-results PR #228 review (CHD-01 there: restore `main`'s signatures instead of `Optional`). The method has no production callers, so no other code changes |
+
+Fix (production): `SubscribersRepository.findSubscriberByEmailAddressForSubscription` returns `Subscriber` via
+`query.getSingleResult()`; the unused `java.util.Optional` import is removed. Test: the existing
+`shouldAddSubscribersToTheSubscription` assertions go back to `main`'s form (`notNullValue()` and `isActive()` on the
+`Subscriber`). Verified on JDK 25: the persistence module went from 21/23 to 23/23, with only the two CHD-06 tests
+changing from red to green.
+
+No test was accepted, so no owner sign-off is needed. Every parity test is green on Java 25.
 
 ## Java 25 unit totals (JDK 25.0.5, `mvn clean install`)
 
 | | Run | Failures | Errors | Skipped |
 |---|---|---|---|---|
 | Before parity tests | 208 | 0 | 0 | 0 |
-| With parity tests | 226 | 2 | 0 | 0 |
+| With parity tests (Stage 3) | 226 | 2 | 0 | 0 |
+| After Stage 5 fix | 226 | 0 | 0 | 0 |
 
-18 parity tests: 16 pass, 2 fail.
+18 parity tests: all pass after Stage 5 (16 passed before the CHD-06 fix).
 
 ## Removed parity tests
 
@@ -63,8 +74,12 @@ Removed because they relied on a zone other than UTC, which doesn't happen at ru
 ### Persistence tests on both Hibernate versions
 
 `subscriptions-viewstore-persistence` (23 tests) gives identical results on Hibernate 6.6.1.Final (BOM default) and
-7.3.2.Final (WildFly 40 runtime, via a temporary `dependencyManagement` override, not committed): 21 pass, and the
-same two CHD-06 tests fail.
+7.3.2.Final (WildFly 40 runtime, via a temporary `dependencyManagement` override, not committed):
+
+| Run | Hibernate 6.6.1 | Hibernate 7.3.2 |
+|---|---|---|
+| Stage 3 | 21 pass, the two CHD-06 tests fail | 21 pass, the two CHD-06 tests fail |
+| After the CHD-05 rewording and the Stage 5 CHD-06 fix | 23 pass | 23 pass |
 
 The 7.3.2 run also needed the six entity classes listed in the test `persistence.xml`, because Hibernate 7 doesn't
 find entities through `<jar-file>`. That was part of the temporary override and isn't kept: the build runs on 6.6.1,
@@ -105,6 +120,4 @@ Expectation corrected:
   `IllegalArgumentException` is thrown directly. Both stacks throw, so the `subscription-deleted` listener fails for an
   unknown id either way, and nothing catches either type. The test in both copies now asserts a `RuntimeException`
   whose root cause is `IllegalArgumentException`, renamed
-  `chd05_removeOfANullSubscriptionThrowsWithIllegalArgumentExceptionAsTheRootCause`. It passes on both JDKs. The
-  persistence module was re-run on JDK 25 (Hibernate 6.6.1) after the change; the 7.3.2 comparison above was run
-  before it.
+  `chd05_removeOfANullSubscriptionThrowsWithIllegalArgumentExceptionAsTheRootCause`. It passes on both JDKs.
