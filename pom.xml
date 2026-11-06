@@ -23,7 +23,6 @@
         <cpp.framework.action.mapping.enabled>true</cpp.framework.action.mapping.enabled>
         <coredomain.version>25.104.6</coredomain.version>
         <notification.notify.version>17.104.46</notification.notify.version>
-        <material.version>17.0.80</material.version>
         <hearing.version>17.104.200</hearing.version>
         <jgitflow.maven.developBranchName>main</jgitflow.maven.developBranchName>
     </properties>
@@ -45,11 +44,6 @@
                     <archiveClasses>true</archiveClasses>
                     <attachClasses>true</attachClasses>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.11.0.3922</version>
             </plugin>
         </plugins>
     </build>
