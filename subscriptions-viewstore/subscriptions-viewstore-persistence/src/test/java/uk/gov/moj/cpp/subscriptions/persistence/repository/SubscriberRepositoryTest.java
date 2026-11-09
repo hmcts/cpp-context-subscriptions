@@ -19,12 +19,9 @@ import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.NonUniqueResultException;
-import jakarta.persistence.PersistenceException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -144,14 +141,6 @@ public class SubscriberRepositoryTest {
     }
 
     @Test
-    public void chd01_loadingASubscriberWithANullActiveColumnThrows() {
-        final UUID subscriberId = randomUUID();
-        insertSubscriberWithNullActive(subscriberId);
-
-        assertThrows(PersistenceException.class, () -> subscribersRepository.findBy(subscriberId));
-    }
-
-    @Test
     public void chd06_findSubscriberByEmailAddressForSubscriptionThrowsNoResultExceptionWhenNothingMatches() {
         final Subscription subscription = subscriptionWithSubscribers("someone@test.com");
         subscriptionsRepository.saveAndFlush(subscription);
@@ -181,20 +170,6 @@ public class SubscriberRepositoryTest {
         }
         subscription.setSubscribers(subscribers);
         return subscription;
-    }
-
-    private void insertSubscriberWithNullActive(final UUID subscriberId) {
-        final Subscription subscription = subscriptionWithSubscribers();
-        subscriptionsRepository.saveAndFlush(subscription);
-
-        final EntityManager entityManager = hibernateTestEntityManagerProvider.getEntityManager();
-        entityManager.createNativeQuery("ALTER TABLE subscriber ALTER COLUMN active SET NULL").executeUpdate();
-        entityManager.createNativeQuery("INSERT INTO subscriber (id, email_address, subscription_id, active) VALUES (?1, 'legacy@test.com', ?2, NULL)")
-                .setParameter(1, subscriberId)
-                .setParameter(2, subscription.getId())
-                .executeUpdate();
-        entityManager.flush();
-        entityManager.clear();
     }
 
 }

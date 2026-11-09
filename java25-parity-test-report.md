@@ -26,6 +26,9 @@ tests here therefore use UTC input only. See "Removed parity tests".
 | Persistence module on Hibernate 7.3.2 | n/a (Hibernate 5.4.24) | 23 of 23 pass |
 | Integration tests, `./runIntegrationTests.sh` | 35 run, 0 failures | 35 run, 0 failures |
 
+The runs above include the two CHD-01 tests, which were later removed from the branch (see "Removed parity tests").
+The branch now has 16 parity tests; the persistence module runs 21 of 21 on JDK 25 / Hibernate 6.6.1.
+
 One behaviour change was found (CHD-06) and fixed. Two differences that callers can't observe were found and need
 no change (CHD-03 in-memory zone, CHD-05 exception wrapper). Nothing was accepted, so no owner sign-off is needed.
 
@@ -76,7 +79,7 @@ Behaviour is the same on both JDKs (parity tests green on both):
 
 | ID | Failing tests (before) | Root cause in the upgrade diff | Decision | Why |
 |---|---|---|---|---|
-| CHD-06 (BC-01/02) | `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNoResultExceptionWhenNothingMatches`, `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNonUniqueResultExceptionWhenSeveralMatch` | The DeltaSpike `@Query` method returning `Subscriber` (single-result mode, `getSingleResult()`) was rewritten as `Optional<Subscriber>` with `getResultStream().findFirst()`. No match became `Optional.empty()` instead of `NoResultException`, and several matches silently returned one row instead of `NonUniqueResultException` | **Fixed** | Restores `main`'s signature and semantics with a one-method change. Same approach Narayan asked for in the cpp-context-results PR #228 review (CHD-01 there: restore `main`'s signatures instead of `Optional`). The method has no production callers, so no other code changes |
+| CHD-06 (BC-01/02) | `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNoResultExceptionWhenNothingMatches`, `SubscriberRepositoryTest.chd06_findSubscriberByEmailAddressForSubscriptionThrowsNonUniqueResultExceptionWhenSeveralMatch` | The DeltaSpike `@Query` method returning `Subscriber` (single-result mode, `getSingleResult()`) was rewritten as `Optional<Subscriber>` with `getResultStream().findFirst()`. No match became `Optional.empty()` instead of `NoResultException`, and several matches silently returned one row instead of `NonUniqueResultException` | **Fixed** | Restores `main`'s signature and semantics with a one-method change. Same approach as agreed in the cpp-context-results PR #228 review (CHD-01 there: restore `main`'s signatures instead of `Optional`). The method has no production callers, so no other code changes |
 
 Fix (production): `SubscribersRepository.findSubscriberByEmailAddressForSubscription` returns `Subscriber` via
 `query.getSingleResult()`; the unused `java.util.Optional` import is removed. Test: the existing
@@ -109,6 +112,12 @@ Removed because they relied on a zone other than UTC, which doesn't happen at ru
 | CHD-03 | `chd03_sentTimeReadBackFromTheStoredEventIsInTheUtcRegionZone` (was failing) | Compared `Z[UTC]` with `Z`, i.e. two zone IDs for the same instant. The stored string is identical on both stacks, and no listener or query reads `sentTime` back, so the difference is never observed |
 | CHD-09 | `chd09_notificationSentSchemaAcceptsSentTimeWithAnOffset` (`+01:00`) | notificationnotify sends `sentTime` in UTC |
 
+Removed after the runs above, during PR review:
+
+| ID | Removed | Why |
+|---|---|---|
+| CHD-01 | `SubscriptionsRepositoryTest.chd01_loadingASubscriptionWithANullActiveColumnThrows`, `SubscriberRepositoryTest.chd01_loadingASubscriberWithANullActiveColumnThrows` | Both passed on Java 17 and Java 25 (Hibernate 5.4.24, 6.6.1 and 7.3.2), and it isn't a behaviour we expect to regress. The tests needed `ALTER TABLE` to make `active` nullable, which H2 commits straight away, so they leaked schema changes into later tests |
+
 ### Persistence tests on both Hibernate versions
 
 `subscriptions-viewstore-persistence` (23 tests) gives identical results on Hibernate 6.6.1.Final (BOM default) and
@@ -125,7 +134,7 @@ which passes with the unchanged `persistence.xml`. Production entity scanning is
 
 ## Java 17 results
 
-Java 17 copy on `dev/CHD-2878-chd-parity-with-j25` (git worktree `../cpp-context-subscriptions-j17`), JDK 17,
+Java 17 copy on `dev/CHD-2878-chd-parity-with-j25`, JDK 17,
 `mvn clean install`:
 
 | | Run | Failures | Errors | Skipped |
@@ -166,9 +175,9 @@ Expectation corrected:
 
 | | Java 17 | Java 25 |
 |---|---|---|
-| Branch | `dev/CHD-2878-chd-parity-with-j25` (parity tests uncommitted in the worktree) | `dev/25.104-chd-j25-j17-parity` at `a111643d` (includes the Stage 5 CHD-06 fix) |
+| Branch | `dev/CHD-2878-chd-parity-with-j25` (parity tests not committed) | `dev/25.104-chd-j25-j17-parity` at `a111643d` (includes the Stage 5 CHD-06 fix) |
 | JDK | 17 | 25.0.5 |
-| `CPP_DOCKER_DIR` | `cpp-developers-docker` `java-17` at `c6b7ab6` (worktree `../cpp-developers-docker-j17`) | `cpp-developers-docker` `java-25` at `7e4dfab` |
+| `CPP_DOCKER_DIR` | `cpp-developers-docker` `java-17` at `c6b7ab6` | `cpp-developers-docker` `java-25` at `7e4dfab` |
 | Build, Liquibase, deploy | OK | OK |
 | Healthchecks | 4/4 passed | 4/4 passed |
 | ITs | 35 run, 0 failures, 0 errors, 0 skipped | 35 run, 0 failures, 0 errors, 0 skipped |
@@ -195,7 +204,7 @@ No failures, so no causes to record. The only Liquibase lines containing "error"
 Java 25 copy (this branch):
 
 ```bash
-export JAVA_HOME=$(jenv prefix 25.0) PATH=$(jenv prefix 25.0)/bin:$PATH
+export JAVA_HOME=<JDK 25 home> PATH=$JAVA_HOME/bin:$PATH
 mvn clean install                                   # unit + parity tests
 mvn test -pl subscriptions-viewstore/subscriptions-viewstore-persistence   # persistence only
 CPP_DOCKER_DIR=<cpp-developers-docker on java-25> ./runIntegrationTests.sh </dev/null
@@ -207,10 +216,10 @@ Hibernate 7.3.2 persistence run (temporary, don't commit): in
 `Subscriber`, `Subscription`) as `<class>` entries in the test `META-INF/persistence.xml`, run the persistence module,
 then revert both files.
 
-Java 17 copy (`dev/CHD-2878-chd-parity-with-j25`, worktree `../cpp-context-subscriptions-j17`):
+Java 17 copy (`dev/CHD-2878-chd-parity-with-j25`):
 
 ```bash
-export JAVA_HOME=$(jenv prefix 17) PATH=$(jenv prefix 17)/bin:$PATH
+export JAVA_HOME=<JDK 17 home> PATH=$JAVA_HOME/bin:$PATH
 mvn clean install
 CPP_DOCKER_DIR=<cpp-developers-docker on java-17> ./runIntegrationTests.sh </dev/null
 ```

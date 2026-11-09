@@ -26,7 +26,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceException;
 
 import com.google.common.collect.Sets;
 import org.junit.jupiter.api.BeforeEach;
@@ -276,14 +275,6 @@ public class SubscriptionsRepositoryTest {
     }
 
     @Test
-    public void chd01_loadingASubscriptionWithANullActiveColumnThrows() {
-        final UUID subscriptionId = randomUUID();
-        insertSubscriptionWithNullActive(subscriptionId);
-
-        assertThrows(PersistenceException.class, () -> subscriptionsRepository.findBy(subscriptionId));
-    }
-
-    @Test
     public void chd04_saveWithAnExistingIdUpdatesTheRowAndRepeatingTheSaveIsIdempotent() {
         final UUID subscriptionId = randomUUID();
         final UUID organisationId = randomUUID();
@@ -346,15 +337,6 @@ public class SubscriptionsRepositoryTest {
         final Court court = Court.builder().withId(randomUUID()).withCourtId(courtId).withName("Court").withSubscription(subscription).build();
         subscription.setCourts(Sets.newHashSet(court));
         return subscription;
-    }
-
-    private void insertSubscriptionWithNullActive(final UUID subscriptionId) {
-        final EntityManager entityManager = hibernateTestEntityManagerProvider.getEntityManager();
-        entityManager.createNativeQuery("ALTER TABLE subscription ALTER COLUMN active SET NULL").executeUpdate();
-        entityManager.createNativeQuery("INSERT INTO subscription (id, name, active) VALUES (?1, 'Legacy Subscription', NULL)")
-                .setParameter(1, subscriptionId)
-                .executeUpdate();
-        flushAndClear();
     }
 
     private Throwable rootCauseOf(final Throwable throwable) {
