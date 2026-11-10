@@ -2,7 +2,6 @@ package uk.gov.moj.cpp.subscriptions.persistence.repository;
 
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscriber;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -30,12 +29,12 @@ public class SubscribersRepository {
         return entityManager.find(Subscriber.class, id);
     }
 
-    public Optional<Subscriber> findSubscriberByEmailAddressForSubscription(final String emailAddress, final UUID subscriptionId) {
+    public Subscriber findSubscriberByEmailAddressForSubscription(final String emailAddress, final UUID subscriptionId) {
         final TypedQuery<Subscriber> query = entityManager.createQuery(
                 "SELECT subscriber FROM Subscriber subscriber WHERE subscriber.emailAddress = :emailAddress " +
                         "AND subscriber.subscription.id = :subscriptionId", Subscriber.class);
         query.setParameter("emailAddress", emailAddress);
         query.setParameter("subscriptionId", subscriptionId);
-        return query.getResultStream().findFirst();
+        return query.getSingleResult();
     }
 }

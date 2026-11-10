@@ -1,9 +1,11 @@
 package uk.gov.moj.cpp.subscriptions.event.processor;
 
 import static java.lang.String.format;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.UUID.randomUUID;
 import static uk.gov.justice.services.messaging.JsonObjects.createObjectBuilder;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,10 +20,15 @@ import uk.gov.justice.services.messaging.JsonEnvelope;
 import uk.gov.moj.cpp.subscriptions.event.processor.service.ApplicationParameters;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SendEmailRequested;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.json.JsonObject;
+
+import org.everit.json.schema.ValidationException;
+import org.everit.json.schema.loader.SchemaLoader;
+import org.json.JSONObject;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -160,5 +167,46 @@ public class NotificationEventProcessorTest {
         assertThat(envelopeCaptor.getValue().payload().getString("notificationId"), equalTo(notificationId));
         assertThat(envelopeCaptor.getValue().payload().getString("failedTime"), equalTo(failedTime));
         assertThat(envelopeCaptor.getValue().payload().getString("errorMessage"), equalTo(errorMessage));
+    }
+
+    @Test
+    public void chd09_notificationSentSchemaAcceptsSentTimeWithoutFractionalSeconds() throws Exception {
+        assertThat(notificationSentSchemaAcceptsSentTime("2016-09-09T08:31:40Z"), is(true));
+    }
+
+    @Test
+    public void chd09_notificationSentSchemaAcceptsSentTimeWithMilliseconds() throws Exception {
+        assertThat(notificationSentSchemaAcceptsSentTime("2016-09-09T08:31:40.123Z"), is(true));
+    }
+
+    @Test
+    public void chd09_notificationSentSchemaAcceptsSentTimeWithMicroseconds() throws Exception {
+        assertThat(notificationSentSchemaAcceptsSentTime("2016-09-09T08:31:40.123456Z"), is(true));
+    }
+
+    @Test
+    public void chd09_notificationSentSchemaRejectsSentTimeWithoutAZone() throws Exception {
+        assertThat(notificationSentSchemaAcceptsSentTime("2016-09-09T08:31:40"), is(false));
+    }
+
+    @Test
+    public void chd09_notificationSentSchemaRejectsADateOnlySentTime() throws Exception {
+        assertThat(notificationSentSchemaAcceptsSentTime("2016-09-09"), is(false));
+    }
+
+    private boolean notificationSentSchemaAcceptsSentTime(final String sentTime) throws Exception {
+        final JSONObject notificationSentSchema;
+        try (final InputStream schema = getClass().getResourceAsStream("/json/schema/public.notificationnotify.events.notification-sent.json")) {
+            notificationSentSchema = new JSONObject(new String(schema.readAllBytes(), UTF_8));
+        }
+        final JSONObject sentTimeOnlySchema = new JSONObject()
+                .put("type", "object")
+                .put("properties", new JSONObject().put("sentTime", notificationSentSchema.getJSONObject("properties").getJSONObject("sentTime")));
+        try {
+            SchemaLoader.load(sentTimeOnlySchema).validate(new JSONObject().put("sentTime", sentTime));
+            return true;
+        } catch (final ValidationException e) {
+            return false;
+        }
     }
 }

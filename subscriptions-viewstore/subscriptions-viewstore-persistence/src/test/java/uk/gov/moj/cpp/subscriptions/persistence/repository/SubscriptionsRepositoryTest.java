@@ -2,9 +2,14 @@ package uk.gov.moj.cpp.subscriptions.persistence.repository;
 
 import static java.time.LocalDate.parse;
 import static java.util.UUID.randomUUID;
+import static java.util.stream.Collectors.toList;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static uk.gov.moj.cpp.subscriptions.persistence.constants.FilterType.DEFENDANT;
 import static uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription.builder;
 
@@ -19,6 +24,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
+import jakarta.persistence.EntityManager;
 
 import com.google.common.collect.Sets;
 import org.junit.jupiter.api.BeforeEach;
@@ -265,6 +272,85 @@ public class SubscriptionsRepositoryTest {
         subscriptionsRepository.remove(subscription);
 
         assertThat(subscriptionsRepository.findByOrganisationId(subscription.getOrganisationId()), hasSize(0));
+    }
+
+    @Test
+    public void chd04_saveWithAnExistingIdUpdatesTheRowAndRepeatingTheSaveIsIdempotent() {
+        final UUID subscriptionId = randomUUID();
+        final UUID organisationId = randomUUID();
+
+        subscriptionsRepository.save(subscription(subscriptionId, organisationId, "Original Name"));
+        flushAndClear();
+        subscriptionsRepository.save(subscription(subscriptionId, organisationId, "Updated Name"));
+        flushAndClear();
+        subscriptionsRepository.save(subscription(subscriptionId, organisationId, "Updated Name"));
+        flushAndClear();
+
+        final List<Subscription> persistedSubscriptions = subscriptionsRepository.findByOrganisationId(organisationId);
+        assertThat(persistedSubscriptions, hasSize(1));
+        assertThat(persistedSubscriptions.get(0).getName(), is("Updated Name"));
+    }
+
+    @Test
+    public void chd05_removeOfANullSubscriptionThrowsWithIllegalArgumentExceptionAsTheRootCause() {
+        final RuntimeException thrown = assertThrows(RuntimeException.class, () -> subscriptionsRepository.remove(null));
+
+        assertThat(rootCauseOf(thrown), instanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    public void chd07_findersReturnAnEmptyListWhenNothingMatches() {
+        assertThat(subscriptionsRepository.findByOrganisationId(randomUUID()), is(empty()));
+        assertThat(subscriptionsRepository.findByCourtId(randomUUID()), is(empty()));
+        assertThat(subscriptionsRepository.findByOrganisationIdAndSubscriber(randomUUID(), "nobody@test.com"), is(empty()));
+    }
+
+    @Test
+    public void chd07_findByCourtIdReturnsOnlyTheSubscriptionsForThatCourt() {
+        final UUID courtId = randomUUID();
+        final Subscription firstSubscriptionAtCourt = subscriptionAtCourt(courtId);
+        final Subscription secondSubscriptionAtCourt = subscriptionAtCourt(courtId);
+        final Subscription subscriptionAtAnotherCourt = subscriptionAtCourt(randomUUID());
+        subscriptionsRepository.saveAndFlush(firstSubscriptionAtCourt);
+        subscriptionsRepository.saveAndFlush(secondSubscriptionAtCourt);
+        subscriptionsRepository.saveAndFlush(subscriptionAtAnotherCourt);
+        flushAndClear();
+
+        final List<UUID> subscriptionIds = subscriptionsRepository.findByCourtId(courtId).stream()
+                .map(Subscription::getId)
+                .collect(toList());
+
+        assertThat(subscriptionIds, containsInAnyOrder(firstSubscriptionAtCourt.getId(), secondSubscriptionAtCourt.getId()));
+    }
+
+    private Subscription subscription(final UUID id, final UUID organisationId, final String name) {
+        return builder()
+                .withId(id)
+                .withName(name)
+                .withOrganisationId(organisationId)
+                .withActive(true)
+                .build();
+    }
+
+    private Subscription subscriptionAtCourt(final UUID courtId) {
+        final Subscription subscription = subscription(randomUUID(), randomUUID(), "Subscription Name");
+        final Court court = Court.builder().withId(randomUUID()).withCourtId(courtId).withName("Court").withSubscription(subscription).build();
+        subscription.setCourts(Sets.newHashSet(court));
+        return subscription;
+    }
+
+    private Throwable rootCauseOf(final Throwable throwable) {
+        Throwable rootCause = throwable;
+        while (rootCause.getCause() != null) {
+            rootCause = rootCause.getCause();
+        }
+        return rootCause;
+    }
+
+    private void flushAndClear() {
+        final EntityManager entityManager = hibernateTestEntityManagerProvider.getEntityManager();
+        entityManager.flush();
+        entityManager.clear();
     }
 
 }
