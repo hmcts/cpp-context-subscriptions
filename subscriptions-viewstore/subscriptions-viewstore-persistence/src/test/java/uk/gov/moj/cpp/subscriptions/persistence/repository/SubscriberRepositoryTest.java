@@ -6,11 +6,12 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static uk.gov.moj.cpp.subscriptions.persistence.constants.EventType.CHANGE_OF_PLEA;
 import static uk.gov.moj.cpp.subscriptions.persistence.constants.FilterType.DEFENDANT;
 import static uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription.builder;
 
-import uk.gov.justice.services.test.utils.persistence.BaseTransactionalJunit4Test;
+import uk.gov.justice.services.test.utils.persistence.HibernateTestEntityManagerProvider;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Event;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Filter;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscriber;
@@ -19,21 +20,37 @@ import uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.inject.Inject;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.NonUniqueResultException;
 
-import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
-@RunWith(CdiTestRunner.class)
-public class SubscriberRepositoryTest extends BaseTransactionalJunit4Test {
+/**
+ * Real-JPA test for the subscriber/subscription repositories (post DeltaSpike Data → plain JPA migration).
+ * Both repositories share the single {@link HibernateTestEntityManagerProvider} EntityManager so writes in one
+ * are visible to the other within the per-test transaction (rolled back afterwards). No docker required.
+ */
+public class SubscriberRepositoryTest {
 
-    @Inject
+    private static final String PERSISTENCE_UNIT = "subscriptions-test-persistence-unit";
+
+    @RegisterExtension
+    static HibernateTestEntityManagerProvider hibernateTestEntityManagerProvider =
+            new HibernateTestEntityManagerProvider(PERSISTENCE_UNIT);
+
     private SubscribersRepository subscribersRepository;
 
-    @Inject
     private SubscriptionsRepository subscriptionsRepository;
 
+    @BeforeEach
+    void createRepositoriesWithInjectedEntityManager() {
+        subscribersRepository = new SubscribersRepository();
+        subscriptionsRepository = new SubscriptionsRepository();
+        hibernateTestEntityManagerProvider.injectEntityManagerInto(subscribersRepository);
+        hibernateTestEntityManagerProvider.injectEntityManagerInto(subscriptionsRepository);
+    }
 
     @Test
     public void shouldAddSubscribersToTheSubscription() {
@@ -93,6 +110,66 @@ public class SubscriberRepositoryTest extends BaseTransactionalJunit4Test {
         assertThat(subscriberByEmailAddressForSubscription, notNullValue());
         assertThat(subscriberByEmailAddressForSubscription.isActive(), is(true));
 
+    }
+
+    @Test
+    public void shouldFindSubscriberById() {
+
+        final Subscription subscription = builder()
+                .withId(randomUUID())
+                .withName("Subscription Name")
+                .withActive(true)
+                .build();
+
+        final Subscriber subscriber = Subscriber.builder()
+                .withId(randomUUID())
+                .withEmailAddress("findme@test.com")
+                .withActive(true)
+                .withSubscription(subscription)
+                .build();
+
+        final Set<Subscriber> subscribers = new HashSet<>();
+        subscribers.add(subscriber);
+        subscription.setSubscribers(subscribers);
+
+        subscriptionsRepository.saveAndFlush(subscription);
+
+        final Subscriber persistedSubscriber = subscribersRepository.findBy(subscriber.getId());
+        assertThat(persistedSubscriber.getId(), is(subscriber.getId()));
+        assertThat(persistedSubscriber.getEmailAddress(), is("findme@test.com"));
+        assertThat(persistedSubscriber.isActive(), is(true));
+    }
+
+    @Test
+    public void chd06_findSubscriberByEmailAddressForSubscriptionThrowsNoResultExceptionWhenNothingMatches() {
+        final Subscription subscription = subscriptionWithSubscribers("someone@test.com");
+        subscriptionsRepository.saveAndFlush(subscription);
+
+        assertThrows(NoResultException.class,
+                () -> subscribersRepository.findSubscriberByEmailAddressForSubscription("nobody@test.com", subscription.getId()));
+    }
+
+    @Test
+    public void chd06_findSubscriberByEmailAddressForSubscriptionThrowsNonUniqueResultExceptionWhenSeveralMatch() {
+        final Subscription subscription = subscriptionWithSubscribers("twice@test.com", "twice@test.com");
+        subscriptionsRepository.saveAndFlush(subscription);
+
+        assertThrows(NonUniqueResultException.class,
+                () -> subscribersRepository.findSubscriberByEmailAddressForSubscription("twice@test.com", subscription.getId()));
+    }
+
+    private Subscription subscriptionWithSubscribers(final String... emailAddresses) {
+        final Subscription subscription = builder()
+                .withId(randomUUID())
+                .withName("Subscription Name")
+                .withActive(true)
+                .build();
+        final Set<Subscriber> subscribers = new HashSet<>();
+        for (final String emailAddress : emailAddresses) {
+            subscribers.add(Subscriber.builder().withId(randomUUID()).withEmailAddress(emailAddress).withActive(true).withSubscription(subscription).build());
+        }
+        subscription.setSubscribers(subscribers);
+        return subscription;
     }
 
 }

@@ -2,13 +2,18 @@ package uk.gov.moj.cpp.subscriptions.persistence.repository;
 
 import static java.time.LocalDate.parse;
 import static java.util.UUID.randomUUID;
+import static java.util.stream.Collectors.toList;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static uk.gov.moj.cpp.subscriptions.persistence.constants.FilterType.DEFENDANT;
 import static uk.gov.moj.cpp.subscriptions.persistence.entity.Subscription.builder;
 
-import uk.gov.justice.services.test.utils.persistence.BaseTransactionalJunit4Test;
+import uk.gov.justice.services.test.utils.persistence.HibernateTestEntityManagerProvider;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Court;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.Filter;
 import uk.gov.moj.cpp.subscriptions.persistence.entity.NowsEdt;
@@ -20,18 +25,34 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.inject.Inject;
+import jakarta.persistence.EntityManager;
 
 import com.google.common.collect.Sets;
-import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
-@RunWith(CdiTestRunner.class)
-public class SubscriptionsRepositoryTest extends BaseTransactionalJunit4Test {
+/**
+ * Real-JPA test for {@link SubscriptionsRepository} (post DeltaSpike Data → plain JPA migration). Runs at
+ * build time (Surefire) against an in-memory H2 via {@link HibernateTestEntityManagerProvider} — the JPQL and
+ * native queries are exercised against a real database (schema generated from the entities), each test rolled
+ * back. No docker required, so it stays a {@code …Test}.
+ */
+public class SubscriptionsRepositoryTest {
 
-    @Inject
+    private static final String PERSISTENCE_UNIT = "subscriptions-test-persistence-unit";
+
+    @RegisterExtension
+    static HibernateTestEntityManagerProvider hibernateTestEntityManagerProvider =
+            new HibernateTestEntityManagerProvider(PERSISTENCE_UNIT);
+
     private SubscriptionsRepository subscriptionsRepository;
+
+    @BeforeEach
+    void createRepositoryWithInjectedEntityManager() {
+        subscriptionsRepository = new SubscriptionsRepository();
+        hibernateTestEntityManagerProvider.injectEntityManagerInto(subscriptionsRepository);
+    }
 
     @Test
     public void shouldSaveTheGivenSubscriptionAndGetById() {
@@ -49,8 +70,8 @@ public class SubscriptionsRepositoryTest extends BaseTransactionalJunit4Test {
 
         subscription.setCourts(courts);
         final Set<NowsEdt> nowsEdts = new HashSet<>();
-        final NowsEdt custodialDocument = NowsEdt.builder().withId(randomUUID()).withName("Custodial Document").build();
-        final NowsEdt custodialRemanDocument = NowsEdt.builder().withId(randomUUID()).withName("Custodial Remand Document").build();
+        final NowsEdt custodialDocument = NowsEdt.builder().withId(randomUUID()).withName("Custodial Document").withSubscription(subscription).build();
+        final NowsEdt custodialRemanDocument = NowsEdt.builder().withId(randomUUID()).withName("Custodial Remand Document").withSubscription(subscription).build();
 
         nowsEdts.add(custodialDocument);
         nowsEdts.add(custodialRemanDocument);
@@ -233,6 +254,103 @@ public class SubscriptionsRepositoryTest extends BaseTransactionalJunit4Test {
         assertThat(persistedSubscriptions.get(0).getId(), is(subscription.getId()));
         assertThat(persistedSubscriptions.get(0).getName(), is(subscription.getName()));
         assertThat(persistedSubscriptions.get(0).getNowsEdts(), hasSize(2));
+    }
+
+    @Test
+    public void shouldRemoveTheGivenSubscription() {
+
+        final Subscription subscription = builder()
+                .withId(randomUUID())
+                .withName("Subscription Name")
+                .withOrganisationId(randomUUID())
+                .withActive(true)
+                .build();
+
+        subscriptionsRepository.saveAndFlush(subscription);
+        assertThat(subscriptionsRepository.findBy(subscription.getId()).getId(), is(subscription.getId()));
+
+        subscriptionsRepository.remove(subscription);
+
+        assertThat(subscriptionsRepository.findByOrganisationId(subscription.getOrganisationId()), hasSize(0));
+    }
+
+    @Test
+    public void chd04_saveWithAnExistingIdUpdatesTheRowAndRepeatingTheSaveIsIdempotent() {
+        final UUID subscriptionId = randomUUID();
+        final UUID organisationId = randomUUID();
+
+        subscriptionsRepository.save(subscription(subscriptionId, organisationId, "Original Name"));
+        flushAndClear();
+        subscriptionsRepository.save(subscription(subscriptionId, organisationId, "Updated Name"));
+        flushAndClear();
+        subscriptionsRepository.save(subscription(subscriptionId, organisationId, "Updated Name"));
+        flushAndClear();
+
+        final List<Subscription> persistedSubscriptions = subscriptionsRepository.findByOrganisationId(organisationId);
+        assertThat(persistedSubscriptions, hasSize(1));
+        assertThat(persistedSubscriptions.get(0).getName(), is("Updated Name"));
+    }
+
+    @Test
+    public void chd05_removeOfANullSubscriptionThrowsWithIllegalArgumentExceptionAsTheRootCause() {
+        final RuntimeException thrown = assertThrows(RuntimeException.class, () -> subscriptionsRepository.remove(null));
+
+        assertThat(rootCauseOf(thrown), instanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    public void chd07_findersReturnAnEmptyListWhenNothingMatches() {
+        assertThat(subscriptionsRepository.findByOrganisationId(randomUUID()), is(empty()));
+        assertThat(subscriptionsRepository.findByCourtId(randomUUID()), is(empty()));
+        assertThat(subscriptionsRepository.findByOrganisationIdAndSubscriber(randomUUID(), "nobody@test.com"), is(empty()));
+    }
+
+    @Test
+    public void chd07_findByCourtIdReturnsOnlyTheSubscriptionsForThatCourt() {
+        final UUID courtId = randomUUID();
+        final Subscription firstSubscriptionAtCourt = subscriptionAtCourt(courtId);
+        final Subscription secondSubscriptionAtCourt = subscriptionAtCourt(courtId);
+        final Subscription subscriptionAtAnotherCourt = subscriptionAtCourt(randomUUID());
+        subscriptionsRepository.saveAndFlush(firstSubscriptionAtCourt);
+        subscriptionsRepository.saveAndFlush(secondSubscriptionAtCourt);
+        subscriptionsRepository.saveAndFlush(subscriptionAtAnotherCourt);
+        flushAndClear();
+
+        final List<UUID> subscriptionIds = subscriptionsRepository.findByCourtId(courtId).stream()
+                .map(Subscription::getId)
+                .collect(toList());
+
+        assertThat(subscriptionIds, containsInAnyOrder(firstSubscriptionAtCourt.getId(), secondSubscriptionAtCourt.getId()));
+    }
+
+    private Subscription subscription(final UUID id, final UUID organisationId, final String name) {
+        return builder()
+                .withId(id)
+                .withName(name)
+                .withOrganisationId(organisationId)
+                .withActive(true)
+                .build();
+    }
+
+    private Subscription subscriptionAtCourt(final UUID courtId) {
+        final Subscription subscription = subscription(randomUUID(), randomUUID(), "Subscription Name");
+        final Court court = Court.builder().withId(randomUUID()).withCourtId(courtId).withName("Court").withSubscription(subscription).build();
+        subscription.setCourts(Sets.newHashSet(court));
+        return subscription;
+    }
+
+    private Throwable rootCauseOf(final Throwable throwable) {
+        Throwable rootCause = throwable;
+        while (rootCause.getCause() != null) {
+            rootCause = rootCause.getCause();
+        }
+        return rootCause;
+    }
+
+    private void flushAndClear() {
+        final EntityManager entityManager = hibernateTestEntityManagerProvider.getEntityManager();
+        entityManager.flush();
+        entityManager.clear();
     }
 
 }

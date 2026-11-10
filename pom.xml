@@ -4,12 +4,12 @@
     <parent>
         <groupId>uk.gov.moj.cpp.common</groupId>
         <artifactId>service-parent-pom</artifactId>
-        <version>17.104.5</version>
+        <version>25.104.7</version>
     </parent>
 
     <groupId>uk.gov.moj.cpp.subscriptions</groupId>
     <artifactId>subscriptions-parent</artifactId>
-    <version>17.104.7-SNAPSHOT</version>
+    <version>25.104.3-CHD-2878-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Subscription Microservice - Parent</name>
     <description>Subscription Microservice - Subscription Context</description>
@@ -21,10 +21,9 @@
         <sonar.scm.provider>git</sonar.scm.provider>
         <mvn.site.url>file://${project.build.directory}/site</mvn.site.url>
         <cpp.framework.action.mapping.enabled>true</cpp.framework.action.mapping.enabled>
-        <coredomain.version>17.104.4</coredomain.version>
+        <coredomain.version>25.104.7</coredomain.version>
         <notification.notify.version>17.104.46</notification.notify.version>
-        <material.version>17.0.80</material.version>
-        <hearing.version>17.104.161</hearing.version>
+        <hearing.version>17.104.200</hearing.version>
         <jgitflow.maven.developBranchName>main</jgitflow.maven.developBranchName>
     </properties>
 
@@ -45,11 +44,6 @@
                     <archiveClasses>true</archiveClasses>
                     <attachClasses>true</attachClasses>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.11.0.3922</version>
             </plugin>
         </plugins>
     </build>
