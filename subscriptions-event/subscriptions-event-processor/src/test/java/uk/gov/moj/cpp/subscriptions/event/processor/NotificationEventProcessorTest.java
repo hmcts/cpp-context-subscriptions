@@ -20,8 +20,7 @@ import uk.gov.justice.services.messaging.JsonEnvelope;
 import uk.gov.moj.cpp.subscriptions.event.processor.service.ApplicationParameters;
 import uk.gov.moj.cpp.subscriptions.json.schemas.SendEmailRequested;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -196,8 +195,10 @@ public class NotificationEventProcessorTest {
     }
 
     private boolean notificationSentSchemaAcceptsSentTime(final String sentTime) throws Exception {
-        final JSONObject notificationSentSchema = new JSONObject(new String(Files.readAllBytes(
-                Paths.get("src/yaml/json/schema/public.notificationnotify.events.notification-sent.json")), UTF_8));
+        final JSONObject notificationSentSchema;
+        try (final InputStream schema = getClass().getResourceAsStream("/json/schema/public.notificationnotify.events.notification-sent.json")) {
+            notificationSentSchema = new JSONObject(new String(schema.readAllBytes(), UTF_8));
+        }
         final JSONObject sentTimeOnlySchema = new JSONObject()
                 .put("type", "object")
                 .put("properties", new JSONObject().put("sentTime", notificationSentSchema.getJSONObject("properties").getJSONObject("sentTime")));
