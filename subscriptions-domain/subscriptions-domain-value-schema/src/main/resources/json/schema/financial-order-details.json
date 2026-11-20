@@ -38,9 +38,11 @@
       "type": "string"
     },
     "totalAmountImposed": {
+      "description": "Absent on an enforcement NOW from hearing-nows when GOB did not return offences.accountTotal (CIMD-4640)",
       "type": "string"
     },
     "totalBalance": {
+      "description": "Absent on an enforcement NOW from hearing-nows when GOB did not return accountBalance (CIMD-4640)",
       "type": "string"
     },
     "paymentTerms": {
@@ -66,9 +68,5 @@
       ]
     }
   },
-  "required": [
-    "totalAmountImposed",
-    "totalBalance"
-  ],
   "additionalProperties": false
 }
